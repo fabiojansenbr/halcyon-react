@@ -1,0 +1,62 @@
+body {
+    padding-top: 85px;
+}
+
+button,
+.form-check-label,
+.form-check-input {
+    cursor: pointer;
+}
+
+.nav-link img {
+    width: 25px;
+    height: 25px;
+}
+
+.jumbotron img {
+    width: 180px;
+    height: 180px;
+}
+
+a.card {
+    color: inherit !important;
+}
+
+a.card:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+    border-color: #008cba;
+}
+
+.card .img-thumbnail {
+    width: 75px;
+    height: 75px;
+}
+
+.btn-link {
+    padding: 0;
+}
+
+.spinner {
+    color: #fff;
+}
+
+.spinner .modal-dialog {
+    margin-top: 130px;
+}
+
+.iziToast > .iziToast-body .iziToast-message {
+    color: #fff;
+}
+
+.iziToast.iziToast-color-red {
+    background: #f04124;
+}
+
+.iziToast.iziToast-color-orange {
+    background: #e99002;
+}
+
+.iziToast.iziToast-color-green {
+    background: #43ac6a;
+}

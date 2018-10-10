@@ -1,0 +1,17 @@
+version: 1.0.{build}
+image: ubuntu
+stack: node 8
+
+build_script:
+- yarn
+- yarn lint
+- yarn build
+
+artifacts:
+- path: build
+  name: Halcyon.React
+  type: Zip
+  
+deploy:
+- provider: Environment
+  name: halcyon-react

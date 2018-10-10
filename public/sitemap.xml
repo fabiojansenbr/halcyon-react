@@ -1,0 +1,17 @@
+﻿<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://halcyon-react.chrispoulter.com/</loc>
+  </url>
+  <url>
+    <loc>https://halcyon-react.chrispoulter.com/about</loc>
+  </url>
+  <url>
+    <loc>https://halcyon-react.chrispoulter.com/account/login</loc>
+  </url>
+  <url>
+    <loc>https://halcyon-react.chrispoulter.com/account/register</loc>
+  </url>
+  <url>
+    <loc>https://halcyon-react.chrispoulter.com/account/forgotpassword</loc>
+  </url>
+</urlset>

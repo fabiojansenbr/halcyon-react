@@ -1,0 +1,20 @@
+{
+    "name": "Halcyon",
+    "short_name": "Halcyon",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "/images/icons/android-chrome-192x192.png?v=eE55b9MdGK",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/icons/android-chrome-512x512.png?v=eE55b9MdGK",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#008cba",
+    "background_color": "#008cba",
+    "display": "standalone"
+}
