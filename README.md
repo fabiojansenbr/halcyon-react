@@ -1,6 +1,6 @@
 # Halcyon React
 
-[![Build status](https://ci.appveyor.com/api/projects/status/nse4wfb08hvdp2fx?svg=true)](https://ci.appveyor.com/project/chrispoulter/halcyon-react)
+[![Build status](https://ci.appveyor.com/api/projects/status/j070golbldar3dls?svg=true)](https://ci.appveyor.com/project/chrispoulter/halcyon-react)
 
 A React web site project template.
 
