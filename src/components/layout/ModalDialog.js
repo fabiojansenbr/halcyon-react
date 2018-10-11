@@ -16,8 +16,8 @@ class ModalDialog extends Component {
     }
 
     async onOk() {
+        await this.props.context.modal.onOk();
         this.props.context.closeModal();
-        await this.props.modal.onOk();
     }
 
     render() {

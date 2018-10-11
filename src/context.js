@@ -40,7 +40,7 @@ class Context {
     }
 
     closeModal() {
-        this.modal = { ...this.modal, show: false };
+        this.modal = { show: false };
     }
 
     loading(value) {
