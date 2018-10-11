@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'reactstrap';
-import ErrorPage from './home/ErrorPage';
+import ErrorPage from '../pages/home/ErrorPage';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import ModalDialog from './layout/ModalDialog';
