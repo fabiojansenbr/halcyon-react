@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withContext } from '../../context';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const LoginOptions = ({ currentUser }) => {
-    if (currentUser) {
+const LoginOptions = ({ context }) => {
+    if (context.user) {
         return null;
     }
 
@@ -25,7 +26,7 @@ const LoginOptions = ({ currentUser }) => {
 };
 
 LoginOptions.propTypes = {
-    currentUser: PropTypes.object
+    context: PropTypes.object.required
 };
 
-export default LoginOptions;
+export default withContext(LoginOptions);

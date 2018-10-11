@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withContext } from '../../context';
 import {
     getProfile,
     verifyEmail,
@@ -10,7 +11,6 @@ import {
     deleteAccount
 } from '../../clients/manageClient';
 import { Row, Col, Card, CardBody } from 'reactstrap';
-import { openModal } from '../../components/layout/ModalDialog';
 import Profile from '../../components/manage/Profile';
 import Picture from '../../components/manage/Picture';
 import ExternalLogin from '../../components/manage/ExternalLogin';
@@ -71,7 +71,7 @@ class ManagePage extends Component {
     }
 
     onDeleteAccount() {
-        openModal({
+        this.props.context.showModal({
             title: 'Confirm',
             message: 'Are you sure you want to delete your account?',
             onOk: async () => {
@@ -143,7 +143,8 @@ class ManagePage extends Component {
 }
 
 ManagePage.propTypes = {
+    context: PropTypes.object.required,
     history: PropTypes.object.isRequired
 };
 
-export default ManagePage;
+export default withContext(ManagePage);

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withContext } from '../../context';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-
-export const openModal = () => {};
-export const closeModal = () => {};
 
 class ModalDialog extends Component {
     constructor(props) {
@@ -13,11 +12,11 @@ class ModalDialog extends Component {
     }
 
     onClose() {
-        closeModal();
+        this.context.closeModal();
     }
 
     async onOk() {
-        closeModal();
+        this.context.closeModal();
         await this.props.modal.onOk();
     }
 
@@ -45,4 +44,8 @@ class ModalDialog extends Component {
     }
 }
 
-export default ModalDialog;
+ModalDialog.propTypes = {
+    context: PropTypes.object.required
+};
+
+export default withContext(ModalDialog);

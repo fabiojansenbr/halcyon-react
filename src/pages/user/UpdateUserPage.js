@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withContext } from '../../context';
 import {
     getUser,
     updateUser,
@@ -11,7 +12,6 @@ import { toUserDataModel } from '../../mappers/userMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
-import { openModal } from '../../components/layout/ModalDialog';
 import ProfileForm from '../../components/form/ProfileForm';
 import RoleForm from '../../components/form/RoleForm';
 import Status from '../../components/user/Status';
@@ -32,7 +32,7 @@ class UpdateUserPage extends Component {
     }
 
     onUnlock(user) {
-        openModal({
+        this.props.context.showModal({
             title: 'Confirm',
             message: `Are you sure you want to unlock <strong>${
                 user.firstName
@@ -48,7 +48,7 @@ class UpdateUserPage extends Component {
     }
 
     onLock(user) {
-        openModal({
+        this.props.context.showModal({
             title: 'Confirm',
             message: `Are you sure you want to lock out <strong>${
                 user.firstName
@@ -64,7 +64,7 @@ class UpdateUserPage extends Component {
     }
 
     onDelete(user) {
-        openModal({
+        this.props.context.showModal({
             title: 'Confirm',
             message: `Are you sure you want to delete <strong>${
                 user.firstName
@@ -158,8 +158,9 @@ class UpdateUserPage extends Component {
 }
 
 UpdateUserPage.propTypes = {
+    context: PropTypes.object.required,
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default UpdateUserPage;
+export default withContext(UpdateUserPage);

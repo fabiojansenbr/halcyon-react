@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { removeItem } from '../../utils/storage';
-import history from '../../utils/history';
+import PropTypes from 'prop-types';
+import { withContext } from '../../context';
 import {
     Nav,
     UncontrolledDropdown,
@@ -18,14 +18,14 @@ class UserOptions extends Component {
     }
 
     onLogout() {
-        removeItem('session.token');
-        history.push('/');
+        this.props.context.updateUser(undefined);
+        this.props.history.push('/');
     }
 
     render() {
-        const { currentUser } = this.props;
+        const { context } = this.props;
 
-        if (!currentUser) {
+        if (!context.user) {
             return null;
         }
 
@@ -34,13 +34,13 @@ class UserOptions extends Component {
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                         <img
-                            src={currentUser.picture}
-                            alt={`${currentUser.given_name} ${
-                                currentUser.family_name
+                            src={context.user.picture}
+                            alt={`${context.user.given_name} ${
+                                context.user.family_name
                             }`}
                             className="rounded-circle mr-2"
                         />{' '}
-                        {currentUser.given_name} {currentUser.family_name}{' '}
+                        {context.user.given_name} {context.user.family_name}{' '}
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem to="/manage" tag={Link}>
@@ -56,4 +56,9 @@ class UserOptions extends Component {
     }
 }
 
-export default UserOptions;
+UserOptions.propTypes = {
+    history: PropTypes.object.isRequired,
+    context: PropTypes.object.required
+};
+
+export default withContext(UserOptions);
