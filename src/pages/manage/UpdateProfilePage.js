@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getProfile, updateProfile } from '../../clients/manageClient';
-import { getToken } from '../../clients/tokenClient';
+import { getProfile, updateProfile } from '../../api/manageClient';
+import { getToken } from '../../api/tokenClient';
 import { getItem } from '../../utils/storage';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';

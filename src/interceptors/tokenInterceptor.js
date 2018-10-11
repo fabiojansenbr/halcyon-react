@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { AppContext } from '../context';
-import { getToken } from '../clients/tokenClient';
+import { getToken } from '../api/tokenClient';
 
 const tokenInterceptor = async request => {
     if (!request.authenticate) {

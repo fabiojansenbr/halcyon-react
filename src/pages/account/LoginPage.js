@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getToken } from '../../clients/tokenClient';
-import { registerExternal } from '../../clients/accountClient';
+import { getToken } from '../../api/tokenClient';
+import { registerExternal } from '../../api/accountClient';
 import PasswordForm from '../../components/account/PasswordForm';
 import RegisterExternalForm from '../../components/account/RegisterExternalForm';
 import TwoFactorForm from '../../components/account/TwoFactorForm';

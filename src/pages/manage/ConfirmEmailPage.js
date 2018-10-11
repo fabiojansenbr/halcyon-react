@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { confirmEmail } from '../../clients/manageClient';
+import { confirmEmail } from '../../api/manageClient';
 import { parse } from '../../utils/querystring';
 
 class ManagePage extends Component {

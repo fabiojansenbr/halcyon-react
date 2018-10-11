@@ -7,7 +7,7 @@ import {
     unlockUser,
     lockUser,
     deleteUser
-} from '../../clients/userClient';
+} from '../../api/userClient';
 import { toUserDataModel } from '../../mappers/userMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';

@@ -9,7 +9,7 @@ import {
     disableAuthenticator,
     resetRecoveryCodes,
     deleteAccount
-} from '../../clients/manageClient';
+} from '../../api/manageClient';
 import { Row, Col, Card, CardBody } from 'reactstrap';
 import Profile from '../../components/manage/Profile';
 import Picture from '../../components/manage/Picture';
