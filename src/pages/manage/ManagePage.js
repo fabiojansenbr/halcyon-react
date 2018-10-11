@@ -21,6 +21,10 @@ class ManagePage extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            data: undefined
+        };
+
         this.onVerifyEmail = this.onVerifyEmail.bind(this);
         this.onAddLogin = this.onAddLogin.bind(this);
         this.onRemoveLogin = this.onRemoveLogin.bind(this);
@@ -30,8 +34,15 @@ class ManagePage extends Component {
         this.onDownloadData = this.onDownloadData.bind(this);
     }
 
-    componentDidMount() {
-        getProfile();
+    async componentDidMount() {
+        await this.loadData();
+    }
+
+    async loadData() {
+        const result = getProfile();
+        if (!result.error) {
+            this.setState({ data: result.data.data });
+        }
     }
 
     async onVerifyEmail() {
@@ -48,21 +59,21 @@ class ManagePage extends Component {
 
         const result = await addLogin({ provider, accessToken });
         if (!result.error) {
-            getProfile();
+            await this.loadData();
         }
     }
 
     async onRemoveLogin(login) {
         const result = await removeLogin(login);
         if (!result.error) {
-            getProfile();
+            await this.loadData();
         }
     }
 
     async onDisableAuthenticator() {
         const result = await disableAuthenticator();
         if (!result.error) {
-            getProfile();
+            await this.loadData();
         }
     }
 
@@ -89,7 +100,7 @@ class ManagePage extends Component {
         link.setAttribute('type', 'application/json');
 
         link.href = window.URL.createObjectURL(
-            new Blob([JSON.stringify(this.props.profile)])
+            new Blob([JSON.stringify(this.state.data)])
         );
 
         document.body.appendChild(link);
@@ -97,7 +108,7 @@ class ManagePage extends Component {
     }
 
     render() {
-        if (!this.props.profile) {
+        if (!this.state.data) {
             return null;
         }
 
@@ -110,20 +121,20 @@ class ManagePage extends Component {
                             <hr />
 
                             <Profile
-                                profile={this.props.profile}
+                                profile={this.state.data}
                                 onVerifyEmail={this.onVerifyEmail}
                             />
 
-                            <Picture profile={this.props.profile} />
+                            <Picture profile={this.state.data} />
 
                             <ExternalLogin
-                                profile={this.props.profile}
+                                profile={this.state.data}
                                 onAddLogin={this.onAddLogin}
                                 onRemoveLogin={this.onRemoveLogin}
                             />
 
                             <TwoFactor
-                                profile={this.props.profile}
+                                profile={this.state.data}
                                 onDisableAuthenticator={
                                     this.onDisableAuthenticator
                                 }

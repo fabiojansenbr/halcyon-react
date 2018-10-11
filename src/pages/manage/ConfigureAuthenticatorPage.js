@@ -13,11 +13,22 @@ class ConfigureAuthenticatorPage extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            data: undefined
+        };
+
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentDidMount() {
-        getAuthenticatorSettings();
+    async componentDidMount() {
+        await this.loadData();
+    }
+
+    async loadData() {
+        const result = await getAuthenticatorSettings();
+        if (!result.error) {
+            this.setState({ data: result.data.data });
+        }
     }
 
     async onSubmit(event, values) {
@@ -28,14 +39,9 @@ class ConfigureAuthenticatorPage extends Component {
     }
 
     render() {
-        if (!this.props.authenticatorSettings) {
+        if (!this.state.data) {
             return null;
         }
-
-        const {
-            sharedKey,
-            authenticatorUri
-        } = this.props.authenticatorSettings;
 
         return (
             <Row className="justify-content-md-center">
@@ -75,13 +81,15 @@ class ConfigureAuthenticatorPage extends Component {
                                 <li>
                                     <p>
                                         Scan the QR Code or enter this key{' '}
-                                        <kbd>{sharedKey}</kbd> into your two
-                                        factor authenticator app. Spaces and
-                                        casing do not matter.
+                                        <kbd>{this.state.data.sharedKey}</kbd>{' '}
+                                        into your two factor authenticator app.
+                                        Spaces and casing do not matter.
                                     </p>
                                     <p>
                                         <QRCode
-                                            value={authenticatorUri}
+                                            value={
+                                                this.state.data.authenticatorUri
+                                            }
                                             size={150}
                                         />
                                     </p>

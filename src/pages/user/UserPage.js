@@ -11,6 +11,7 @@ class UserPage extends Component {
         super(props);
 
         this.state = {
+            data: undefined,
             filter: {
                 page: 1,
                 size: 5,
@@ -25,8 +26,15 @@ class UserPage extends Component {
         this.onSearch = this.onSearch.bind(this);
     }
 
-    componentDidMount() {
-        getUsers(this.state.filter);
+    async componentDidMount() {
+        await this.loadData();
+    }
+
+    async loadData() {
+        const result = await getUsers(this.state.filter);
+        if (!result.error) {
+            this.setState({ data: result.data.data });
+        }
     }
 
     onSortChange(value) {
@@ -37,7 +45,7 @@ class UserPage extends Component {
                     sort: value
                 }
             }),
-            () => getUsers(this.state.filter)
+            () => this.loadData()
         );
     }
 
@@ -49,7 +57,7 @@ class UserPage extends Component {
                     page: previousState.filter.page - 1
                 }
             }),
-            () => getUsers(this.state.filter)
+            () => this.loadData()
         );
     }
 
@@ -61,7 +69,7 @@ class UserPage extends Component {
                     page: previousState.filter.page + 1
                 }
             }),
-            () => getUsers(this.state.filter)
+            () => this.loadData()
         );
     }
 
@@ -74,13 +82,15 @@ class UserPage extends Component {
                     page: 1
                 }
             }),
-            () => getUsers(this.state.filter)
+            () => this.loadData()
         );
     }
 
     render() {
-        const { users } = this.props;
-        const hasUsers = users && users.items && users.items.length > 0;
+        const hasUsers =
+            this.state.data &&
+            this.state.data.items &&
+            this.state.data.items.length > 0;
 
         return (
             <React.Fragment>
@@ -106,12 +116,12 @@ class UserPage extends Component {
 
                 {hasUsers && (
                     <React.Fragment>
-                        {users.items.map(user => (
+                        {this.state.data.items.map(user => (
                             <Summary key={user.id} user={user} />
                         ))}
 
                         <Pager
-                            {...users}
+                            {...this.state.data}
                             onNextPage={this.onNextPage}
                             onPreviousPage={this.onPreviousPage}
                         />

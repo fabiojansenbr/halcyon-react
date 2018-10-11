@@ -13,11 +13,22 @@ class UpdateProfilePage extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            data: undefined
+        };
+
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentDidMount() {
-        getProfile();
+    async componentDidMount() {
+        await this.loadData();
+    }
+
+    async loadData() {
+        const result = await getProfile();
+        if (!result.error) {
+            this.setState({ data: result.data.data });
+        }
     }
 
     async onSubmit(event, values) {
@@ -43,7 +54,7 @@ class UpdateProfilePage extends Component {
     }
 
     render() {
-        if (!this.props.profile) {
+        if (!this.state.data) {
             return null;
         }
 
@@ -57,7 +68,7 @@ class UpdateProfilePage extends Component {
 
                             <AvForm
                                 onValidSubmit={this.onSubmit}
-                                model={this.props.profile}
+                                model={this.state.data}
                             >
                                 <AvField
                                     name="emailAddress"

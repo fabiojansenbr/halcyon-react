@@ -24,9 +24,7 @@ class UserOptions extends Component {
     }
 
     render() {
-        const { context } = this.props;
-
-        if (!context.user) {
+        if (!this.props.context.user) {
             return null;
         }
 
@@ -35,13 +33,14 @@ class UserOptions extends Component {
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                         <img
-                            src={context.user.picture}
-                            alt={`${context.user.given_name} ${
-                                context.user.family_name
+                            src={this.props.context.user.picture}
+                            alt={`${this.props.context.user.given_name} ${
+                                this.props.context.user.family_name
                             }`}
                             className="rounded-circle mr-2"
                         />{' '}
-                        {context.user.given_name} {context.user.family_name}{' '}
+                        {this.props.context.user.given_name}{' '}
+                        {this.props.context.user.family_name}{' '}
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem to="/manage" tag={Link}>

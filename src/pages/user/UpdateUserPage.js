@@ -21,14 +21,25 @@ class UpdateUserPage extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            data: undefined
+        };
+
         this.onUnlock = this.onUnlock.bind(this);
         this.onLock = this.onLock.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentDidMount() {
-        getUser(this.props.match.params.id);
+    async componentDidMount() {
+        await this.loadData();
+    }
+
+    async loadData() {
+        const result = await getUser(this.props.match.params.id);
+        if (!result.error) {
+            this.setState({ data: result.data.data });
+        }
     }
 
     onUnlock(user) {
@@ -41,7 +52,7 @@ class UpdateUserPage extends Component {
                 const id = this.props.match.params.id;
                 const result = await unlockUser(id);
                 if (!result.error) {
-                    getUser(this.props.match.params.id);
+                    await this.loadData();
                 }
             }
         });
@@ -57,7 +68,7 @@ class UpdateUserPage extends Component {
                 const id = this.props.match.params.id;
                 const result = await lockUser(id);
                 if (!result.error) {
-                    getUser(this.props.match.params.id);
+                    await this.loadData();
                 }
             }
         });
@@ -89,7 +100,7 @@ class UpdateUserPage extends Component {
     }
 
     render() {
-        if (!this.props.user) {
+        if (!this.state.data) {
             return null;
         }
 
@@ -100,27 +111,27 @@ class UpdateUserPage extends Component {
                         <CardBody>
                             <div className="d-flex flex-wrap">
                                 <img
-                                    src={this.props.user.gravatarUrl}
-                                    alt={this.props.user.emailAddress}
+                                    src={this.state.data.gravatarUrl}
+                                    alt={this.state.data.emailAddress}
                                     className="img-thumbnail rounded-circle mr-3 mb-2"
                                 />
                                 <h2 className="mb-2 text-truncate">
-                                    {this.props.user.firstName}{' '}
-                                    {this.props.user.lastName}
+                                    {this.state.data.firstName}{' '}
+                                    {this.state.data.lastName}
                                     <br />
                                     <small className="text-muted">
-                                        {this.props.user.emailAddress}
+                                        {this.state.data.emailAddress}
                                     </small>
                                 </h2>
                                 <div className="ml-auto">
-                                    <Status user={this.props.user} />
+                                    <Status user={this.state.data} />
                                 </div>
                             </div>
                             <hr />
 
                             <AvForm
                                 onValidSubmit={this.onSubmit}
-                                model={this.props.user}
+                                model={this.state.data}
                             >
                                 <AvField
                                     name="emailAddress"
@@ -139,7 +150,7 @@ class UpdateUserPage extends Component {
                                         Cancel
                                     </Link>{' '}
                                     <Options
-                                        user={this.props.user}
+                                        user={this.state.data}
                                         onUnlock={this.onUnlock}
                                         onLock={this.onLock}
                                         onDelete={this.onDelete}
