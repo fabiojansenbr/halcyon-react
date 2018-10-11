@@ -6,8 +6,8 @@ import { toUserDataModel } from '../../mappers/userMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
-import ProfileForm from '../common/form/ProfileForm';
-import RoleForm from '../common/form/RoleForm';
+import ProfileForm from '../../components/form/ProfileForm';
+import RoleForm from '../../components/form/RoleForm';
 
 class CreateUserPage extends Component {
     constructor(props) {

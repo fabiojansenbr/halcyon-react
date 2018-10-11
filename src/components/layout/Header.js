@@ -8,7 +8,7 @@ import {
     Nav
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import history from '../../../utils/history';
+import history from '../../utils/history';
 import BaseOptions from '../menu/BaseOptions';
 import AdminOptions from '../menu/AdminOptions';
 import UserOptions from '../menu/UserOptions';

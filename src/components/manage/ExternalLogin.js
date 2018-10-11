@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import SocialButton from '../common/layout/SocialButton';
+import SocialButton from '../layout/SocialButton';
 import providers from '../../providers';
 
 const ExternalLogin = ({ profile, onAddLogin, onRemoveLogin }) => (

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/tokenActions';
 import { registerExternal } from '../../actions/accountActions';
-import PasswordForm from './PasswordForm';
-import RegisterExternalForm from './RegisterExternalForm';
-import TwoFactorForm from './TwoFactorForm';
-import RecoveryCodeForm from './RecoveryCodeForm';
+import PasswordForm from '../../components/account/PasswordForm';
+import RegisterExternalForm from '../../components/account/RegisterExternalForm';
+import TwoFactorForm from '../../components/account/TwoFactorForm';
+import RecoveryCodeForm from '../../components/account/RecoveryCodeForm';
 
 class LoginPage extends Component {
     constructor(props) {

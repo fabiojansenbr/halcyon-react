@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { register, registerExternal } from '../../actions/accountActions';
 import { getToken } from '../../actions/tokenActions';
-import RegisterForm from './RegisterForm';
-import RegisterExternalForm from './RegisterExternalForm';
+import RegisterForm from '../../components/account/RegisterForm';
+import RegisterExternalForm from '../../components/account/RegisterExternalForm';
 
 class RegisterPage extends Component {
     constructor(props) {

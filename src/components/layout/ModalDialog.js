@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { closeModal } from '../../../actions/modalActions';
+import { closeModal } from '../../actions/modalActions';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
 class ModalDialog extends Component {

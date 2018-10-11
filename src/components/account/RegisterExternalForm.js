@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import ProfileForm from '../common/form/ProfileForm';
+import ProfileForm from '../form/ProfileForm';
 
 const RegisterExternalForm = ({ provider, onSubmit, onStageChange }) => (
     <Row className="justify-content-md-center">

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { removeToken } from '../../../actions/tokenActions';
-import history from '../../../utils/history';
+import { removeToken } from '../../actions/tokenActions';
+import history from '../../utils/history';
 import {
     Nav,
     UncontrolledDropdown,

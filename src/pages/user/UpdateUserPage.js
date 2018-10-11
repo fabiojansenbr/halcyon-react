@@ -16,10 +16,10 @@ import {
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
-import ProfileForm from '../common/form/ProfileForm';
-import RoleForm from '../common/form/RoleForm';
-import Status from './Status';
-import Options from './Options';
+import ProfileForm from '../../components/form/ProfileForm';
+import RoleForm from '../../components/form/RoleForm';
+import Status from '../../components/user/Status';
+import Options from '../../components/user/Options';
 
 class UpdateUserPage extends Component {
     constructor(props) {

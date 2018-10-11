@@ -13,11 +13,11 @@ import {
 import { openModal } from '../../actions/modalActions';
 import { toProfileViewModel } from '../../mappers/manageMapper';
 import { Row, Col, Card, CardBody } from 'reactstrap';
-import Profile from './Profile';
-import Picture from './Picture';
-import ExternalLogin from './ExternalLogin';
-import TwoFactor from './TwoFactor';
-import Settings from './Settings';
+import Profile from '../../components/manage/Profile';
+import Picture from '../../components/manage/Picture';
+import ExternalLogin from '../../components/manage/ExternalLogin';
+import TwoFactor from '../../components/manage/TwoFactor';
+import Settings from '../../components/manage/Settings';
 
 class ManagePage extends Component {
     constructor(props) {

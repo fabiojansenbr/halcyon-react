@@ -4,7 +4,7 @@ import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
 import ExternalLogin from './ExternalLogin';
-import ProfileForm from '../common/form/ProfileForm';
+import ProfileForm from '../form/ProfileForm';
 
 const RegisterForm = ({ from, onSubmit, onExternalResponse }) => (
     <Row className="justify-content-md-center">

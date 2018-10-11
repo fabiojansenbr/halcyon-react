@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { getUsers } from '../../actions/userActions';
 import { Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import SearchForm from './SearchForm';
-import Summary from './Summary';
-import Pager from '../common/layout/Pager';
+import SearchForm from '../../components/user/SearchForm';
+import Summary from '../../components/user/Summary';
+import Pager from '../../components/layout/Pager';
 
 class UserPage extends Component {
     constructor(props) {
