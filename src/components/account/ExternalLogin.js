@@ -13,10 +13,10 @@ const ExternalLogin = ({ onResponse }) => (
                 appId={provider.appId}
                 color="secondary"
                 block
-                onLoginSuccess={user => onResponse(provider.type, user)}
+                onLoginSuccess={user => onResponse(provider.provider, user)}
             >
                 <FontAwesomeIcon icon={provider.icon} fixedWidth /> Connect with{' '}
-                {provider.displayName}
+                {provider.provider}
             </SocialButton>
         ))}
     </React.Fragment>
