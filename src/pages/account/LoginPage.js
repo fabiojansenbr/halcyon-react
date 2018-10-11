@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getToken } from '../../clients/tokenClient';
 import { registerExternal } from '../../clients/accountClient';
-import PasswordForm from './PasswordForm';
-import RegisterExternalForm from './RegisterExternalForm';
-import TwoFactorForm from './TwoFactorForm';
-import RecoveryCodeForm from './RecoveryCodeForm';
+import PasswordForm from '../../components/account/PasswordForm';
+import RegisterExternalForm from '../../components/account/RegisterExternalForm';
+import TwoFactorForm from '../../components/account/TwoFactorForm';
+import RecoveryCodeForm from '../../components/account/RecoveryCodeForm';
 
 class LoginPage extends Component {
     constructor(props) {
@@ -189,8 +189,6 @@ class LoginPage extends Component {
 }
 
 LoginPage.propTypes = {
-    getToken: PropTypes.func.isRequired,
-    registerExternal: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

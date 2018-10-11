@@ -7,15 +7,15 @@ import {
     lockUser,
     deleteUser
 } from '../../clients/userClient';
-import { openModal } from '../../clients/modalClient';
 import { toUserDataModel } from '../../mappers/userMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
-import ProfileForm from '../common/form/ProfileForm';
-import RoleForm from '../common/form/RoleForm';
-import Status from './Status';
-import Options from './Options';
+import { openModal } from '../../components/layout/ModalDialog';
+import ProfileForm from '../../components/form/ProfileForm';
+import RoleForm from '../../components/form/RoleForm';
+import Status from '../../components/user/Status';
+import Options from '../../components/user/Options';
 
 class UpdateUserPage extends Component {
     constructor(props) {
@@ -158,13 +158,6 @@ class UpdateUserPage extends Component {
 }
 
 UpdateUserPage.propTypes = {
-    user: PropTypes.object,
-    getUser: PropTypes.func.isRequired,
-    updateUser: PropTypes.func.isRequired,
-    unlockUser: PropTypes.func.isRequired,
-    lockUser: PropTypes.func.isRequired,
-    deleteUser: PropTypes.func.isRequired,
-    openModal: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

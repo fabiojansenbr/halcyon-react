@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { closeModal } from '../../../clients/modalClient';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+
+export const openModal = () => {};
+export const closeModal = () => {};
 
 class ModalDialog extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class ModalDialog extends Component {
     }
 
     render() {
-        const { show, title, message } = this.props.modal;
+        const { show, title, message } = this.props.modal || {};
 
         if (!show) {
             return null;
@@ -43,10 +44,5 @@ class ModalDialog extends Component {
         );
     }
 }
-
-ModalDialog.propTypes = {
-    modal: PropTypes.object.isRequired,
-    closeModal: PropTypes.func.isRequired
-};
 
 export default ModalDialog;

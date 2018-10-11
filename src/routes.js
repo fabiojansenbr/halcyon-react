@@ -1,30 +1,30 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import PublicRoute from './components/common/routing/PublicRoute';
-import PrivateRoute from './components/common/routing/PrivateRoute';
+import PublicRoute from './components/routing/PublicRoute';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 import App from './components/App';
 
-import HomePage from './components/home/HomePage';
-import AboutPage from './components/home/AboutPage';
-import NotFoundPage from './components/home/NotFoundPage';
+import HomePage from './pages/home/HomePage';
+import AboutPage from './pages/home/AboutPage';
+import NotFoundPage from './pages/home/NotFoundPage';
 
-import LoginPage from './components/account/LoginPage';
-import RegisterPage from './components/account/RegisterPage';
-import ForgotPasswordPage from './components/account/ForgotPasswordPage';
-import ResetPasswordPage from './components/account/ResetPasswordPage';
-import AccessDeniedPage from './components/account/AccessDeniedPage';
+import LoginPage from './pages/account/LoginPage';
+import RegisterPage from './pages/account/RegisterPage';
+import ForgotPasswordPage from './pages/account/ForgotPasswordPage';
+import ResetPasswordPage from './pages/account/ResetPasswordPage';
+import AccessDeniedPage from './pages/account/AccessDeniedPage';
 
-import ManagePage from './components/manage/ManagePage';
-import UpdateProfilePage from './components/manage/UpdateProfilePage';
-import ConfirmEmailPage from './components/manage/ConfirmEmailPage';
-import ChangePasswordPage from './components/manage/ChangePasswordPage';
-import SetPasswordPage from './components/manage/SetPasswordPage';
-import ConfigureAuthenticatorPage from './components/manage/ConfigureAuthenticatorPage';
+import ManagePage from './pages/manage/ManagePage';
+import UpdateProfilePage from './pages/manage/UpdateProfilePage';
+import ConfirmEmailPage from './pages/manage/ConfirmEmailPage';
+import ChangePasswordPage from './pages/manage/ChangePasswordPage';
+import SetPasswordPage from './pages/manage/SetPasswordPage';
+import ConfigureAuthenticatorPage from './pages/manage/ConfigureAuthenticatorPage';
 
-import UserPage from './components/user/UserPage';
-import CreateUserPage from './components/user/CreateUserPage';
-import UpdateUserPage from './components/user/UpdateUserPage';
+import UserPage from './pages/user/UserPage';
+import CreateUserPage from './pages/user/CreateUserPage';
+import UpdateUserPage from './pages/user/UpdateUserPage';
 
 const routes = (
     <App>

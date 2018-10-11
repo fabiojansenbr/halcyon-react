@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { setPassword } from '../../clients/manageClient';
+import { changePassword } from '../../clients/manageClient';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
 
-class SetPasswordPage extends Component {
+class ChangePasswordPage extends Component {
     constructor(props) {
         super(props);
 
@@ -13,7 +13,7 @@ class SetPasswordPage extends Component {
     }
 
     async onSubmit(event, values) {
-        const result = await setPassword(values);
+        const result = await changePassword(values);
         if (!result.error) {
             this.props.history.push('/manage');
         }
@@ -25,10 +25,16 @@ class SetPasswordPage extends Component {
                 <Col lg={8}>
                     <Card className="mb-3">
                         <CardBody>
-                            <h1>Set Password</h1>
+                            <h1>Change Password</h1>
                             <hr />
 
                             <AvForm onValidSubmit={this.onSubmit}>
+                                <AvField
+                                    name="currentPassword"
+                                    type="password"
+                                    label="Current Password"
+                                    required
+                                />
                                 <AvField
                                     name="newPassword"
                                     type="password"
@@ -57,6 +63,15 @@ class SetPasswordPage extends Component {
                                     </Button>
                                 </FormGroup>
                             </AvForm>
+
+                            <hr />
+
+                            <p>
+                                Forgotten your password?{' '}
+                                <Link to="/account/forgotpassword">
+                                    Request reset
+                                </Link>
+                            </p>
                         </CardBody>
                     </Card>
                 </Col>
@@ -65,9 +80,8 @@ class SetPasswordPage extends Component {
     }
 }
 
-SetPasswordPage.propTypes = {
-    setPassword: PropTypes.func.isRequired,
+ChangePasswordPage.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default SetPasswordPage;
+export default ChangePasswordPage;

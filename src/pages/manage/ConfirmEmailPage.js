@@ -20,7 +20,6 @@ class ManagePage extends Component {
 }
 
 ManagePage.propTypes = {
-    confirmEmail: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

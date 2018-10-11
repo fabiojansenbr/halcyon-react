@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { removeToken } from '../../../clients/tokenClient';
-import history from '../../../utils/history';
+import { removeItem } from '../../utils/storage';
+import history from '../../utils/history';
 import {
     Nav,
     UncontrolledDropdown,
@@ -19,7 +18,7 @@ class UserOptions extends Component {
     }
 
     onLogout() {
-        removeToken();
+        removeItem('session.token');
         history.push('/');
     }
 
@@ -56,10 +55,5 @@ class UserOptions extends Component {
         );
     }
 }
-
-UserOptions.propTypes = {
-    removeToken: PropTypes.func.isRequired,
-    currentUser: PropTypes.object
-};
 
 export default UserOptions;

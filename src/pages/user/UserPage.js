@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { getUsers } from '../../clients/userClient';
 import { Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import SearchForm from './SearchForm';
-import Summary from './Summary';
-import Pager from '../common/layout/Pager';
+import SearchForm from '../../components/user/SearchForm';
+import Summary from '../../components/user/Summary';
+import Pager from '../../components/layout/Pager';
 
 class UserPage extends Component {
     constructor(props) {
@@ -122,10 +121,5 @@ class UserPage extends Component {
         );
     }
 }
-
-UserPage.propTypes = {
-    getUsers: PropTypes.func.isRequired,
-    users: PropTypes.object
-};
 
 export default UserPage;

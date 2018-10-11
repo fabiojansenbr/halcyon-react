@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,10 +18,6 @@ const Spinner = ({ isLoading }) => {
             <div className="modal-backdrop show" />
         </div>
     );
-};
-
-Spinner.propTypes = {
-    isLoading: PropTypes.bool.isRequired
 };
 
 export default Spinner;

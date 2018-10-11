@@ -125,9 +125,6 @@ class ConfigureAuthenticatorPage extends Component {
 }
 
 ConfigureAuthenticatorPage.propTypes = {
-    authenticatorSettings: PropTypes.object,
-    getAuthenticatorSettings: PropTypes.func.isRequired,
-    configureAuthenticator: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 };
 

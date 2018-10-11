@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProfile, updateProfile } from '../../clients/manageClient';
-import { refreshToken } from '../../clients/tokenClient';
+import { getToken } from '../../clients/tokenClient';
+import { getItem } from '../../utils/storage';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
-import ProfileForm from '../common/form/ProfileForm';
+import ProfileForm from '../../components/form/ProfileForm';
 
 class UpdateProfilePage extends Component {
     constructor(props) {
@@ -24,8 +25,15 @@ class UpdateProfilePage extends Component {
             return;
         }
 
-        const refreshTokenResult = await refreshToken();
-        if (refreshTokenResult.error) {
+        const jwt = getItem('session.token');
+        const refreshToken = jwt && jwt.refreshToken;
+
+        const tokenResult = await getToken({
+            grantType: 'RefreshToken',
+            refreshToken: refreshToken
+        });
+
+        if (tokenResult.error) {
             return;
         }
 
@@ -79,10 +87,6 @@ class UpdateProfilePage extends Component {
 }
 
 UpdateProfilePage.propTypes = {
-    profile: PropTypes.object,
-    getProfile: PropTypes.func.isRequired,
-    updateProfile: PropTypes.func.isRequired,
-    refreshToken: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 };
 

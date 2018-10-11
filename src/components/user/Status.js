@@ -6,7 +6,7 @@ import {
     faKey,
     faMobileAlt
 } from '@fortawesome/free-solid-svg-icons';
-import StackedIcon from '../common/layout/StackedIcon';
+import StackedIcon from '../layout/StackedIcon';
 
 const Status = ({ user }) => (
     <React.Fragment>

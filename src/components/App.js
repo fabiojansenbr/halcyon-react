@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'reactstrap';
 import ErrorPage from './home/ErrorPage';
-import Header from './common/layout/Header';
-import Footer from './common/layout/Footer';
-import ModalDialog from './common/layout/ModalDialog';
-import Spinner from './common/layout/Spinner';
+import Header from './layout/Header';
+import Footer from './layout/Footer';
+import ModalDialog from './layout/ModalDialog';
+import Spinner from './layout/Spinner';
 
 class App extends React.Component {
     constructor(props) {

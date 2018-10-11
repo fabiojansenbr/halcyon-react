@@ -71,7 +71,6 @@ class ResetPasswordPage extends Component {
 }
 
 ResetPasswordPage.propTypes = {
-    resetPassword: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

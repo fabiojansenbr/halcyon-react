@@ -9,13 +9,13 @@ import {
     resetRecoveryCodes,
     deleteAccount
 } from '../../clients/manageClient';
-import { openModal } from '../../clients/modalClient';
 import { Row, Col, Card, CardBody } from 'reactstrap';
-import Profile from './Profile';
-import Picture from './Picture';
-import ExternalLogin from './ExternalLogin';
-import TwoFactor from './TwoFactor';
-import Settings from './Settings';
+import { openModal } from '../../components/layout/ModalDialog';
+import Profile from '../../components/manage/Profile';
+import Picture from '../../components/manage/Picture';
+import ExternalLogin from '../../components/manage/ExternalLogin';
+import TwoFactor from '../../components/manage/TwoFactor';
+import Settings from '../../components/manage/Settings';
 
 class ManagePage extends Component {
     constructor(props) {
@@ -143,15 +143,6 @@ class ManagePage extends Component {
 }
 
 ManagePage.propTypes = {
-    profile: PropTypes.object,
-    getProfile: PropTypes.func.isRequired,
-    verifyEmail: PropTypes.func.isRequired,
-    addLogin: PropTypes.func.isRequired,
-    removeLogin: PropTypes.func.isRequired,
-    disableAuthenticator: PropTypes.func.isRequired,
-    resetRecoveryCodes: PropTypes.func.isRequired,
-    deleteAccount: PropTypes.func.isRequired,
-    openModal: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 };
 

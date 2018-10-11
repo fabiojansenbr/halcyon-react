@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { register, registerExternal } from '../../clients/accountClient';
 import { getToken } from '../../clients/tokenClient';
-import RegisterForm from './RegisterForm';
-import RegisterExternalForm from './RegisterExternalForm';
+import RegisterForm from '../../components/account/RegisterForm';
+import RegisterExternalForm from '../../components/account/RegisterExternalForm';
 
 class RegisterPage extends Component {
     constructor(props) {
@@ -137,9 +137,6 @@ class RegisterPage extends Component {
 }
 
 RegisterPage.propTypes = {
-    register: PropTypes.func.isRequired,
-    registerExternal: PropTypes.func.isRequired,
-    getToken: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
