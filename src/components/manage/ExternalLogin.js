@@ -12,14 +12,14 @@ const ExternalLogin = ({ profile, onAddLogin, onRemoveLogin }) => (
 
         {providers.map(provider => {
             const userLogin = profile.logins.filter(
-                a => a.provider === provider.type
+                a => a.provider === provider.provider
             )[0];
 
             return (
                 <div key={provider.type} className="d-flex mb-2">
                     <div className="mr-auto">
                         <FontAwesomeIcon icon={provider.icon} fixedWidth />{' '}
-                        {provider.displayName}
+                        {provider.provider}
                     </div>
                     {!userLogin && (
                         <SocialButton
@@ -27,7 +27,7 @@ const ExternalLogin = ({ profile, onAddLogin, onRemoveLogin }) => (
                             provider={provider.type}
                             appId={provider.appId}
                             onLoginSuccess={user =>
-                                onAddLogin(provider.type, user, undefined)
+                                onAddLogin(provider.provider, user, undefined)
                             }
                         >
                             Connect
