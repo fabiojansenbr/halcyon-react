@@ -1,7 +1,7 @@
 import history from '../utils/history';
 import { context } from '../context';
 
-const statusCodeInterceptor = error => {
+const error = error => {
     const response = error.response;
     const status = response && response.status;
 
@@ -22,4 +22,6 @@ const statusCodeInterceptor = error => {
     return Promise.reject(error);
 };
 
-export default statusCodeInterceptor;
+export default {
+    error
+};

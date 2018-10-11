@@ -2,7 +2,7 @@ import moment from 'moment';
 import { context } from '../context';
 import { getToken } from '../api/tokenClient';
 
-const tokenInterceptor = async request => {
+const request = async request => {
     if (!request.authenticate) {
         return request;
     }
@@ -44,4 +44,6 @@ const isExpired = exp => {
     return remainingSeconds < 30;
 };
 
-export default tokenInterceptor;
+export default {
+    request
+};

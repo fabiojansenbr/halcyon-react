@@ -2,13 +2,11 @@ import React from 'react';
 import jwtDecode from 'jwt-decode';
 import { getItem, setItem } from './utils/storage';
 
-const STORAGE_KEY = 'session.token';
+class Context {
+    storageKey = 'session.token';
 
-export const context = {
-    user: undefined,
-    modal: undefined,
-    loadUser: function() {
-        const value = getItem(STORAGE_KEY);
+    constructor() {
+        const value = getItem(this.storgageKey);
 
         let newUser = undefined;
         if (value) {
@@ -19,9 +17,12 @@ export const context = {
         }
 
         this.user = newUser;
-    },
-    updateUser: function(value, persist) {
-        setItem(STORAGE_KEY, value, persist);
+        this.modal = undefined;
+        this.loading = 0;
+    }
+
+    updateUser(value, persist) {
+        setItem(this.storgageKey, value, persist);
 
         let newUser = undefined;
         if (value) {
@@ -32,38 +33,27 @@ export const context = {
         }
 
         this.user = newUser;
-    },
-    showModal: function(value) {
+    }
+
+    showModal(value) {
         this.modal = { ...value, show: true };
-    },
+    }
 
-    closeModal: function() {
+    closeModal() {
         this.modal = { ...this.modal, show: false };
     }
-};
 
-// export const AppContext = React.createContext(null);
+    loading(value) {
+        this.loading = Math.max(0, this.loading + value);
+    }
+}
 
-// export const ContextProvider = props => (
-//     <AppContext.Provider value={context}>
-//         {props.children}
-//     </AppContext.Provider>
-// );
+export const context = new Context();
 
 export const ContextProvider = props => (
     <React.Fragment>{props.children}</React.Fragment>
 );
 
-// export const withContext = Component => props => (
-//     <AppContext.Consumer>
-//         {context => {
-//             console.log('context', context);
-//             return <Component {...props} context={context} />;
-//         }}
-//     </AppContext.Consumer>
-// );
-
-export const withContext = Component => props => {
-    console.log('context', context);
-    return <Component {...props} context={context} />;
-};
+export const withContext = Component => props => (
+    <Component {...props} context={context} />
+);

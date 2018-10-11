@@ -35,7 +35,10 @@ class LoginPage extends Component {
                 });
 
                 if (!result.error) {
-                    this.props.context.updateUser(result.data.data);
+                    this.props.context.updateUser(
+                        result.data.data,
+                        this.state.rememberMe
+                    );
                     return this.props.history.push(this.state.from);
                 }
 
@@ -50,7 +53,10 @@ class LoginPage extends Component {
                 });
 
                 if (!result.error) {
-                    this.props.context.updateUser(result.data.data);
+                    this.props.context.updateUser(
+                        result.data.data,
+                        this.state.rememberMe
+                    );
                     return this.props.history.push(this.state.from);
                 }
 
@@ -89,7 +95,10 @@ class LoginPage extends Component {
                 });
 
                 if (!result.error) {
-                    this.props.context.updateUser(result.data.data);
+                    this.props.context.updateUser(
+                        result.data.data,
+                        this.state.rememberMe
+                    );
                     return this.props.history.push(this.state.from);
                 }
 

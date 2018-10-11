@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-const Spinner = ({ isLoading }) => {
-    if (!isLoading) {
+const Spinner = ({ context }) => {
+    if (!context.loading) {
         return null;
     }
 
@@ -20,4 +22,8 @@ const Spinner = ({ isLoading }) => {
     );
 };
 
-export default Spinner;
+Spinner.propTypes = {
+    context: PropTypes.object
+};
+
+export default withContext(Spinner);
