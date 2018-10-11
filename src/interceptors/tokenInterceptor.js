@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { AppContext } from '../context';
+import { context } from '../context';
 import { getToken } from '../api/tokenClient';
 
 const tokenInterceptor = async request => {
@@ -7,16 +7,12 @@ const tokenInterceptor = async request => {
         return request;
     }
 
-    const token = AppContext.user;
-    console.log('token', token);
-
-    const jwt = token && token.jwt;
+    const jwt = context.user && context.user.jwt;
     if (!jwt) {
         return request;
     }
 
-    const currentUser = token && token.currentUser;
-    if (!isExpired(currentUser.exp)) {
+    if (!isExpired(context.user.exp)) {
         request.headers.Authorization = `Bearer ${jwt.accessToken}`;
         return request;
     }
@@ -34,8 +30,8 @@ const tokenInterceptor = async request => {
         });
     }
 
-    AppContext.updateUser(result.data.data);
-    request.headers.Authorization = `Bearer ${AppContext.user.accessToken}`;
+    context.updateUser(result.data.data);
+    request.headers.Authorization = `Bearer ${context.user.accessToken}`;
 
     return request;
 };

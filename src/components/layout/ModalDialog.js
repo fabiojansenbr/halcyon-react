@@ -12,16 +12,16 @@ class ModalDialog extends Component {
     }
 
     onClose() {
-        this.context.closeModal();
+        this.props.context.closeModal();
     }
 
     async onOk() {
-        this.context.closeModal();
+        this.props.context.closeModal();
         await this.props.modal.onOk();
     }
 
     render() {
-        const { show, title, message } = this.props.modal || {};
+        const { show, title, message } = this.props.context.modal || {};
 
         if (!show) {
             return null;
@@ -45,7 +45,7 @@ class ModalDialog extends Component {
 }
 
 ModalDialog.propTypes = {
-    context: PropTypes.object.required
+    context: PropTypes.object
 };
 
 export default withContext(ModalDialog);

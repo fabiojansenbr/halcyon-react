@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withContext } from '../../context';
 import { getProfile, updateProfile } from '../../api/manageClient';
 import { getToken } from '../../api/tokenClient';
 import { getItem } from '../../utils/storage';
@@ -20,23 +21,24 @@ class UpdateProfilePage extends Component {
     }
 
     async onSubmit(event, values) {
-        const updateProfileResult = await updateProfile(values);
-        if (updateProfileResult.error) {
+        let result = await updateProfile(values);
+        if (result.error) {
             return;
         }
 
         const jwt = getItem('session.token');
         const refreshToken = jwt && jwt.refreshToken;
 
-        const tokenResult = await getToken({
+        result = await getToken({
             grantType: 'RefreshToken',
             refreshToken: refreshToken
         });
 
-        if (tokenResult.error) {
+        if (result.error) {
             return;
         }
 
+        this.props.context.updateUser(result.data.data);
         this.props.history.push('/manage');
     }
 
@@ -87,7 +89,8 @@ class UpdateProfilePage extends Component {
 }
 
 UpdateProfilePage.propTypes = {
+    context: PropTypes.object,
     history: PropTypes.object.isRequired
 };
 
-export default UpdateProfilePage;
+export default withContext(UpdateProfilePage);

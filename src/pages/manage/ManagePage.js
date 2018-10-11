@@ -143,7 +143,7 @@ class ManagePage extends Component {
 }
 
 ManagePage.propTypes = {
-    context: PropTypes.object.required,
+    context: PropTypes.object,
     history: PropTypes.object.isRequired
 };
 

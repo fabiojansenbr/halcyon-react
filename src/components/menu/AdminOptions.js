@@ -36,7 +36,7 @@ const AdminOptions = ({ context }) => {
 };
 
 AdminOptions.propTypes = {
-    context: PropTypes.object.required
+    context: PropTypes.object
 };
 
 export default withContext(AdminOptions);

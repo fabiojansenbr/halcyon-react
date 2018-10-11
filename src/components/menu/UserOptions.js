@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import { withContext } from '../../context';
 import {
     Nav,
@@ -58,7 +59,7 @@ class UserOptions extends Component {
 
 UserOptions.propTypes = {
     history: PropTypes.object.isRequired,
-    context: PropTypes.object.required
+    context: PropTypes.object
 };
 
-export default withContext(UserOptions);
+export default withRouter(withContext(UserOptions));

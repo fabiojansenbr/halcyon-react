@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withContext } from '../../context';
 import { register, registerExternal } from '../../api/accountClient';
 import { getToken } from '../../api/tokenClient';
 import RegisterForm from '../../components/account/RegisterForm';
@@ -41,6 +42,7 @@ class RegisterPage extends Component {
                     });
 
                     if (!result.error) {
+                        this.props.context.updateUser(result.data.data);
                         return this.props.history.push(this.state.from);
                     }
                 }
@@ -64,6 +66,7 @@ class RegisterPage extends Component {
                     });
 
                     if (!result.error) {
+                        this.props.context.updateUser(result.data.data);
                         return this.props.history.push(this.state.from);
                     }
                 }
@@ -87,12 +90,11 @@ class RegisterPage extends Component {
         });
 
         if (!result.error) {
+            this.props.context.updateUser(result.data.data);
             return this.props.history.push(this.state.from);
         }
 
         const requiresExternal =
-            result &&
-            result.error &&
             result.error.response &&
             result.error.response.data &&
             result.error.response.data.data &&
@@ -137,8 +139,9 @@ class RegisterPage extends Component {
 }
 
 RegisterPage.propTypes = {
+    context: PropTypes.object,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default RegisterPage;
+export default withContext(RegisterPage);

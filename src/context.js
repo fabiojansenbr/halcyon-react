@@ -1,46 +1,69 @@
 import React from 'react';
+import jwtDecode from 'jwt-decode';
+import { getItem, setItem } from './utils/storage';
 
-class Context {
-    constructor() {
-        this.user = undefined;
-        this.modal = undefined;
-    }
+const STORAGE_KEY = 'session.token';
 
-    updateUser(value) {
-        this.user = value;
-    }
+export const context = {
+    user: undefined,
+    modal: undefined,
+    loadUser: function() {
+        const value = getItem(STORAGE_KEY);
 
-    showModal(value) {
+        let newUser = undefined;
+        if (value) {
+            newUser = {
+                ...value,
+                ...jwtDecode(value.accessToken)
+            };
+        }
+
+        this.user = newUser;
+    },
+    updateUser: function(value, persist) {
+        setItem(STORAGE_KEY, value, persist);
+
+        let newUser = undefined;
+        if (value) {
+            newUser = {
+                ...value,
+                ...jwtDecode(value.accessToken)
+            };
+        }
+
+        this.user = newUser;
+    },
+    showModal: function(value) {
         this.modal = { ...value, show: true };
-    }
+    },
 
-    closeModal() {
+    closeModal: function() {
         this.modal = { ...this.modal, show: false };
     }
-}
+};
 
-export const AppContext = React.createContext(null);
+// export const AppContext = React.createContext(null);
 
-export class ContextProvider extends React.Component {
-    constructor(props) {
-        super(props);
-        this.context = new Context();
-    }
+// export const ContextProvider = props => (
+//     <AppContext.Provider value={context}>
+//         {props.children}
+//     </AppContext.Provider>
+// );
 
-    render() {
-        return (
-            <AppContext.Provider value={this.context}>
-                {this.props.children}
-            </AppContext.Provider>
-        );
-    }
-}
-
-export const withContext = Component => props => (
-    <AppContext.Consumer>
-        {context => {
-            console.log('context', context);
-            return <Component {...props} context={context} />;
-        }}
-    </AppContext.Consumer>
+export const ContextProvider = props => (
+    <React.Fragment>{props.children}</React.Fragment>
 );
+
+// export const withContext = Component => props => (
+//     <AppContext.Consumer>
+//         {context => {
+//             console.log('context', context);
+//             return <Component {...props} context={context} />;
+//         }}
+//     </AppContext.Consumer>
+// );
+
+export const withContext = Component => props => {
+    console.log('context', context);
+    return <Component {...props} context={context} />;
+};

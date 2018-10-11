@@ -26,7 +26,7 @@ const LoginOptions = ({ context }) => {
 };
 
 LoginOptions.propTypes = {
-    context: PropTypes.object.required
+    context: PropTypes.object
 };
 
 export default withContext(LoginOptions);

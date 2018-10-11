@@ -1,13 +1,13 @@
 import history from '../utils/history';
-import { AppContext } from '../context';
+import { context } from '../context';
 
-const statusCodeInterceptor = ({ dispatch }, error) => {
+const statusCodeInterceptor = error => {
     const response = error.response;
     const status = response && response.status;
 
     switch (status) {
         case 401:
-            AppContext.updateUser(undefined);
+            context.updateUser(undefined);
             history.push('/');
             break;
 
