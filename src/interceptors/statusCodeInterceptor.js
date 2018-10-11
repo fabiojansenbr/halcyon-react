@@ -7,7 +7,7 @@ const error = error => {
 
     switch (status) {
         case 401:
-            context.updateUser(undefined);
+            context.removeUser();
             history.push('/');
             break;
 

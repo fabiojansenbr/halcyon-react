@@ -19,7 +19,7 @@ class UserOptions extends Component {
     }
 
     onLogout() {
-        this.props.context.updateUser(undefined);
+        this.props.context.removeUser();
         this.props.history.push('/');
     }
 

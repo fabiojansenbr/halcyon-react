@@ -1,46 +1,50 @@
 import React from 'react';
 import jwtDecode from 'jwt-decode';
-import { getItem, setItem } from './utils/storage';
+import { getItem, setItem, removeItem } from './utils/storage';
+
+const STORAGE_KEY = 'session.token';
 
 class Context {
-    storageKey = 'session.token';
-
     constructor() {
-        const value = getItem(this.storgageKey);
-
-        let newUser = undefined;
-        if (value) {
-            newUser = {
-                ...value,
-                ...jwtDecode(value.accessToken)
-            };
-        }
-
-        this.user = newUser;
+        this.loadUser();
         this.modal = undefined;
         this.loading = 0;
     }
 
-    updateUser(value, persist) {
-        setItem(this.storgageKey, value, persist);
+    loadUser() {
+        const value = getItem(STORAGE_KEY);
 
-        let newUser = undefined;
+        let user = undefined;
         if (value) {
-            newUser = {
+            user = {
                 ...value,
                 ...jwtDecode(value.accessToken)
             };
         }
 
-        this.user = newUser;
+        this.user = user;
+    }
+
+    updateUser(value, persist) {
+        setItem(STORAGE_KEY, value, persist);
+
+        this.user = {
+            ...value,
+            ...jwtDecode(value.accessToken)
+        };
+    }
+
+    removeUser() {
+        removeItem(STORAGE_KEY);
+        this.user = undefined;
     }
 
     showModal(value) {
-        this.modal = { ...value, show: true };
+        this.modal = value;
     }
 
     closeModal() {
-        this.modal = { show: false };
+        this.modal = undefined;
     }
 
     loading(value) {
