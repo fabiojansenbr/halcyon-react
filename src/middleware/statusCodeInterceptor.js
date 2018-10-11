@@ -1,7 +1,7 @@
 import history from '../utils/history';
 import { removeToken } from '../actions/tokenActions';
 
-const errorStatusCodeInterceptor = ({ dispatch }, error) => {
+const error = ({ dispatch }, error) => {
     const response = error.response;
     const status = response && response.status;
 
@@ -22,4 +22,4 @@ const errorStatusCodeInterceptor = ({ dispatch }, error) => {
     return Promise.reject(error);
 };
 
-export default { error: errorStatusCodeInterceptor };
+export default { error };

@@ -90,8 +90,6 @@ class LoginPage extends Component {
                 }
 
                 const requiresTwoFactor =
-                    result &&
-                    result.error &&
                     result.error.response &&
                     result.error.response.data &&
                     result.error.response.data.data &&
@@ -128,8 +126,6 @@ class LoginPage extends Component {
         }
 
         const requiresExternal =
-            result &&
-            result.error &&
             result.error.response &&
             result.error.response.data &&
             result.error.response.data.data &&

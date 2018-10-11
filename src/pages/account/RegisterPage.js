@@ -92,8 +92,6 @@ class RegisterPage extends Component {
         }
 
         const requiresExternal =
-            result &&
-            result.error &&
             result.error.response &&
             result.error.response.data &&
             result.error.response.data.data &&

@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { refreshToken } from '../actions/tokenActions';
 
-const tokenInterceptor = async ({ getState, dispatch }, request) => {
+const request = async ({ getState, dispatch }, request) => {
     if (!request.authenticate) {
         return request;
     }
@@ -43,4 +43,4 @@ const isExpired = exp => {
     return remainingSeconds < 30;
 };
 
-export default tokenInterceptor;
+export default request;

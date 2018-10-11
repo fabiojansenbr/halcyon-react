@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { removeToken } from '../../actions/tokenActions';
-import history from '../../utils/history';
 import {
     Nav,
     UncontrolledDropdown,
@@ -21,13 +21,11 @@ class UserOptions extends Component {
 
     onLogout() {
         this.props.removeToken();
-        history.push('/');
+        this.props.history.push('/');
     }
 
     render() {
-        const { currentUser } = this.props;
-
-        if (!currentUser) {
+        if (!this.props.currentUser) {
             return null;
         }
 
@@ -36,13 +34,14 @@ class UserOptions extends Component {
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                         <img
-                            src={currentUser.picture}
-                            alt={`${currentUser.given_name} ${
-                                currentUser.family_name
+                            src={this.props.currentUser.picture}
+                            alt={`${this.props.currentUser.given_name} ${
+                                this.props.currentUser.family_name
                             }`}
                             className="rounded-circle mr-2"
                         />{' '}
-                        {currentUser.given_name} {currentUser.family_name}{' '}
+                        {this.props.currentUser.given_name}{' '}
+                        {this.props.currentUser.family_name}{' '}
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem to="/manage" tag={Link}>
@@ -68,10 +67,13 @@ const mapDispatchToProps = dispatch => ({
 
 UserOptions.propTypes = {
     removeToken: PropTypes.func.isRequired,
-    currentUser: PropTypes.object
+    currentUser: PropTypes.object,
+    history: PropTypes.object.isRequired
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UserOptions);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(UserOptions)
+);

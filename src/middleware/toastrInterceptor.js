@@ -9,7 +9,7 @@ iziToast.settings({
     drag: false
 });
 
-const successToastrInterceptor = (config, response) => {
+const success = (config, response) => {
     const result = response.data;
     const messages = (result && result.messages) || [];
 
@@ -20,7 +20,7 @@ const successToastrInterceptor = (config, response) => {
     return response;
 };
 
-const errorToastrInterceptor = (config, error) => {
+const error = (config, error) => {
     const response = error.response;
     const status = response && response.status;
     let messages = [];
@@ -51,6 +51,6 @@ const errorToastrInterceptor = (config, error) => {
 };
 
 export default {
-    success: successToastrInterceptor,
-    error: errorToastrInterceptor
+    success,
+    error
 };

@@ -81,8 +81,10 @@ class UserPage extends Component {
     }
 
     render() {
-        const { users } = this.props;
-        const hasUsers = users && users.items && users.items.length > 0;
+        const hasUsers =
+            this.props.users &&
+            this.props.users.items &&
+            this.props.users.items.length > 0;
 
         return (
             <React.Fragment>
@@ -108,12 +110,12 @@ class UserPage extends Component {
 
                 {hasUsers && (
                     <React.Fragment>
-                        {users.items.map(user => (
+                        {this.props.users.items.map(user => (
                             <Summary key={user.id} user={user} />
                         ))}
 
                         <Pager
-                            {...users}
+                            {...this.props.users}
                             onNextPage={this.onNextPage}
                             onPreviousPage={this.onPreviousPage}
                         />

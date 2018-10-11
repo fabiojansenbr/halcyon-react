@@ -21,13 +21,13 @@ class UpdateProfilePage extends Component {
     }
 
     async onSubmit(event, values) {
-        const updateProfileResult = await this.props.updateProfile(values);
-        if (updateProfileResult.error) {
+        let result = await this.props.updateProfile(values);
+        if (result.error) {
             return;
         }
 
-        const refreshTokenResult = await this.props.refreshToken();
-        if (refreshTokenResult.error) {
+        result = await this.props.refreshToken();
+        if (result.error) {
             return;
         }
 
