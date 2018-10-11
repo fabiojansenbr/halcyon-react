@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 
 const Options = ({ user, currentUser, onUnlock, onLock, onDelete }) => (
@@ -30,10 +29,6 @@ const Options = ({ user, currentUser, onUnlock, onLock, onDelete }) => (
     </React.Fragment>
 );
 
-const mapStateToProps = state => ({
-    currentUser: state.token.currentUser
-});
-
 Options.propTypes = {
     user: PropTypes.object.isRequired,
     currentUser: PropTypes.object,
@@ -42,4 +37,4 @@ Options.propTypes = {
     onDelete: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(Options);
+export default Options;

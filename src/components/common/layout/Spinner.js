@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
@@ -22,12 +21,8 @@ const Spinner = ({ isLoading }) => {
     );
 };
 
-const mapStateToProps = state => ({
-    isLoading: !!state.loading.inProgress
-});
-
 Spinner.propTypes = {
     isLoading: PropTypes.bool.isRequired
 };
 
-export default connect(mapStateToProps)(Spinner);
+export default Spinner;

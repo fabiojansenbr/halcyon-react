@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { removeToken } from '../../../actions/tokenActions';
+import { removeToken } from '../../../clients/tokenClient';
 import history from '../../../utils/history';
 import {
     Nav,
@@ -20,7 +19,7 @@ class UserOptions extends Component {
     }
 
     onLogout() {
-        this.props.removeToken();
+        removeToken();
         history.push('/');
     }
 
@@ -58,20 +57,9 @@ class UserOptions extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.token.currentUser
-});
-
-const mapDispatchToProps = dispatch => ({
-    removeToken: () => dispatch(removeToken())
-});
-
 UserOptions.propTypes = {
     removeToken: PropTypes.func.isRequired,
     currentUser: PropTypes.object
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UserOptions);
+export default UserOptions;

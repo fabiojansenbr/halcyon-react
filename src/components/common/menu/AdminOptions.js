@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import {
     UncontrolledDropdown,
     DropdownToggle,
@@ -35,12 +34,8 @@ const AdminOptions = ({ currentUser }) => {
     );
 };
 
-const mapStateToProps = state => ({
-    currentUser: state.token.currentUser
-});
-
 AdminOptions.propTypes = {
     currentUser: PropTypes.object
 };
 
-export default connect(mapStateToProps)(AdminOptions);
+export default AdminOptions;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { changePassword } from '../../actions/manageActions';
+import { changePassword } from '../../clients/manageClient';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ class ChangePasswordPage extends Component {
     }
 
     async onSubmit(event, values) {
-        const result = await this.props.changePassword(values);
+        const result = await changePassword(values);
         if (!result.error) {
             this.props.history.push('/manage');
         }
@@ -81,16 +80,9 @@ class ChangePasswordPage extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    changePassword: model => dispatch(changePassword(model))
-});
-
 ChangePasswordPage.propTypes = {
     changePassword: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default connect(
-    undefined,
-    mapDispatchToProps
-)(ChangePasswordPage);
+export default ChangePasswordPage;

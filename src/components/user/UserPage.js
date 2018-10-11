@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getUsers } from '../../actions/userActions';
+import { getUsers } from '../../clients/userClient';
 import { Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import SearchForm from './SearchForm';
@@ -28,7 +27,7 @@ class UserPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getUsers(this.state.filter);
+        getUsers(this.state.filter);
     }
 
     onSortChange(value) {
@@ -39,7 +38,7 @@ class UserPage extends Component {
                     sort: value
                 }
             }),
-            () => this.props.getUsers(this.state.filter)
+            () => getUsers(this.state.filter)
         );
     }
 
@@ -51,7 +50,7 @@ class UserPage extends Component {
                     page: previousState.filter.page - 1
                 }
             }),
-            () => this.props.getUsers(this.state.filter)
+            () => getUsers(this.state.filter)
         );
     }
 
@@ -63,7 +62,7 @@ class UserPage extends Component {
                     page: previousState.filter.page + 1
                 }
             }),
-            () => this.props.getUsers(this.state.filter)
+            () => getUsers(this.state.filter)
         );
     }
 
@@ -76,7 +75,7 @@ class UserPage extends Component {
                     page: 1
                 }
             }),
-            () => this.props.getUsers(this.state.filter)
+            () => getUsers(this.state.filter)
         );
     }
 
@@ -124,20 +123,9 @@ class UserPage extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    users: state.user.users
-});
-
-const mapDispatchToProps = dispatch => ({
-    getUsers: model => dispatch(getUsers(model))
-});
-
 UserPage.propTypes = {
     getUsers: PropTypes.func.isRequired,
     users: PropTypes.object
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UserPage);
+export default UserPage;

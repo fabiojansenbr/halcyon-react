@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import {
     getProfile,
     verifyEmail,
@@ -9,9 +8,8 @@ import {
     disableAuthenticator,
     resetRecoveryCodes,
     deleteAccount
-} from '../../actions/manageActions';
-import { openModal } from '../../actions/modalActions';
-import { toProfileViewModel } from '../../mappers/manageMapper';
+} from '../../clients/manageClient';
+import { openModal } from '../../clients/modalClient';
 import { Row, Col, Card, CardBody } from 'reactstrap';
 import Profile from './Profile';
 import Picture from './Picture';
@@ -33,11 +31,11 @@ class ManagePage extends Component {
     }
 
     componentDidMount() {
-        this.props.getProfile();
+        getProfile();
     }
 
     async onVerifyEmail() {
-        await this.props.verifyEmail();
+        await verifyEmail();
     }
 
     async onAddLogin(provider, response) {
@@ -48,36 +46,36 @@ class ManagePage extends Component {
             return;
         }
 
-        const result = await this.props.addLogin({ provider, accessToken });
+        const result = await addLogin({ provider, accessToken });
         if (!result.error) {
-            this.props.getProfile();
+            getProfile();
         }
     }
 
     async onRemoveLogin(login) {
-        const result = await this.props.removeLogin(login);
+        const result = await removeLogin(login);
         if (!result.error) {
-            this.props.getProfile();
+            getProfile();
         }
     }
 
     async onDisableAuthenticator() {
-        const result = await this.props.disableAuthenticator();
+        const result = await disableAuthenticator();
         if (!result.error) {
-            this.props.getProfile();
+            getProfile();
         }
     }
 
     async onResetRecoveryCodes() {
-        await this.props.resetRecoveryCodes();
+        await resetRecoveryCodes();
     }
 
     onDeleteAccount() {
-        this.props.openModal({
+        openModal({
             title: 'Confirm',
             message: 'Are you sure you want to delete your account?',
             onOk: async () => {
-                const result = await this.props.deleteAccount();
+                const result = await deleteAccount();
                 if (!result.error) {
                     this.props.history.push('/');
                 }
@@ -144,21 +142,6 @@ class ManagePage extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    profile: toProfileViewModel(state.manage.profile)
-});
-
-const mapDispatchToProps = dispatch => ({
-    getProfile: () => dispatch(getProfile()),
-    verifyEmail: () => dispatch(verifyEmail()),
-    addLogin: model => dispatch(addLogin(model)),
-    removeLogin: model => dispatch(removeLogin(model)),
-    disableAuthenticator: () => dispatch(disableAuthenticator()),
-    resetRecoveryCodes: () => dispatch(resetRecoveryCodes()),
-    deleteAccount: () => dispatch(deleteAccount()),
-    openModal: modal => dispatch(openModal(modal))
-});
-
 ManagePage.propTypes = {
     profile: PropTypes.object,
     getProfile: PropTypes.func.isRequired,
@@ -172,7 +155,4 @@ ManagePage.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ManagePage);
+export default ManagePage;

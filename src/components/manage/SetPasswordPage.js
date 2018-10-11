@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { setPassword } from '../../actions/manageActions';
+import { setPassword } from '../../clients/manageClient';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ class SetPasswordPage extends Component {
     }
 
     async onSubmit(event, values) {
-        const result = await this.props.setPassword(values);
+        const result = await setPassword(values);
         if (!result.error) {
             this.props.history.push('/manage');
         }
@@ -66,16 +65,9 @@ class SetPasswordPage extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    setPassword: model => dispatch(setPassword(model))
-});
-
 SetPasswordPage.propTypes = {
     setPassword: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default connect(
-    undefined,
-    mapDispatchToProps
-)(SetPasswordPage);
+export default SetPasswordPage;

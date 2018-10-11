@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getToken } from '../../actions/tokenActions';
-import { registerExternal } from '../../actions/accountActions';
+import { getToken } from '../../clients/tokenClient';
+import { registerExternal } from '../../clients/accountClient';
 import PasswordForm from './PasswordForm';
 import RegisterExternalForm from './RegisterExternalForm';
 import TwoFactorForm from './TwoFactorForm';
@@ -27,7 +26,7 @@ class LoginPage extends Component {
 
         switch (this.state.stage) {
             case 'TwoFactor':
-                result = await this.props.getToken({
+                result = await getToken({
                     grantType: 'TwoFactor',
                     emailAddress: this.state.emailAddress,
                     password: this.state.password,
@@ -41,7 +40,7 @@ class LoginPage extends Component {
                 return null;
 
             case 'RecoveryCode':
-                result = await this.props.getToken({
+                result = await getToken({
                     grantType: 'RecoveryCode',
                     emailAddress: this.state.emailAddress,
                     password: this.state.password,
@@ -55,7 +54,7 @@ class LoginPage extends Component {
                 return null;
 
             case 'RegisterExternal':
-                result = await this.props.registerExternal({
+                result = await registerExternal({
                     emailAddress: values.emailAddress,
                     firstName: values.firstName,
                     lastName: values.lastName,
@@ -65,7 +64,7 @@ class LoginPage extends Component {
                 });
 
                 if (!result.error) {
-                    result = await this.props.getToken({
+                    result = await getToken({
                         grantType: 'External',
                         provider: this.state.provider,
                         accessToken: this.state.accessToken
@@ -79,7 +78,7 @@ class LoginPage extends Component {
                 return null;
 
             default:
-                result = await this.props.getToken({
+                result = await getToken({
                     grantType: 'Password',
                     emailAddress: values.emailAddress,
                     password: values.password
@@ -117,7 +116,7 @@ class LoginPage extends Component {
             return null;
         }
 
-        const result = await this.props.getToken({
+        const result = await getToken({
             grantType: 'External',
             provider,
             accessToken
@@ -189,11 +188,6 @@ class LoginPage extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    getToken: model => dispatch(getToken(model)),
-    registerExternal: model => dispatch(registerExternal(model))
-});
-
 LoginPage.propTypes = {
     getToken: PropTypes.func.isRequired,
     registerExternal: PropTypes.func.isRequired,
@@ -201,7 +195,4 @@ LoginPage.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default connect(
-    undefined,
-    mapDispatchToProps
-)(LoginPage);
+export default LoginPage;

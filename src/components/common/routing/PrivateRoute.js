@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 
@@ -40,10 +39,6 @@ const PrivateRoute = ({
     );
 };
 
-const mapStateToProps = state => ({
-    currentUser: state.token.currentUser
-});
-
 PrivateRoute.propTypes = {
     component: PropTypes.func.isRequired,
     currentUser: PropTypes.object,
@@ -51,4 +46,4 @@ PrivateRoute.propTypes = {
     title: PropTypes.string
 };
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import {
     getAuthenticatorSettings,
     configureAuthenticator
-} from '../../actions/manageActions';
+} from '../../clients/manageClient';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
@@ -18,11 +17,11 @@ class ConfigureAuthenticatorPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getAuthenticatorSettings();
+        getAuthenticatorSettings();
     }
 
     async onSubmit(event, values) {
-        const result = await this.props.configureAuthenticator(values);
+        const result = await configureAuthenticator(values);
         if (!result.error) {
             this.props.history.push('/manage');
         }
@@ -125,15 +124,6 @@ class ConfigureAuthenticatorPage extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    authenticatorSettings: state.manage.authenticatorSettings
-});
-
-const mapDispatchToProps = dispatch => ({
-    getAuthenticatorSettings: () => dispatch(getAuthenticatorSettings()),
-    configureAuthenticator: model => dispatch(configureAuthenticator(model))
-});
-
 ConfigureAuthenticatorPage.propTypes = {
     authenticatorSettings: PropTypes.object,
     getAuthenticatorSettings: PropTypes.func.isRequired,
@@ -141,7 +131,4 @@ ConfigureAuthenticatorPage.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ConfigureAuthenticatorPage);
+export default ConfigureAuthenticatorPage;

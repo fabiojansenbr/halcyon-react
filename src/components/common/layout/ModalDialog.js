@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { closeModal } from '../../../actions/modalActions';
+import { closeModal } from '../../../clients/modalClient';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
 class ModalDialog extends Component {
@@ -13,11 +12,11 @@ class ModalDialog extends Component {
     }
 
     onClose() {
-        this.props.closeModal();
+        closeModal();
     }
 
     async onOk() {
-        this.props.closeModal();
+        closeModal();
         await this.props.modal.onOk();
     }
 
@@ -45,20 +44,9 @@ class ModalDialog extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    modal: state.modal
-});
-
-const mapDispatchToProps = dispatch => ({
-    closeModal: () => dispatch(closeModal())
-});
-
 ModalDialog.propTypes = {
     modal: PropTypes.object.isRequired,
     closeModal: PropTypes.func.isRequired
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ModalDialog);
+export default ModalDialog;

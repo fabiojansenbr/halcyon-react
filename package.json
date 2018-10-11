@@ -34,15 +34,11 @@
         "querystring": "0.2.0",
         "react": "16.5.2",
         "react-dom": "16.5.2",
-        "react-redux": "5.0.7",
         "react-router": "4.3.1",
         "react-router-dom": "4.3.1",
         "react-scripts": "2.0.3",
         "react-social-login": "3.4.2",
-        "reactstrap": "6.4.0",
-        "redux": "4.0.0",
-        "redux-axios-middleware": "4.0.0",
-        "redux-thunk": "2.3.0"
+        "reactstrap": "6.4.0"
     },
     "devDependencies": {
         "husky": "1.1.0",

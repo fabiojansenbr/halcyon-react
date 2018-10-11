@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createUser } from '../../actions/userActions';
+import { createUser } from '../../clients/userClient';
 import { toUserDataModel } from '../../mappers/userMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
@@ -18,7 +17,7 @@ class CreateUserPage extends Component {
 
     async onSubmit(event, values) {
         const model = toUserDataModel(values);
-        const result = await this.props.createUser(model);
+        const result = await createUser(model);
         if (!result.error) {
             this.props.history.push('/user');
         }
@@ -81,16 +80,9 @@ class CreateUserPage extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    createUser: model => dispatch(createUser(model))
-});
-
 CreateUserPage.propTypes = {
     createUser: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default connect(
-    undefined,
-    mapDispatchToProps
-)(CreateUserPage);
+export default CreateUserPage;

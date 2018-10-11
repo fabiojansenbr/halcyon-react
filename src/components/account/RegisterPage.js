@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { register, registerExternal } from '../../actions/accountActions';
-import { getToken } from '../../actions/tokenActions';
+import { register, registerExternal } from '../../clients/accountClient';
+import { getToken } from '../../clients/tokenClient';
 import RegisterForm from './RegisterForm';
 import RegisterExternalForm from './RegisterExternalForm';
 
@@ -25,7 +24,7 @@ class RegisterPage extends Component {
 
         switch (this.state.stage) {
             case 'RegisterExternal':
-                result = await this.props.registerExternal({
+                result = await registerExternal({
                     emailAddress: values.emailAddress,
                     firstName: values.firstName,
                     lastName: values.lastName,
@@ -35,7 +34,7 @@ class RegisterPage extends Component {
                 });
 
                 if (!result.error) {
-                    result = await this.props.getToken({
+                    result = await getToken({
                         grantType: 'External',
                         provider: this.state.provider,
                         accessToken: this.state.accessToken
@@ -49,7 +48,7 @@ class RegisterPage extends Component {
                 return null;
 
             default:
-                result = await this.props.register({
+                result = await register({
                     emailAddress: values.emailAddress,
                     password: values.password,
                     firstName: values.firstName,
@@ -58,7 +57,7 @@ class RegisterPage extends Component {
                 });
 
                 if (!result.error) {
-                    result = await this.props.getToken({
+                    result = await getToken({
                         grantType: 'Password',
                         emailAddress: values.emailAddress,
                         password: values.password
@@ -81,7 +80,7 @@ class RegisterPage extends Component {
             return null;
         }
 
-        const result = await this.props.getToken({
+        const result = await getToken({
             grantType: 'External',
             provider,
             accessToken
@@ -137,12 +136,6 @@ class RegisterPage extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    register: model => dispatch(register(model)),
-    registerExternal: model => dispatch(registerExternal(model)),
-    getToken: model => dispatch(getToken(model))
-});
-
 RegisterPage.propTypes = {
     register: PropTypes.func.isRequired,
     registerExternal: PropTypes.func.isRequired,
@@ -151,7 +144,4 @@ RegisterPage.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default connect(
-    undefined,
-    mapDispatchToProps
-)(RegisterPage);
+export default RegisterPage;

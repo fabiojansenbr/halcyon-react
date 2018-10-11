@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import {
     getUser,
     updateUser,
     unlockUser,
     lockUser,
     deleteUser
-} from '../../actions/userActions';
-import { openModal } from '../../actions/modalActions';
-import {
-    toUpdateUserViewModel,
-    toUserDataModel
-} from '../../mappers/userMapper';
+} from '../../clients/userClient';
+import { openModal } from '../../clients/modalClient';
+import { toUserDataModel } from '../../mappers/userMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
@@ -32,50 +28,50 @@ class UpdateUserPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getUser(this.props.match.params.id);
+        getUser(this.props.match.params.id);
     }
 
     onUnlock(user) {
-        this.props.openModal({
+        openModal({
             title: 'Confirm',
             message: `Are you sure you want to unlock <strong>${
                 user.firstName
             } ${user.lastName}</strong>?`,
             onOk: async () => {
                 const id = this.props.match.params.id;
-                const result = await this.props.unlockUser(id);
+                const result = await unlockUser(id);
                 if (!result.error) {
-                    this.props.getUser(this.props.match.params.id);
+                    getUser(this.props.match.params.id);
                 }
             }
         });
     }
 
     onLock(user) {
-        this.props.openModal({
+        openModal({
             title: 'Confirm',
             message: `Are you sure you want to lock out <strong>${
                 user.firstName
             } ${user.lastName}</strong>?`,
             onOk: async () => {
                 const id = this.props.match.params.id;
-                const result = await this.props.lockUser(id);
+                const result = await lockUser(id);
                 if (!result.error) {
-                    this.props.getUser(this.props.match.params.id);
+                    getUser(this.props.match.params.id);
                 }
             }
         });
     }
 
     onDelete(user) {
-        this.props.openModal({
+        openModal({
             title: 'Confirm',
             message: `Are you sure you want to delete <strong>${
                 user.firstName
             } ${user.lastName}</strong>?`,
             onOk: async () => {
                 const id = this.props.match.params.id;
-                const result = await this.props.deleteUser(id);
+                const result = await deleteUser(id);
                 if (!result.error) {
                     this.props.history.push('/user');
                 }
@@ -86,7 +82,7 @@ class UpdateUserPage extends Component {
     async onSubmit(event, values) {
         const id = this.props.match.params.id;
         const model = toUserDataModel(values);
-        const result = await this.props.updateUser(id, model);
+        const result = await updateUser(id, model);
         if (!result.error) {
             this.props.history.push('/user');
         }
@@ -161,19 +157,6 @@ class UpdateUserPage extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    user: toUpdateUserViewModel(state.user.user)
-});
-
-const mapDispatchToProps = dispatch => ({
-    getUser: id => dispatch(getUser(id)),
-    updateUser: (id, model) => dispatch(updateUser(id, model)),
-    unlockUser: id => dispatch(unlockUser(id)),
-    lockUser: id => dispatch(lockUser(id)),
-    deleteUser: id => dispatch(deleteUser(id)),
-    openModal: modal => dispatch(openModal(modal))
-});
-
 UpdateUserPage.propTypes = {
     user: PropTypes.object,
     getUser: PropTypes.func.isRequired,
@@ -186,7 +169,4 @@ UpdateUserPage.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UpdateUserPage);
+export default UpdateUserPage;

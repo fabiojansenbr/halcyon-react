@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { forgotPassword } from '../../actions/accountActions';
+import { forgotPassword } from '../../clients/accountClient';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 
@@ -13,7 +12,7 @@ class ForgotPasswordPage extends Component {
     }
 
     async onSubmit(event, values) {
-        const result = await this.props.forgotPassword(values);
+        const result = await forgotPassword(values);
         if (!result.error) {
             this.props.history.push('/account/login');
         }
@@ -50,16 +49,8 @@ class ForgotPasswordPage extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    forgotPassword: model => dispatch(forgotPassword(model))
-});
-
 ForgotPasswordPage.propTypes = {
-    forgotPassword: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default connect(
-    undefined,
-    mapDispatchToProps
-)(ForgotPasswordPage);
+export default ForgotPasswordPage;
