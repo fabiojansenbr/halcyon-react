@@ -47,8 +47,12 @@ class Context {
         this.modal = undefined;
     }
 
-    loading(value) {
-        this.loading = Math.max(0, this.loading + value);
+    startLoading() {
+        this.loading = this.loading + 1;
+    }
+
+    stopLoading() {
+        this.loading = Math.max(0, this.loading - 1);
     }
 }
 

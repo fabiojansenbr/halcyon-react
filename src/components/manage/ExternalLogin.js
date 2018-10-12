@@ -16,7 +16,7 @@ const ExternalLogin = ({ profile, onAddLogin, onRemoveLogin }) => (
             )[0];
 
             return (
-                <div key={provider.type} className="d-flex mb-2">
+                <div key={provider.type} className="d-flex mb-3">
                     <div className="mr-auto">
                         <FontAwesomeIcon icon={provider.icon} fixedWidth />{' '}
                         {provider.provider}

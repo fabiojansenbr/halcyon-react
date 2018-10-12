@@ -1,14 +1,12 @@
 import { context } from '../context';
 
 const request = request => {
-    console.log('request');
-    context.loading(1);
+    context.startLoading();
     return request;
 };
 
 const response = response => {
-    console.log('response');
-    context.loading(-1);
+    context.stopLoading();
     return response;
 };
 
