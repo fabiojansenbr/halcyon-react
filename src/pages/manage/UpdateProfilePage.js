@@ -4,6 +4,7 @@ import { withContext } from '../../context';
 import { getProfile, updateProfile } from '../../api/manageClient';
 import { getToken } from '../../api/tokenClient';
 import { getItem } from '../../utils/storage';
+import { toUpdateProfileViewModel } from '../../mappers/manageMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
@@ -27,7 +28,8 @@ class UpdateProfilePage extends Component {
     async loadData() {
         const result = await getProfile();
         if (!result.error) {
-            this.setState({ data: result.data.data });
+            const data = toUpdateProfileViewModel(result.data.data);
+            this.setState({ data });
         }
     }
 

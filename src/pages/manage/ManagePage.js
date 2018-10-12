@@ -10,6 +10,7 @@ import {
     resetRecoveryCodes,
     deleteAccount
 } from '../../api/manageClient';
+import { toProfileViewModel } from '../../mappers/manageMapper';
 import { Row, Col, Card, CardBody } from 'reactstrap';
 import Profile from '../../components/manage/Profile';
 import Picture from '../../components/manage/Picture';
@@ -41,7 +42,8 @@ class ManagePage extends Component {
     async loadData() {
         const result = getProfile();
         if (!result.error) {
-            this.setState({ data: result.data.data });
+            const data = toProfileViewModel(result.data.data);
+            this.setState({ data });
         }
     }
 

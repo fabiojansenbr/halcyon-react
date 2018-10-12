@@ -8,7 +8,10 @@ import {
     lockUser,
     deleteUser
 } from '../../api/userClient';
-import { toUserDataModel } from '../../mappers/userMapper';
+import {
+    toUpdateUserViewModel,
+    toUserDataModel
+} from '../../mappers/userMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
@@ -38,7 +41,8 @@ class UpdateUserPage extends Component {
     async loadData() {
         const result = await getUser(this.props.match.params.id);
         if (!result.error) {
-            this.setState({ data: result.data.data });
+            const data = toUpdateUserViewModel(result.data.data);
+            this.setState({ data });
         }
     }
 
