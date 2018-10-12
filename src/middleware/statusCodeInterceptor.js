@@ -11,6 +11,7 @@ const error = ({ dispatch }, error) => {
             history.push('/');
             break;
 
+        case 404:
         case 403:
             history.push('/');
             break;
