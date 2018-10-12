@@ -114,19 +114,20 @@ class UserPage extends Component {
                     <Alert color="info">No users could be found.</Alert>
                 )}
 
-                {hasUsers && (
-                    <React.Fragment>
-                        {this.state.data.items.map(user => (
-                            <Summary key={user.id} user={user} />
-                        ))}
+                {this.props.users &&
+                    !hasUsers && (
+                        <React.Fragment>
+                            {this.state.data.items.map(user => (
+                                <Summary key={user.id} user={user} />
+                            ))}
 
-                        <Pager
-                            {...this.state.data}
-                            onNextPage={this.onNextPage}
-                            onPreviousPage={this.onPreviousPage}
-                        />
-                    </React.Fragment>
-                )}
+                            <Pager
+                                {...this.state.data}
+                                onNextPage={this.onNextPage}
+                                onPreviousPage={this.onPreviousPage}
+                            />
+                        </React.Fragment>
+                    )}
             </React.Fragment>
         );
     }
