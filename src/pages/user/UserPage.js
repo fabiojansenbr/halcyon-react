@@ -110,24 +110,24 @@ class UserPage extends Component {
                     onSortChange={this.onSortChange}
                 />
 
-                {!hasUsers && (
-                    <Alert color="info">No users could be found.</Alert>
-                )}
-
-                {this.props.users &&
+                {this.state.data &&
                     !hasUsers && (
-                        <React.Fragment>
-                            {this.state.data.items.map(user => (
-                                <Summary key={user.id} user={user} />
-                            ))}
-
-                            <Pager
-                                {...this.state.data}
-                                onNextPage={this.onNextPage}
-                                onPreviousPage={this.onPreviousPage}
-                            />
-                        </React.Fragment>
+                        <Alert color="info">No users could be found.</Alert>
                     )}
+
+                {hasUsers && (
+                    <React.Fragment>
+                        {this.state.data.items.map(user => (
+                            <Summary key={user.id} user={user} />
+                        ))}
+
+                        <Pager
+                            {...this.state.data}
+                            onNextPage={this.onNextPage}
+                            onPreviousPage={this.onPreviousPage}
+                        />
+                    </React.Fragment>
+                )}
             </React.Fragment>
         );
     }

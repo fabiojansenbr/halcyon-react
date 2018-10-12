@@ -7,19 +7,18 @@ const request = async request => {
         return request;
     }
 
-    const jwt = context.user && context.user.jwt;
-    if (!jwt) {
+    if (!context.user) {
         return request;
     }
 
     if (!isExpired(context.user.exp)) {
-        request.headers.Authorization = `Bearer ${jwt.accessToken}`;
+        request.headers.Authorization = `Bearer ${context.user.accessToken}`;
         return request;
     }
 
     const result = await getToken({
         grantType: 'RefreshToken',
-        refreshToken: jwt.refreshToken
+        refreshToken: context.user.refreshToken
     });
 
     if (result.error) {
@@ -30,7 +29,7 @@ const request = async request => {
         });
     }
 
-    context.updateUser(result.data.data);
+    context.updateUser(result.data);
     request.headers.Authorization = `Bearer ${context.user.accessToken}`;
 
     return request;

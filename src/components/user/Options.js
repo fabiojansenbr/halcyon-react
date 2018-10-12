@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withContext } from '../../context';
 import { Button } from 'reactstrap';
 
-const Options = ({ user, currentUser, onUnlock, onLock, onDelete }) => (
+const Options = ({ user, context, onUnlock, onLock, onDelete }) => (
     <React.Fragment>
         {user.isLockedOut && (
             <React.Fragment>
@@ -12,7 +13,7 @@ const Options = ({ user, currentUser, onUnlock, onLock, onDelete }) => (
             </React.Fragment>
         )}
 
-        {user.emailAddress !== currentUser.name && (
+        {user.emailAddress !== context.user.emailAddress && (
             <React.Fragment>
                 {!user.isLockedOut && (
                     <React.Fragment>
@@ -31,10 +32,10 @@ const Options = ({ user, currentUser, onUnlock, onLock, onDelete }) => (
 
 Options.propTypes = {
     user: PropTypes.object.isRequired,
-    currentUser: PropTypes.object,
+    context: PropTypes.object,
     onUnlock: PropTypes.func.isRequired,
     onLock: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
 };
 
-export default Options;
+export default withContext(Options);
