@@ -104,9 +104,10 @@ class UserPage extends Component {
                     onSortChange={this.onSortChange}
                 />
 
-                {!hasUsers && (
-                    <Alert color="info">No users could be found.</Alert>
-                )}
+                {this.props.users &&
+                    !hasUsers && (
+                        <Alert color="info">No users could be found.</Alert>
+                    )}
 
                 {hasUsers && (
                     <React.Fragment>
