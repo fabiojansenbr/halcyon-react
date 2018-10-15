@@ -81,8 +81,8 @@ class ConfigureAuthenticatorPage extends Component {
                                 <li>
                                     <p>
                                         Scan the QR Code or enter this key{' '}
-                                        <kbd>{this.state.data.sharedKey}</kbd>{' '}
-                                        into your two factor authenticator app.
+                                        <kbd>{this.state.data.secret}</kbd> into
+                                        your two factor authenticator app.
                                         Spaces and casing do not matter.
                                     </p>
                                     <p>
