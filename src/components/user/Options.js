@@ -13,7 +13,7 @@ const Options = ({ user, currentUser, onUnlock, onLock, onDelete }) => (
             </React.Fragment>
         )}
 
-        {user.emailAddress !== currentUser.name && (
+        {user.id !== currentUser.sub && (
             <React.Fragment>
                 {!user.isLockedOut && (
                     <React.Fragment>
