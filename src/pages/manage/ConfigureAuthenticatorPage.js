@@ -33,8 +33,6 @@ class ConfigureAuthenticatorPage extends Component {
             return null;
         }
 
-        const { secret, authenticatorUri } = this.props.authenticatorSettings;
-
         return (
             <Row className="justify-content-md-center">
                 <Col lg={8}>
@@ -73,13 +71,21 @@ class ConfigureAuthenticatorPage extends Component {
                                 <li>
                                     <p>
                                         Scan the QR Code or enter this key{' '}
-                                        <kbd>{secret}</kbd> into your two factor
-                                        authenticator app. Spaces and casing do
-                                        not matter.
+                                        <kbd>
+                                            {
+                                                this.props.authenticatorSettings
+                                                    .secret
+                                            }
+                                        </kbd>{' '}
+                                        into your two factor authenticator app.
+                                        Spaces and casing do not matter.
                                     </p>
                                     <p>
                                         <QRCode
-                                            value={authenticatorUri}
+                                            value={
+                                                this.props.authenticatorSettings
+                                                    .authenticatorUri
+                                            }
                                             size={150}
                                         />
                                     </p>
