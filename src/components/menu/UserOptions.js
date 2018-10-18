@@ -43,7 +43,7 @@ class UserOptions extends Component {
                         <span className="text-truncate">
                             {this.props.currentUser.given_name}{' '}
                             {this.props.currentUser.family_name}
-                        </span>
+                        </span>{' '}
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem to="/manage" tag={Link}>

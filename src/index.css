@@ -13,15 +13,6 @@ button,
     height: 25px;
 }
 
-.text-truncate {
-    display: inline-block;
-    vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 300px;
-}
-
 .jumbotron img {
     width: 180px;
     height: 180px;
@@ -44,6 +35,15 @@ a.card:hover {
 
 .btn-link {
     padding: 0;
+}
+
+.text-truncate {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
 }
 
 .spinner {
