@@ -13,10 +13,14 @@ const Summary = ({ user }) => (
                     alt={user.emailAddress}
                     className="img-thumbnail rounded-circle mr-3 mb-2"
                 />
-                <h4 className="mb-2 text-truncate">
-                    {user.firstName} {user.lastName}
+                <h4 className="mb-2">
+                    <span className="text-truncate">
+                        {user.firstName} {user.lastName}
+                    </span>
                     <br />
-                    <small className="text-muted">{user.emailAddress}</small>
+                    <small className="text-truncate text-muted">
+                        {user.emailAddress}
+                    </small>
                 </h4>
                 <div className="ml-auto">
                     <Status user={user} />

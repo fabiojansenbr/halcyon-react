@@ -39,8 +39,10 @@ class UserOptions extends Component {
                             }`}
                             className="rounded-circle mr-2"
                         />{' '}
-                        {this.props.context.user.given_name}{' '}
-                        {this.props.context.user.family_name}{' '}
+                        <span className="text-truncate">
+                            {this.props.context.user.given_name}{' '}
+                            {this.props.context.user.family_name}
+                        </span>{' '}
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem to="/manage" tag={Link}>

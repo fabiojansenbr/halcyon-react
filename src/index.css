@@ -18,6 +18,15 @@ button,
     height: 180px;
 }
 
+.text-truncate {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+}
+
 a.card {
     color: inherit !important;
 }
