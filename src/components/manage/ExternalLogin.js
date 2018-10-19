@@ -11,9 +11,9 @@ const ExternalLogin = ({ profile, onAddLogin, onRemoveLogin }) => (
         <hr />
 
         {providers.map(provider => {
-            const userLogin = profile.logins.filter(
+            const userLogin = profile.logins.find(
                 a => a.provider === provider.provider
-            )[0];
+            );
 
             return (
                 <div key={provider.type} className="d-flex mb-2">
