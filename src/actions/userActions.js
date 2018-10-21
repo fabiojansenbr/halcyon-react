@@ -14,7 +14,7 @@ export const getUser = id => ({
     type: 'GET_USER',
     payload: {
         request: {
-            url: `/user/${encodeURIComponent(id)}`,
+            url: `/user/${id}`,
             method: 'GET',
             authenticate: true
         }
@@ -37,7 +37,7 @@ export const updateUser = (id, model) => ({
     type: 'UPDATE_USER',
     payload: {
         request: {
-            url: `/user/${encodeURIComponent(id)}`,
+            url: `/user/${id}`,
             method: 'PUT',
             authenticate: true,
             data: model
@@ -49,7 +49,7 @@ export const lockUser = id => ({
     type: 'LOCK_USER',
     payload: {
         request: {
-            url: `/user/${encodeURIComponent(id)}/lock`,
+            url: `/user/${id}/lock`,
             method: 'PUT',
             authenticate: true
         }
@@ -60,7 +60,7 @@ export const unlockUser = id => ({
     type: 'UNLOCK_USER',
     payload: {
         request: {
-            url: `/user/${encodeURIComponent(id)}/unlock`,
+            url: `/user/${id}/unlock`,
             method: 'PUT',
             authenticate: true
         }
@@ -71,7 +71,7 @@ export const deleteUser = id => ({
     type: 'DELETE_USER',
     payload: {
         request: {
-            url: `/user/${encodeURIComponent(id)}`,
+            url: `/user/${id}`,
             method: 'DELETE',
             authenticate: true
         }
