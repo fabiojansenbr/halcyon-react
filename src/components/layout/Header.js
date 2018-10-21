@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import {
     Navbar,
     Container,
@@ -8,7 +10,6 @@ import {
     Nav
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import history from '../../utils/history';
 import BaseOptions from '../menu/BaseOptions';
 import AdminOptions from '../menu/AdminOptions';
 import UserOptions from '../menu/UserOptions';
@@ -27,7 +28,7 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        history.listen(this.onRouteChange);
+        this.props.history.listen(this.onRouteChange);
     }
 
     onToggle() {
@@ -63,4 +64,8 @@ class Header extends Component {
     }
 }
 
-export default Header;
+Header.propTypes = {
+    history: PropTypes.object.isRequired
+};
+
+export default withRouter(Header);
