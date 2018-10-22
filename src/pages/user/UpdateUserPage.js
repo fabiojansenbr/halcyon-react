@@ -40,10 +40,12 @@ class UpdateUserPage extends Component {
 
     async loadData() {
         const result = await getUser(this.props.match.params.id);
-        if (!result.error) {
-            const data = toUpdateUserViewModel(result);
-            this.setState({ data });
+        if (result.error) {
+            return;
         }
+
+        const data = toUpdateUserViewModel(result);
+        this.setState({ data });
     }
 
     onUnlock(user) {
@@ -55,9 +57,11 @@ class UpdateUserPage extends Component {
             onOk: async () => {
                 const id = this.props.match.params.id;
                 const result = await unlockUser(id);
-                if (!result.error) {
-                    await this.loadData();
+                if (result.error) {
+                    return;
                 }
+
+                await this.loadData();
             }
         });
     }
@@ -71,9 +75,11 @@ class UpdateUserPage extends Component {
             onOk: async () => {
                 const id = this.props.match.params.id;
                 const result = await lockUser(id);
-                if (!result.error) {
-                    await this.loadData();
+                if (result.error) {
+                    return;
                 }
+
+                await this.loadData();
             }
         });
     }
@@ -87,9 +93,11 @@ class UpdateUserPage extends Component {
             onOk: async () => {
                 const id = this.props.match.params.id;
                 const result = await deleteUser(id);
-                if (!result.error) {
-                    this.props.history.push('/user');
+                if (result.error) {
+                    return;
                 }
+
+                this.props.history.push('/user');
             }
         });
     }
@@ -97,10 +105,13 @@ class UpdateUserPage extends Component {
     async onSubmit(event, values) {
         const id = this.props.match.params.id;
         const model = toUserDataModel(values);
+
         const result = await updateUser(id, model);
-        if (!result.error) {
-            this.props.history.push('/user');
+        if (result.error) {
+            return;
         }
+
+        this.props.history.push('/user');
     }
 
     render() {

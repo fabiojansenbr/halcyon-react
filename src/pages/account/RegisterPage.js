@@ -35,7 +35,7 @@ class RegisterPage extends Component {
                 });
 
                 if (result.error) {
-                    return null;
+                    return;
                 }
 
                 result = await getToken({
@@ -45,7 +45,7 @@ class RegisterPage extends Component {
                 });
 
                 if (result.error) {
-                    return null;
+                    return;
                 }
 
                 this.props.context.updateUser(result);
@@ -61,7 +61,7 @@ class RegisterPage extends Component {
                 });
 
                 if (result.error) {
-                    return null;
+                    return;
                 }
 
                 result = await getToken({
@@ -71,7 +71,7 @@ class RegisterPage extends Component {
                 });
 
                 if (result.error) {
-                    return null;
+                    return;
                 }
 
                 this.props.context.updateUser(result);
@@ -84,7 +84,7 @@ class RegisterPage extends Component {
             response && response._token && response._token.accessToken;
 
         if (!accessToken) {
-            return null;
+            return;
         }
 
         const result = await getToken({
@@ -100,11 +100,11 @@ class RegisterPage extends Component {
                 accessToken
             });
 
-            return null;
+            return;
         }
 
         if (result.error) {
-            return null;
+            return;
         }
 
         this.props.context.updateUser(result);

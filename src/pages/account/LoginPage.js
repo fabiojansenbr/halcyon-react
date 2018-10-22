@@ -35,7 +35,7 @@ class LoginPage extends Component {
                 });
 
                 if (result.error) {
-                    return null;
+                    return;
                 }
 
                 this.props.context.updateUser(result, this.state.rememberMe);
@@ -50,7 +50,7 @@ class LoginPage extends Component {
                 });
 
                 if (result.error) {
-                    return null;
+                    return;
                 }
 
                 this.props.context.updateUser(result, this.state.rememberMe);
@@ -67,7 +67,7 @@ class LoginPage extends Component {
                 });
 
                 if (result.error) {
-                    return null;
+                    return;
                 }
 
                 result = await getToken({
@@ -77,7 +77,7 @@ class LoginPage extends Component {
                 });
 
                 if (result.error) {
-                    return null;
+                    return;
                 }
 
                 this.props.context.updateUser(result);
@@ -97,11 +97,11 @@ class LoginPage extends Component {
                         password: values.password
                     });
 
-                    return null;
+                    return;
                 }
 
                 if (result.error) {
-                    return null;
+                    return;
                 }
 
                 this.props.context.updateUser(result, this.state.rememberMe);
@@ -114,7 +114,7 @@ class LoginPage extends Component {
             response && response._token && response._token.accessToken;
 
         if (!accessToken) {
-            return null;
+            return;
         }
 
         const result = await getToken({
@@ -130,11 +130,11 @@ class LoginPage extends Component {
                 accessToken
             });
 
-            return null;
+            return;
         }
 
         if (result.error) {
-            return null;
+            return;
         }
 
         this.props.context.updateUser(result);

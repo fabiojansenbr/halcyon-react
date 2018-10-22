@@ -32,9 +32,11 @@ class UserPage extends Component {
 
     async loadData() {
         const result = await getUsers(this.state.filter);
-        if (!result.error) {
-            this.setState({ data: result });
+        if (result.error) {
+            return;
         }
+
+        this.setState({ data: result });
     }
 
     onSortChange(value) {

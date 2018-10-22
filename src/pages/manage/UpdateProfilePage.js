@@ -27,10 +27,12 @@ class UpdateProfilePage extends Component {
 
     async loadData() {
         const result = await getProfile();
-        if (!result.error) {
-            const data = toUpdateProfileViewModel(result);
-            this.setState({ data });
+        if (result.error) {
+            return;
         }
+
+        const data = toUpdateProfileViewModel(result);
+        this.setState({ data });
     }
 
     async onSubmit(event, values) {

@@ -41,10 +41,12 @@ class ManagePage extends Component {
 
     async loadData() {
         const result = await getProfile();
-        if (!result.error) {
-            const data = toProfileViewModel(result);
-            this.setState({ data });
+        if (result.error) {
+            return;
         }
+
+        const data = toProfileViewModel(result);
+        this.setState({ data });
     }
 
     async onVerifyEmail() {
@@ -60,23 +62,29 @@ class ManagePage extends Component {
         }
 
         const result = await addLogin({ provider, accessToken });
-        if (!result.error) {
-            await this.loadData();
+        if (result.error) {
+            return;
         }
+
+        await this.loadData();
     }
 
     async onRemoveLogin(login) {
         const result = await removeLogin(login);
-        if (!result.error) {
-            await this.loadData();
+        if (result.error) {
+            return;
         }
+
+        await this.loadData();
     }
 
     async onDisableAuthenticator() {
         const result = await disableAuthenticator();
-        if (!result.error) {
-            await this.loadData();
+        if (result.error) {
+            return;
         }
+
+        await this.loadData();
     }
 
     async onResetRecoveryCodes() {
@@ -89,9 +97,11 @@ class ManagePage extends Component {
             message: 'Are you sure you want to delete your account?',
             onOk: async () => {
                 const result = await deleteAccount();
-                if (!result.error) {
-                    this.props.history.push('/');
+                if (result.error) {
+                    return;
                 }
+
+                this.props.history.push('/');
             }
         });
     }

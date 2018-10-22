@@ -26,16 +26,20 @@ class ConfigureAuthenticatorPage extends Component {
 
     async loadData() {
         const result = await getAuthenticatorSettings();
-        if (!result.error) {
-            this.setState({ data: result });
+        if (result.error) {
+            return;
         }
+
+        this.setState({ data: result });
     }
 
     async onSubmit(event, values) {
         const result = await configureAuthenticator(values);
-        if (!result.error) {
-            this.props.history.push('/manage');
+        if (result.error) {
+            return;
         }
+
+        this.props.history.push('/manage');
     }
 
     render() {

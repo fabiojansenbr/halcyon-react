@@ -19,9 +19,11 @@ class ResetPasswordPage extends Component {
             code: qs.code
         });
 
-        if (!result.error) {
-            this.props.history.push('/account/login');
+        if (result.error) {
+            return;
         }
+
+        this.props.history.push('/account/login');
     }
 
     render() {
