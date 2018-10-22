@@ -38,7 +38,8 @@
         "react-router-dom": "4.3.1",
         "react-scripts": "2.0.3",
         "react-social-login": "3.4.2",
-        "reactstrap": "6.4.0"
+        "reactstrap": "6.4.0",
+        "unstated": "2.1.1"
     },
     "devDependencies": {
         "husky": "1.1.0",

@@ -1,36 +1,135 @@
 import axios from 'axios';
+import iziToast from 'izitoast';
+import moment from 'moment';
+import { context } from '../context';
 import { serializer } from './querystring';
-import loadingInterceptor from '../interceptors/loadingInterceptor';
-import tokenInterceptor from '../interceptors/tokenInterceptor';
-import statusCodeInterceptor from '../interceptors/statusCodeInterceptor';
-import toastrInterceptor from '../interceptors/toastrInterceptor';
+import history from './history';
 
 const client = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     paramsSerializer: serializer
 });
 
-client.interceptors.request.use(loadingInterceptor.request);
-client.interceptors.request.use(tokenInterceptor.request);
-
-client.interceptors.response.use(
-    loadingInterceptor.response,
-    loadingInterceptor.response
-);
-client.interceptors.response.use(undefined, statusCodeInterceptor.error);
-client.interceptors.response.use(
-    toastrInterceptor.success,
-    toastrInterceptor.error
-);
+iziToast.settings({
+    layout: 2,
+    progressBar: false,
+    animateInside: false,
+    icon: false,
+    close: false,
+    drag: false
+});
 
 const http = async request => {
-    try {
-        return await client(request);
-    } catch (error) {
-        return {
-            error
-        };
+    context.startLoading();
+
+    const valid = await validateRequest(request);
+    if (!valid) {
+        context.stopLoading();
+        return;
     }
+
+    let result;
+    try {
+        const response = await client(request);
+        result = processSuccess(response);
+    } catch (error) {
+        result = processError(error);
+    }
+
+    context.stopLoading();
+
+    return result;
+};
+
+const validateRequest = async request => {
+    if (!request.authenticate) {
+        return true;
+    }
+
+    if (!context.user) {
+        return false;
+    }
+
+    const remainingSeconds = moment
+        .unix(context.user.exp)
+        .diff(moment(Date.now()), 'seconds');
+
+    if (remainingSeconds >= 30) {
+        request.headers.Authorization = `Bearer ${context.user.accessToken}`;
+        return true;
+    }
+
+    let response;
+    try {
+        response = await http({
+            url: '/token',
+            method: 'POST',
+            data: {
+                grantType: 'RefreshToken',
+                refreshToken: context.user.refreshToken
+            }
+        });
+    } catch {
+        return false;
+    }
+
+    context.updateUser(response.data.data);
+    request.headers.Authorization = `Bearer ${response.data.data.accessToken}`;
+    return true;
+};
+
+const processSuccess = response => {
+    const data = response.data.data;
+    const messages = response.data.messages;
+
+    if (!data) {
+        for (const message of messages) {
+            iziToast.success({ message });
+        }
+    }
+
+    return data;
+};
+
+const processError = error => {
+    const response = error.response;
+    const status = response.status;
+    const data = response.data.data;
+    const messages = response.data.messages;
+
+    switch (status) {
+        case 401:
+            context.removeUser();
+            iziToast.warn({
+                message: 'Sorry, you do not have access to this resource.'
+            });
+            history.push('/');
+            break;
+
+        case 403:
+            history.push('/');
+            iziToast.warn({
+                message: 'Sorry, you do not have access to this resource.'
+            });
+            break;
+
+        case 404:
+            history.push('/');
+            break;
+
+        default:
+            if (!data) {
+                for (const message of messages || [
+                    'An unknown error has occurred.'
+                ]) {
+                    iziToast.error({ message });
+                }
+            }
+
+            break;
+    }
+
+    return data;
 };
 
 export default http;
