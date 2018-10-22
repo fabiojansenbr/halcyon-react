@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
-import { withContext } from '../../context';
 import {
     Nav,
     UncontrolledDropdown,
@@ -24,7 +22,8 @@ class UserOptions extends Component {
     }
 
     render() {
-        if (!this.props.context.user) {
+        const user = this.props.context.user;
+        if (!user) {
             return null;
         }
 
@@ -33,15 +32,12 @@ class UserOptions extends Component {
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                         <img
-                            src={this.props.context.user.picture}
-                            alt={`${this.props.context.user.given_name} ${
-                                this.props.context.user.family_name
-                            }`}
+                            src={user.picture}
+                            alt={`${user.given_name} ${user.family_name}`}
                             className="rounded-circle mr-2"
                         />{' '}
                         <span className="text-truncate">
-                            {this.props.context.user.given_name}{' '}
-                            {this.props.context.user.family_name}
+                            {user.given_name} {user.family_name}
                         </span>{' '}
                     </DropdownToggle>
                     <DropdownMenu>
@@ -59,8 +55,8 @@ class UserOptions extends Component {
 }
 
 UserOptions.propTypes = {
-    history: PropTypes.object.isRequired,
-    context: PropTypes.object
+    context: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
-export default withRouter(withContext(UserOptions));
+export default UserOptions;

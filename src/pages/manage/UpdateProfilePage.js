@@ -104,7 +104,7 @@ class UpdateProfilePage extends Component {
 }
 
 UpdateProfilePage.propTypes = {
-    context: PropTypes.object,
+    context: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

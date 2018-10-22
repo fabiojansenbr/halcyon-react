@@ -39,7 +39,8 @@ class UpdateUserPage extends Component {
     }
 
     async loadData() {
-        const result = await getUser(this.props.match.params.id);
+        const id = this.props.match.params.id;
+        const result = await getUser(id);
         if (result.error) {
             return;
         }
@@ -184,7 +185,7 @@ class UpdateUserPage extends Component {
 }
 
 UpdateUserPage.propTypes = {
-    context: PropTypes.object,
+    context: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

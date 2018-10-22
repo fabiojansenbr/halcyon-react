@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import { withContext } from '../../context';
 import {
     Navbar,
     Container,
@@ -53,10 +54,10 @@ class Header extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar className="mr-auto">
                             <BaseOptions />
-                            <AdminOptions />
+                            <AdminOptions user={this.props.context.user} />
                         </Nav>
-                        <UserOptions />
-                        <LoginOptions />
+                        <UserOptions user={this.props.context.user} />
+                        <LoginOptions context={this.props.context} />
                     </Collapse>
                 </Container>
             </Navbar>
@@ -65,7 +66,8 @@ class Header extends Component {
 }
 
 UserOptions.propTypes = {
+    context: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default withRouter(Header);
+export default withRouter(withContext(Header));

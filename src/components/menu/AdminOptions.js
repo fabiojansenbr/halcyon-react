@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withContext } from '../../context';
 import {
     UncontrolledDropdown,
     DropdownToggle,
@@ -9,14 +8,14 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const AdminOptions = ({ context }) => {
-    if (!context.user || !context.user.role) {
+const AdminOptions = ({ user }) => {
+    if (!user || !user.role) {
         return null;
     }
 
     if (
-        !context.user.role.includes('User Administrator') &&
-        !context.user.role.includes('System Administrator')
+        !user.role.includes('User Administrator') &&
+        !user.role.includes('System Administrator')
     ) {
         return null;
     }
@@ -36,7 +35,7 @@ const AdminOptions = ({ context }) => {
 };
 
 AdminOptions.propTypes = {
-    context: PropTypes.object
+    user: PropTypes.object
 };
 
-export default withContext(AdminOptions);
+export default AdminOptions;

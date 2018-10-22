@@ -49,7 +49,7 @@ class ModalDialog extends Component {
 }
 
 ModalDialog.propTypes = {
-    context: PropTypes.object
+    context: PropTypes.object.isRequired
 };
 
 export default withContext(ModalDialog);

@@ -10,7 +10,8 @@ const PrivateRoute = ({
     requiredRoles,
     ...rest
 }) => {
-    if (!context.user) {
+    const user = context.user;
+    if (!user) {
         return (
             <Redirect
                 to={{
@@ -25,8 +26,7 @@ const PrivateRoute = ({
 
     if (
         requiredRoles &&
-        (!context.user.role ||
-            !requiredRoles.some(value => context.user.role.includes(value)))
+        (!user.role || !requiredRoles.some(value => user.role.includes(value)))
     ) {
         return <Redirect to="/account/accessdenied" />;
     }
@@ -41,7 +41,7 @@ const PrivateRoute = ({
 };
 
 PrivateRoute.propTypes = {
-    context: PropTypes.object,
+    context: PropTypes.object.isRequired,
     component: PropTypes.func.isRequired,
     requiredRoles: PropTypes.array,
     title: PropTypes.string

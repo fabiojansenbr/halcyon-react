@@ -23,7 +23,7 @@ const Spinner = ({ context }) => {
 };
 
 Spinner.propTypes = {
-    context: PropTypes.object
+    context: PropTypes.object.isRequired
 };
 
 export default withContext(Spinner);

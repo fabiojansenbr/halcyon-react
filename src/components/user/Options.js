@@ -32,7 +32,7 @@ const Options = ({ user, context, onUnlock, onLock, onDelete }) => (
 
 Options.propTypes = {
     user: PropTypes.object.isRequired,
-    context: PropTypes.object,
+    context: PropTypes.object.isRequired,
     onUnlock: PropTypes.func.isRequired,
     onLock: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired

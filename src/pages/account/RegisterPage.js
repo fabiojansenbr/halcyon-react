@@ -139,7 +139,7 @@ class RegisterPage extends Component {
 }
 
 RegisterPage.propTypes = {
-    context: PropTypes.object,
+    context: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
