@@ -28,7 +28,7 @@ class UpdateProfilePage extends Component {
     async loadData() {
         const result = await getProfile();
         if (!result.error) {
-            const data = toUpdateProfileViewModel(result.data.data);
+            const data = toUpdateProfileViewModel(result);
             this.setState({ data });
         }
     }
@@ -51,7 +51,7 @@ class UpdateProfilePage extends Component {
             return;
         }
 
-        this.props.context.updateUser(result.data.data);
+        this.props.context.updateUser(result);
         this.props.history.push('/manage');
     }
 

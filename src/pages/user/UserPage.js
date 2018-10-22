@@ -33,7 +33,7 @@ class UserPage extends Component {
     async loadData() {
         const result = await getUsers(this.state.filter);
         if (!result.error) {
-            this.setState({ data: result.data.data });
+            this.setState({ data: result });
         }
     }
 

@@ -34,20 +34,22 @@ class RegisterPage extends Component {
                     accessToken: this.state.accessToken
                 });
 
-                if (!result.error) {
-                    result = await getToken({
-                        grantType: 'External',
-                        provider: this.state.provider,
-                        accessToken: this.state.accessToken
-                    });
-
-                    if (!result.error) {
-                        this.props.context.updateUser(result.data.data);
-                        return this.props.history.push(this.state.from);
-                    }
+                if (result.error) {
+                    return null;
                 }
 
-                return null;
+                result = await getToken({
+                    grantType: 'External',
+                    provider: this.state.provider,
+                    accessToken: this.state.accessToken
+                });
+
+                if (result.error) {
+                    return null;
+                }
+
+                this.props.context.updateUser(result);
+                return this.props.history.push(this.state.from);
 
             default:
                 result = await register({
@@ -58,20 +60,22 @@ class RegisterPage extends Component {
                     dateOfBirth: values.dateOfBirth
                 });
 
-                if (!result.error) {
-                    result = await getToken({
-                        grantType: 'Password',
-                        emailAddress: values.emailAddress,
-                        password: values.password
-                    });
-
-                    if (!result.error) {
-                        this.props.context.updateUser(result.data.data);
-                        return this.props.history.push(this.state.from);
-                    }
+                if (result.error) {
+                    return null;
                 }
 
-                return null;
+                result = await getToken({
+                    grantType: 'Password',
+                    emailAddress: values.emailAddress,
+                    password: values.password
+                });
+
+                if (result.error) {
+                    return null;
+                }
+
+                this.props.context.updateUser(result);
+                return this.props.history.push(this.state.from);
         }
     }
 
@@ -89,26 +93,22 @@ class RegisterPage extends Component {
             accessToken
         });
 
-        if (!result.error) {
-            this.props.context.updateUser(result.data.data);
-            return this.props.history.push(this.state.from);
-        }
-
-        const requiresExternal =
-            result.error.response &&
-            result.error.response.data &&
-            result.error.response.data.data &&
-            result.error.response.data.data.requiresExternal;
-
-        if (requiresExternal) {
+        if (result.requiresExternal) {
             this.setState({
                 stage: 'RegisterExternal',
                 provider,
                 accessToken
             });
+
+            return null;
         }
 
-        return null;
+        if (result.error) {
+            return null;
+        }
+
+        this.props.context.updateUser(result);
+        return this.props.history.push(this.state.from);
     }
 
     onStageChange(stage) {

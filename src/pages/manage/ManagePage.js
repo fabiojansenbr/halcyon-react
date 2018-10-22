@@ -42,7 +42,7 @@ class ManagePage extends Component {
     async loadData() {
         const result = await getProfile();
         if (!result.error) {
-            const data = toProfileViewModel(result.data.data);
+            const data = toProfileViewModel(result);
             this.setState({ data });
         }
     }

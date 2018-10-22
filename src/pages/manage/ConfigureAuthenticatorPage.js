@@ -27,7 +27,7 @@ class ConfigureAuthenticatorPage extends Component {
     async loadData() {
         const result = await getAuthenticatorSettings();
         if (!result.error) {
-            this.setState({ data: result.data.data });
+            this.setState({ data: result });
         }
     }
 

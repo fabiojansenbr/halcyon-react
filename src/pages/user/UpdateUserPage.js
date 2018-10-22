@@ -41,7 +41,7 @@ class UpdateUserPage extends Component {
     async loadData() {
         const result = await getUser(this.props.match.params.id);
         if (!result.error) {
-            const data = toUpdateUserViewModel(result.data.data);
+            const data = toUpdateUserViewModel(result);
             this.setState({ data });
         }
     }

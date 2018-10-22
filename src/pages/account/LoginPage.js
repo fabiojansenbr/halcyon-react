@@ -34,15 +34,12 @@ class LoginPage extends Component {
                     verificationCode: values.verificationCode
                 });
 
-                if (!result.error) {
-                    this.props.context.updateUser(
-                        result.data.data,
-                        this.state.rememberMe
-                    );
-                    return this.props.history.push(this.state.from);
+                if (result.error) {
+                    return null;
                 }
 
-                return null;
+                this.props.context.updateUser(result, this.state.rememberMe);
+                return this.props.history.push(this.state.from);
 
             case 'RecoveryCode':
                 result = await getToken({
@@ -52,15 +49,12 @@ class LoginPage extends Component {
                     recoveryCode: values.recoveryCode
                 });
 
-                if (!result.error) {
-                    this.props.context.updateUser(
-                        result.data.data,
-                        this.state.rememberMe
-                    );
-                    return this.props.history.push(this.state.from);
+                if (result.error) {
+                    return null;
                 }
 
-                return null;
+                this.props.context.updateUser(result, this.state.rememberMe);
+                return this.props.history.push(this.state.from);
 
             case 'RegisterExternal':
                 result = await registerExternal({
@@ -72,20 +66,22 @@ class LoginPage extends Component {
                     accessToken: this.state.accessToken
                 });
 
-                if (!result.error) {
-                    result = await getToken({
-                        grantType: 'External',
-                        provider: this.state.provider,
-                        accessToken: this.state.accessToken
-                    });
-
-                    if (!result.error) {
-                        this.props.context.updateUser(result.data.data);
-                        return this.props.history.push(this.state.from);
-                    }
+                if (result.error) {
+                    return null;
                 }
 
-                return null;
+                result = await getToken({
+                    grantType: 'External',
+                    provider: this.state.provider,
+                    accessToken: this.state.accessToken
+                });
+
+                if (result.error) {
+                    return null;
+                }
+
+                this.props.context.updateUser(result);
+                return this.props.history.push(this.state.from);
 
             default:
                 result = await getToken({
@@ -94,29 +90,22 @@ class LoginPage extends Component {
                     password: values.password
                 });
 
-                if (!result.error) {
-                    this.props.context.updateUser(
-                        result.data.data,
-                        this.state.rememberMe
-                    );
-                    return this.props.history.push(this.state.from);
-                }
-
-                const requiresTwoFactor =
-                    result.error.response &&
-                    result.error.response.data &&
-                    result.error.response.data.data &&
-                    result.error.response.data.data.requiresTwoFactor;
-
-                if (requiresTwoFactor) {
+                if (result.requiresTwoFactor) {
                     this.setState({
                         stage: 'TwoFactor',
                         emailAddress: values.emailAddress,
                         password: values.password
                     });
+
+                    return null;
                 }
 
-                return null;
+                if (result.error) {
+                    return null;
+                }
+
+                this.props.context.updateUser(result, this.state.rememberMe);
+                return this.props.history.push(this.state.from);
         }
     }
 
@@ -134,26 +123,22 @@ class LoginPage extends Component {
             accessToken
         });
 
-        if (!result.error) {
-            this.props.context.updateUser(result.data.data);
-            return this.props.history.push(this.state.from);
-        }
-
-        const requiresExternal =
-            result.error.response &&
-            result.error.response.data &&
-            result.error.response.data.data &&
-            result.error.response.data.data.requiresExternal;
-
-        if (requiresExternal) {
+        if (result.requiresExternal) {
             this.setState({
                 stage: 'RegisterExternal',
                 provider,
                 accessToken
             });
+
+            return null;
         }
 
-        return null;
+        if (result.error) {
+            return null;
+        }
+
+        this.props.context.updateUser(result);
+        return this.props.history.push(this.state.from);
     }
 
     onStageChange(stage) {

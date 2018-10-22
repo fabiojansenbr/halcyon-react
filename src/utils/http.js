@@ -75,6 +75,7 @@ const validateRequest = async request => {
 
     context.updateUser(response.data.data);
     request.headers.Authorization = `Bearer ${response.data.data.accessToken}`;
+
     return true;
 };
 
@@ -118,18 +119,16 @@ const processError = error => {
             break;
 
         default:
-            if (!data) {
-                for (const message of messages || [
-                    'An unknown error has occurred.'
-                ]) {
-                    iziToast.error({ message });
-                }
-            }
-
             break;
     }
 
-    return data;
+    if (!data) {
+        for (const message of messages || ['An unknown error has occurred.']) {
+            iziToast.error({ message });
+        }
+    }
+
+    return { error: true, ...data };
 };
 
 export default http;

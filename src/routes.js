@@ -26,6 +26,8 @@ import UserPage from './pages/user/UserPage';
 import CreateUserPage from './pages/user/CreateUserPage';
 import UpdateUserPage from './pages/user/UpdateUserPage';
 
+const isUserAdministrator = ['System Administrator', 'User Administrator'];
+
 const routes = (
     <App>
         <Switch>
@@ -93,19 +95,19 @@ const routes = (
                 exact
                 path="/user"
                 title="Users"
-                requiredRoles={['System Administrator', 'User Administrator']}
+                requiredRoles={isUserAdministrator}
                 component={UserPage}
             />
             <PrivateRoute
                 path="/user/create"
                 title="Create User"
-                requiredRoles={['System Administrator', 'User Administrator']}
+                requiredRoles={isUserAdministrator}
                 component={CreateUserPage}
             />
             <PrivateRoute
                 path="/user/update/:id"
                 title="Update User"
-                requiredRoles={['System Administrator', 'User Administrator']}
+                requiredRoles={isUserAdministrator}
                 component={UpdateUserPage}
             />
 
