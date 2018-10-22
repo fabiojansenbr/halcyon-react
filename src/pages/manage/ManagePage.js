@@ -9,7 +9,7 @@ import {
     disableAuthenticator,
     resetRecoveryCodes,
     deleteAccount
-} from '../../api/manageClient';
+} from '../../clients/manageClient';
 import { toProfileViewModel } from '../../mappers/manageMapper';
 import { Row, Col, Card, CardBody } from 'reactstrap';
 import Profile from '../../components/manage/Profile';

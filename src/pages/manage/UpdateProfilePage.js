@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withContext } from '../../context';
-import { getProfile, updateProfile } from '../../api/manageClient';
-import { getToken } from '../../api/tokenClient';
+import { getProfile, updateProfile } from '../../clients/manageClient';
+import { getToken } from '../../clients/tokenClient';
 import { getItem } from '../../utils/storage';
 import { toUpdateProfileViewModel } from '../../mappers/manageMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';

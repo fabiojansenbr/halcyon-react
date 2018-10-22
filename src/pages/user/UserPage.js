@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getUsers } from '../../api/userClient';
+import { getUsers } from '../../clients/userClient';
 import { Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import SearchForm from '../../components/user/SearchForm';

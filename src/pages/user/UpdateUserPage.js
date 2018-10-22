@@ -7,7 +7,7 @@ import {
     unlockUser,
     lockUser,
     deleteUser
-} from '../../api/userClient';
+} from '../../clients/userClient';
 import {
     toUpdateUserViewModel,
     toUserDataModel
