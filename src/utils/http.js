@@ -128,7 +128,6 @@ const processError = error => {
         }
     }
 
-    console.log('data', data);
     return { success: false, ...data };
 };
 

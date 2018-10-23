@@ -48,6 +48,8 @@ class Header extends Component {
 
     render() {
         const { isOpen } = this.state;
+        const { user } = this.props.context;
+        const history = -this.props.history;
 
         return (
             <Navbar color="dark" dark expand="lg" fixed="top">
@@ -62,14 +64,14 @@ class Header extends Component {
                     <Collapse isOpen={isOpen} navbar>
                         <Nav navbar className="mr-auto">
                             <BaseOptions />
-                            <AdminOptions user={this.props.context.user} />
+                            <AdminOptions user={user} />
                         </Nav>
                         <UserOptions
-                            history={this.props.history}
-                            user={this.props.context.user}
+                            user={user}
+                            history={history}
                             onLogout={this.onLogout}
                         />
-                        <LoginOptions user={this.props.context.user} />
+                        <LoginOptions user={user} />
                     </Collapse>
                 </Container>
             </Navbar>

@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import { withContext } from '../../context';
 import { Button } from 'reactstrap';
 
-const Options = ({ user, context, onUnlock, onLock, onDelete }) => (
+const Options = ({
+    user,
+    user: { id, isLockedOut },
+    context,
+    onUnlock,
+    onLock,
+    onDelete
+}) => (
     <React.Fragment>
-        {user.isLockedOut && (
+        {isLockedOut && (
             <React.Fragment>
                 <Button color="warning" onClick={() => onUnlock(user)}>
                     Unlock
@@ -13,9 +20,9 @@ const Options = ({ user, context, onUnlock, onLock, onDelete }) => (
             </React.Fragment>
         )}
 
-        {user.emailAddress !== context.user.emailAddress && (
+        {id !== context.user.id && (
             <React.Fragment>
-                {!user.isLockedOut && (
+                {!isLockedOut && (
                     <React.Fragment>
                         <Button color="warning" onClick={() => onLock(user)}>
                             Lock

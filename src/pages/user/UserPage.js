@@ -11,13 +11,7 @@ class UserPage extends Component {
         super(props);
 
         this.state = {
-            data: undefined,
-            filter: {
-                page: 1,
-                size: 5,
-                search: '',
-                sort: ''
-            }
+            data: undefined
         };
 
         this.onSortChange = this.onSortChange.bind(this);
@@ -30,8 +24,8 @@ class UserPage extends Component {
         await this.loadData();
     }
 
-    async loadData() {
-        const result = await getUsers(this.state.filter);
+    async loadData(filter) {
+        const result = await getUsers(filter);
         if (!result.success) {
             return;
         }
@@ -40,52 +34,35 @@ class UserPage extends Component {
     }
 
     onSortChange(value) {
-        this.setState(
-            previousState => ({
-                filter: {
-                    ...previousState.filter,
-                    sort: value
-                }
-            }),
-            () => this.loadData()
-        );
+        this.loadData({
+            page: this.state.data.page,
+            search: this.state.data.search,
+            sort: value
+        });
     }
 
     onPreviousPage() {
-        this.setState(
-            previousState => ({
-                filter: {
-                    ...previousState.filter,
-                    page: previousState.filter.page - 1
-                }
-            }),
-            () => this.loadData()
-        );
+        this.loadData({
+            search: this.state.data.search,
+            sort: this.state.data.sort,
+            page: this.state.data.page - 1
+        });
     }
 
     onNextPage() {
-        this.setState(
-            previousState => ({
-                filter: {
-                    ...previousState.filter,
-                    page: previousState.filter.page + 1
-                }
-            }),
-            () => this.loadData()
-        );
+        this.loadData({
+            search: this.state.data.search,
+            sort: this.state.data.sort,
+            page: this.state.data.page + 1
+        });
     }
 
     onSearch(event, values) {
-        this.setState(
-            previousState => ({
-                filter: {
-                    ...previousState.filter,
-                    search: values.search,
-                    page: 1
-                }
-            }),
-            () => this.loadData()
-        );
+        this.loadData({
+            search: values.search,
+            sort: this.state.data.sort,
+            page: 1
+        });
     }
 
     render() {

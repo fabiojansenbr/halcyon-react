@@ -6,17 +6,17 @@ import providers from '../../providers';
 
 const ExternalLogin = ({ onResponse }) => (
     <React.Fragment>
-        {providers.map(provider => (
+        {providers.map(({ type, provider, appId, icon }) => (
             <SocialButton
-                key={provider.type}
-                provider={provider.type}
-                appId={provider.appId}
+                key={type}
+                provider={type}
+                appId={appId}
                 color="secondary"
                 block
-                onLoginSuccess={user => onResponse(provider.provider, user)}
+                onLoginSuccess={user => onResponse(provider, user)}
             >
-                <FontAwesomeIcon icon={provider.icon} fixedWidth /> Connect with{' '}
-                {provider.provider}
+                <FontAwesomeIcon icon={icon} fixedWidth /> Connect with{' '}
+                {provider}
             </SocialButton>
         ))}
     </React.Fragment>

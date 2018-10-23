@@ -8,27 +8,25 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import StackedIcon from '../layout/StackedIcon';
 
-const Status = ({ user }) => (
+const Status = ({
+    user: { isLockedOut, emailConfirmed, hasPassword, twoFactorEnabled }
+}) => (
     <React.Fragment>
-        <StackedIcon
-            title="Unlocked"
-            icon={faUnlock}
-            disabled={user.isLockedOut}
-        />
+        <StackedIcon title="Unlocked" icon={faUnlock} disabled={isLockedOut} />
         <StackedIcon
             title="Email Verified"
             icon={faEnvelope}
-            disabled={!user.emailConfirmed}
+            disabled={!emailConfirmed}
         />
         <StackedIcon
             title="Password Set"
             icon={faKey}
-            disabled={!user.hasPassword}
+            disabled={!hasPassword}
         />
         <StackedIcon
             title="Two Factor Authentication"
             icon={faMobileAlt}
-            disabled={!user.twoFactorEnabled}
+            disabled={!twoFactorEnabled}
         />
     </React.Fragment>
 );
