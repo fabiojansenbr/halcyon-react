@@ -50,7 +50,7 @@ const routes = (
                 component={ForgotPasswordPage}
             />
             <PublicRoute
-                path="/account/resetpassword"
+                path="/account/resetpassword/:code"
                 title="Reset Password"
                 component={ResetPasswordPage}
             />
@@ -72,7 +72,7 @@ const routes = (
                 component={UpdateProfilePage}
             />
             <PrivateRoute
-                path="/manage/confirmemail"
+                path="/manage/confirmemail/:code"
                 component={ConfirmEmailPage}
             />
             <PrivateRoute

@@ -1,13 +1,11 @@
 import axios from 'axios';
-import iziToast from 'izitoast';
 import moment from 'moment';
+import iziToast from 'izitoast';
 import { context } from '../context';
-import { serializer } from './querystring';
 import history from './history';
 
 const client = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
-    paramsSerializer: serializer
+    baseURL: process.env.REACT_APP_API_URL
 });
 
 iziToast.settings({

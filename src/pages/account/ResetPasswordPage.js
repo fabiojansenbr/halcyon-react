@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { resetPassword } from '../../clients/accountClient';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { parse } from '../../utils/querystring';
 
 class ResetPasswordPage extends Component {
     constructor(props) {
@@ -13,10 +12,9 @@ class ResetPasswordPage extends Component {
     }
 
     async onSubmit(event, values) {
-        const qs = parse(this.props.location);
         const result = await resetPassword({
             ...values,
-            code: qs.code
+            code: this.props.match.params.code
         });
 
         if (!result.success) {
@@ -73,7 +71,7 @@ class ResetPasswordPage extends Component {
 }
 
 ResetPasswordPage.propTypes = {
-    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 
