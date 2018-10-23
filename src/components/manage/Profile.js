@@ -3,7 +3,17 @@ import PropTypes from 'prop-types';
 import { FormGroup, Label, Input, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const Profile = ({ profile, onVerifyEmail }) => (
+const Profile = ({
+    profile: {
+        emailAddress,
+        emailConfirmed,
+        hasPassword,
+        firstName,
+        lastName,
+        dateOfBirth
+    },
+    onVerifyEmail
+}) => (
     <React.Fragment>
         <div className="d-flex">
             <h4>Profile</h4>
@@ -19,12 +29,12 @@ const Profile = ({ profile, onVerifyEmail }) => (
         <FormGroup>
             <Label>Email Address</Label>
             <Input plaintext>
-                {profile.emailAddress}
+                {emailAddress}
                 <br />
-                {profile.emailConfirmed && (
+                {emailConfirmed && (
                     <span className="text-success">Verified</span>
                 )}
-                {!profile.emailConfirmed && (
+                {!emailConfirmed && (
                     <React.Fragment>
                         <span className="text-danger">Unverified</span>
                         <br />
@@ -39,7 +49,7 @@ const Profile = ({ profile, onVerifyEmail }) => (
         <FormGroup>
             <Label>Password</Label>
             <Input plaintext>
-                {profile.hasPassword && (
+                {hasPassword && (
                     <React.Fragment>
                         ********
                         <br />
@@ -48,7 +58,7 @@ const Profile = ({ profile, onVerifyEmail }) => (
                         </Link>
                     </React.Fragment>
                 )}
-                {!profile.hasPassword && (
+                {!hasPassword && (
                     <Link to="/manage/setpassword">Set your password...</Link>
                 )}
             </Input>
@@ -57,13 +67,13 @@ const Profile = ({ profile, onVerifyEmail }) => (
         <FormGroup>
             <Label>Name</Label>
             <Input plaintext>
-                {profile.firstName} {profile.lastName}
+                {firstName} {lastName}
             </Input>
         </FormGroup>
 
         <FormGroup>
             <Label>Date of Birth</Label>
-            <Input plaintext>{profile.dateOfBirth}</Input>
+            <Input plaintext>{dateOfBirth}</Input>
         </FormGroup>
     </React.Fragment>
 );

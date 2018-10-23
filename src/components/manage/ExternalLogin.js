@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SocialButton from '../layout/SocialButton';
 import providers from '../../providers';
 
-const ExternalLogin = ({ profile, onAddLogin, onRemoveLogin }) => (
+const ExternalLogin = ({ profile: { logins }, onAddLogin, onRemoveLogin }) => (
     <React.Fragment>
         <h4>External Logins</h4>
         <hr />
 
         {providers.map(provider => {
-            const userLogin = profile.logins.find(
-                a => a.provider === provider.provider
+            const userLogin = logins.find(
+                login => login.provider === provider.provider
             );
 
             return (

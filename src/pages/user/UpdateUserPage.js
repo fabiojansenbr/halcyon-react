@@ -48,11 +48,10 @@ class UpdateUserPage extends Component {
     }
 
     onUnlock(user) {
+        const { firstName, lastName } = user;
         this.props.context.showModal({
             title: 'Confirm',
-            message: `Are you sure you want to unlock <strong>${
-                user.firstName
-            } ${user.lastName}</strong>?`,
+            message: `Are you sure you want to unlock <strong>${firstName} ${lastName}</strong>?`,
             onOk: async () => {
                 const result = await unlockUser(this.props.match.params.id);
                 if (result.error) {
@@ -65,11 +64,10 @@ class UpdateUserPage extends Component {
     }
 
     onLock(user) {
+        const { firstName, lastName } = user;
         this.props.context.showModal({
             title: 'Confirm',
-            message: `Are you sure you want to lock out <strong>${
-                user.firstName
-            } ${user.lastName}</strong>?`,
+            message: `Are you sure you want to lock out <strong>${firstName} ${lastName}</strong>?`,
             onOk: async () => {
                 const result = await lockUser(this.props.match.params.id);
                 if (result.error) {
@@ -82,11 +80,10 @@ class UpdateUserPage extends Component {
     }
 
     onDelete(user) {
+        const { firstName, lastName } = user;
         this.props.context.showModal({
             title: 'Confirm',
-            message: `Are you sure you want to delete <strong>${
-                user.firstName
-            } ${user.lastName}</strong>?`,
+            message: `Are you sure you want to delete <strong>${firstName} ${lastName}</strong>?`,
             onOk: async () => {
                 const result = await deleteUser(this.props.match.params.id);
                 if (result.error) {

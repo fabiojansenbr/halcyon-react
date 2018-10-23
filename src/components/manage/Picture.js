@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Picture = ({ profile }) => (
+const Picture = ({ profile: { firstName, lastName, gravatarUrl } }) => (
     <React.Fragment>
         <h4>Picture</h4>
         <hr />
 
         <div className="d-flex mb-3">
             <img
-                src={profile.gravatarUrl}
-                alt={`${profile.firstName} ${profile.lastName}`}
+                src={gravatarUrl}
+                alt={`${firstName} ${lastName}`}
                 className="img-thumbnail rounded-circle mr-3"
             />{' '}
             <div>

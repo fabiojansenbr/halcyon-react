@@ -36,16 +36,16 @@ const SearchForm = ({ onSearch, onSortChange }) => (
                     <UncontrolledDropdown>
                         <DropdownToggle caret>Sort By</DropdownToggle>
                         <DropdownMenu right>
-                            {Object.keys(sortOptions).map(key => (
-                                <DropdownItem
-                                    key={key}
-                                    onClick={() =>
-                                        onSortChange(sortOptions[key])
-                                    }
-                                >
-                                    {key}
-                                </DropdownItem>
-                            ))}
+                            {Object.entries(sortOptions).map(
+                                ({ key, value }) => (
+                                    <DropdownItem
+                                        key={key}
+                                        onClick={() => onSortChange(value)}
+                                    >
+                                        {key}
+                                    </DropdownItem>
+                                )
+                            )}
                         </DropdownMenu>
                     </UncontrolledDropdown>
                 </InputGroupAddon>

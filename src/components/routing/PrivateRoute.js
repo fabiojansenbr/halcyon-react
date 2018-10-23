@@ -6,11 +6,10 @@ import PublicRoute from './PublicRoute';
 
 const PrivateRoute = ({
     component: Component,
-    context,
+    context: { user },
     requiredRoles,
     ...rest
 }) => {
-    const user = context.user;
     if (!user) {
         return (
             <Redirect

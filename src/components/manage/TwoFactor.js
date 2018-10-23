@@ -4,7 +4,7 @@ import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 const TwoFactor = ({
-    profile,
+    profile: { twoFactorEnabled },
     onDisableAuthenticator,
     onResetRecoveryCodes
 }) => (
@@ -19,7 +19,7 @@ const TwoFactor = ({
             >
                 Configure Authenticator App
             </Link>{' '}
-            {profile.twoFactorEnabled && (
+            {twoFactorEnabled && (
                 <React.Fragment>
                     <Button
                         color="secondary"

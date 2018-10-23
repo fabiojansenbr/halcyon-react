@@ -27,17 +27,19 @@ class UserOptions extends Component {
             return null;
         }
 
+        const { given_name, family_name, picture } = this.props.context.user;
+
         return (
             <Nav navbar>
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                         <img
-                            src={user.picture}
-                            alt={`${user.given_name} ${user.family_name}`}
+                            src={picture}
+                            alt={`${given_name} ${family_name}`}
                             className="rounded-circle mr-2"
                         />{' '}
                         <span className="text-truncate">
-                            {user.given_name} {user.family_name}
+                            {given_name} {family_name}
                         </span>{' '}
                     </DropdownToggle>
                     <DropdownMenu>

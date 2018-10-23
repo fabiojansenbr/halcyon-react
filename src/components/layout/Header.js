@@ -41,6 +41,8 @@ class Header extends Component {
     }
 
     render() {
+        const { isOpen } = this.state;
+        const { user } = this.props.context;
         return (
             <Navbar color="dark" dark expand="lg" fixed="top">
                 <Container>
@@ -51,12 +53,12 @@ class Header extends Component {
                         onClick={this.onToggle}
                         aria-label="Toggle navigation"
                     />
-                    <Collapse isOpen={this.state.isOpen} navbar>
+                    <Collapse isOpen={isOpen} navbar>
                         <Nav navbar className="mr-auto">
                             <BaseOptions />
-                            <AdminOptions user={this.props.context.user} />
+                            <AdminOptions user={user} />
                         </Nav>
-                        <UserOptions user={this.props.context.user} />
+                        <UserOptions user={user} />
                         <LoginOptions context={this.props.context} />
                     </Collapse>
                 </Container>

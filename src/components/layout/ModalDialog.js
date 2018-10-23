@@ -21,18 +21,17 @@ class ModalDialog extends Component {
     }
 
     render() {
-        if (!this.props.context.modal) {
+        const { modal } = this.props.context;
+        if (!modal) {
             return null;
         }
 
         return (
             <Modal isOpen={true} toggle={this.onClose} fade={false}>
-                <ModalHeader toggle={this.onClose}>
-                    {this.props.context.modal.title}
-                </ModalHeader>
+                <ModalHeader toggle={this.onClose}>{modal.title}</ModalHeader>
                 <ModalBody
                     dangerouslySetInnerHTML={{
-                        __html: this.props.context.modal.message
+                        __html: modal.message
                     }}
                 />
                 <ModalFooter>

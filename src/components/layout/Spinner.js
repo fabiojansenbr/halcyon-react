@@ -4,8 +4,8 @@ import { withContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-const Spinner = ({ context }) => {
-    if (!context.loading) {
+const Spinner = ({ context: { loading } }) => {
+    if (!loading) {
         return null;
     }
 

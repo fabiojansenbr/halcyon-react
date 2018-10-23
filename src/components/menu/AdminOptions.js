@@ -8,14 +8,14 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const AdminOptions = ({ user }) => {
-    if (!user || !user.role) {
+const AdminOptions = ({ user: { role } }) => {
+    if (!role) {
         return null;
     }
 
     if (
-        !user.role.includes('User Administrator') &&
-        !user.role.includes('System Administrator')
+        !role.includes('User Administrator') &&
+        !role.includes('System Administrator')
     ) {
         return null;
     }
