@@ -23,12 +23,13 @@ const success = (config, response) => {
 const error = (config, error) => {
     const response = error.response;
     const status = response && response.status;
-    let messages = [];
 
     switch (status) {
         case 401:
         case 403:
-            messages = ['Sorry, you do not have access to this resource.'];
+            iziToast.warning({
+                message: 'Sorry, you do not have access to this resource.'
+            });
             break;
 
         default:
@@ -36,15 +37,13 @@ const error = (config, error) => {
             const data = result && result.data;
 
             if (!data) {
-                messages = result.messages || [
+                for (const message of result.messages || [
                     'An unknown error has occurred.'
-                ];
+                ]) {
+                    iziToast.error({ message });
+                }
             }
             break;
-    }
-
-    for (const message of messages) {
-        iziToast.error({ message });
     }
 
     return Promise.reject(error);
