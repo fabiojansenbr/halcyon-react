@@ -26,7 +26,7 @@ class UpdateProfilePage extends Component {
 
     async loadData() {
         const result = await getProfile();
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 
@@ -35,7 +35,7 @@ class UpdateProfilePage extends Component {
 
     async onSubmit(event, values) {
         let result = await updateProfile(values);
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 
@@ -44,7 +44,7 @@ class UpdateProfilePage extends Component {
             refreshToken: this.props.context.user.refreshToken
         });
 
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 

@@ -14,7 +14,7 @@ class SetPasswordPage extends Component {
 
     async onSubmit(event, values) {
         const result = await setPassword(values);
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 

@@ -31,7 +31,7 @@ class RegisterPage extends Component {
                     ...values
                 });
 
-                if (result.error) {
+                if (!result.success) {
                     return;
                 }
 
@@ -41,7 +41,7 @@ class RegisterPage extends Component {
                     accessToken: this.state.accessToken
                 });
 
-                if (result.error) {
+                if (!result.success) {
                     return;
                 }
 
@@ -51,7 +51,7 @@ class RegisterPage extends Component {
             default:
                 result = await register(...values);
 
-                if (result.error) {
+                if (!result.success) {
                     return;
                 }
 
@@ -60,7 +60,7 @@ class RegisterPage extends Component {
                     ...values
                 });
 
-                if (result.error) {
+                if (!result.success) {
                     return;
                 }
 
@@ -93,7 +93,7 @@ class RegisterPage extends Component {
             return;
         }
 
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 

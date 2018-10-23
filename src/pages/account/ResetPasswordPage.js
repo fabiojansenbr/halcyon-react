@@ -19,7 +19,7 @@ class ResetPasswordPage extends Component {
             code: qs.code
         });
 
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 

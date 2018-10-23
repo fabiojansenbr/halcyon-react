@@ -14,7 +14,7 @@ class ChangePasswordPage extends Component {
 
     async onSubmit(event, values) {
         const result = await changePassword(values);
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 

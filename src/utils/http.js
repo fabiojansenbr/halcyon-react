@@ -89,7 +89,7 @@ const processSuccess = response => {
         }
     }
 
-    return data;
+    return { success: false, ...data };
 };
 
 const processError = error => {
@@ -128,7 +128,8 @@ const processError = error => {
         }
     }
 
-    return { error: true, ...data };
+    console.log('data', data);
+    return { success: false, ...data };
 };
 
 export default http;

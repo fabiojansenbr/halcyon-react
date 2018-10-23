@@ -18,7 +18,7 @@ class CreateUserPage extends Component {
     async onSubmit(event, values) {
         const model = toUserDataModel(values);
         const result = await createUser(model);
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 

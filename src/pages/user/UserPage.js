@@ -32,7 +32,7 @@ class UserPage extends Component {
 
     async loadData() {
         const result = await getUsers(this.state.filter);
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 

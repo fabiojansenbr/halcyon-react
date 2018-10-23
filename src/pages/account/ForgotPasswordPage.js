@@ -13,7 +13,7 @@ class ForgotPasswordPage extends Component {
 
     async onSubmit(event, values) {
         const result = await forgotPassword(values);
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 

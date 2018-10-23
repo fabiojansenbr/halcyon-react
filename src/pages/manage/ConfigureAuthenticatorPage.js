@@ -26,7 +26,7 @@ class ConfigureAuthenticatorPage extends Component {
 
     async loadData() {
         const result = await getAuthenticatorSettings();
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 
@@ -35,7 +35,7 @@ class ConfigureAuthenticatorPage extends Component {
 
     async onSubmit(event, values) {
         const result = await configureAuthenticator(values);
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 

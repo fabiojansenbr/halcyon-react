@@ -40,7 +40,7 @@ class UpdateUserPage extends Component {
 
     async loadData() {
         const result = await getUser(this.props.match.params.id);
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 
@@ -48,57 +48,63 @@ class UpdateUserPage extends Component {
     }
 
     onUnlock(user) {
-        const { firstName, lastName } = user;
+        const { id, firstName, lastName } = user;
+        const onOk = async () => {
+            const result = await unlockUser(id);
+            if (!result.success) {
+                return;
+            }
+
+            await this.loadData();
+        };
+
         this.props.context.showModal({
             title: 'Confirm',
             message: `Are you sure you want to unlock <strong>${firstName} ${lastName}</strong>?`,
-            onOk: async () => {
-                const result = await unlockUser(this.props.match.params.id);
-                if (result.error) {
-                    return;
-                }
-
-                await this.loadData();
-            }
+            onOk
         });
     }
 
     onLock(user) {
-        const { firstName, lastName } = user;
+        const { id, firstName, lastName } = user;
+        const onOk = async () => {
+            const result = await lockUser(id);
+            if (!result.success) {
+                return;
+            }
+
+            await this.loadData();
+        };
+
         this.props.context.showModal({
             title: 'Confirm',
             message: `Are you sure you want to lock out <strong>${firstName} ${lastName}</strong>?`,
-            onOk: async () => {
-                const result = await lockUser(this.props.match.params.id);
-                if (result.error) {
-                    return;
-                }
-
-                await this.loadData();
-            }
+            onOk
         });
     }
 
     onDelete(user) {
-        const { firstName, lastName } = user;
+        const { id, firstName, lastName } = user;
+        const onOk = async () => {
+            const result = await deleteUser(id);
+            if (!result.success) {
+                return;
+            }
+
+            this.props.history.push('/user');
+        };
+
         this.props.context.showModal({
             title: 'Confirm',
             message: `Are you sure you want to delete <strong>${firstName} ${lastName}</strong>?`,
-            onOk: async () => {
-                const result = await deleteUser(this.props.match.params.id);
-                if (result.error) {
-                    return;
-                }
-
-                this.props.history.push('/user');
-            }
+            onOk
         });
     }
 
     async onSubmit(event, values) {
         const model = toUserDataModel(values);
-        const result = await updateUser(this.props.match.params.id, model);
-        if (result.error) {
+        const result = await updateUser(this.state.data.id, model);
+        if (!result.success) {
             return;
         }
 

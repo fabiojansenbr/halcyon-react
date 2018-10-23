@@ -41,7 +41,7 @@ class ManagePage extends Component {
 
     async loadData() {
         const result = await getProfile();
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 
@@ -61,7 +61,7 @@ class ManagePage extends Component {
         }
 
         const result = await addLogin({ provider, accessToken });
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 
@@ -70,7 +70,7 @@ class ManagePage extends Component {
 
     async onRemoveLogin(login) {
         const result = await removeLogin(login);
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 
@@ -79,7 +79,7 @@ class ManagePage extends Component {
 
     async onDisableAuthenticator() {
         const result = await disableAuthenticator();
-        if (result.error) {
+        if (!result.success) {
             return;
         }
 
@@ -91,17 +91,19 @@ class ManagePage extends Component {
     }
 
     onDeleteAccount() {
+        const onOk = async () => {
+            const result = await deleteAccount();
+            if (!result.success) {
+                return;
+            }
+
+            this.props.history.push('/');
+        };
+
         this.props.context.showModal({
             title: 'Confirm',
             message: 'Are you sure you want to delete your account?',
-            onOk: async () => {
-                const result = await deleteAccount();
-                if (result.error) {
-                    return;
-                }
-
-                this.props.history.push('/');
-            }
+            onOk
         });
     }
 
