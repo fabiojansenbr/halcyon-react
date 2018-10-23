@@ -24,10 +24,7 @@ const toRolesViewModel = roles => {
 
 export const toUserDataModel = values => ({
     ...values,
-    roles: toRolesDataModel(values.roles)
+    roles: Object.keys(values.roles || {})
+        .filter(key => values.roles[key])
+        .map(key => key)
 });
-
-const toRolesDataModel = roles =>
-    Object.keys(roles || {})
-        .filter(key => roles[key])
-        .map(key => key);
