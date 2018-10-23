@@ -18,7 +18,6 @@ const tokenReducer = (state = initialState, action) => {
             };
 
         case 'GET_TOKEN_SUCCESS':
-        case 'REFRESH_TOKEN_SUCCESS':
             const jwt =
                 action.payload &&
                 action.payload.data &&

@@ -12,22 +12,3 @@ export const getToken = model => ({
         }
     }
 });
-
-export const refreshToken = () => (dispatch, getState) => {
-    const token = getState().token;
-    const rft = token && token.jwt && token.jwt.refreshToken;
-
-    return dispatch({
-        type: 'REFRESH_TOKEN',
-        payload: {
-            request: {
-                url: '/token',
-                method: 'POST',
-                data: {
-                    grantType: 'RefreshToken',
-                    refreshToken: rft
-                }
-            }
-        }
-    });
-};

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile, updateProfile } from '../../actions/manageActions';
-import { refreshToken } from '../../actions/tokenActions';
+import { getToken } from '../../actions/tokenActions';
 import { toUpdateProfileModel } from '../../mappers/manageMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
@@ -26,7 +26,11 @@ class UpdateProfilePage extends Component {
             return;
         }
 
-        result = await this.props.refreshToken();
+        result = await this.props.getToken({
+            grantType: 'RefreshToken',
+            refreshToken: this.props.jwt.refreshToken
+        });
+
         if (result.error) {
             return;
         }
@@ -81,20 +85,22 @@ class UpdateProfilePage extends Component {
 }
 
 const mapStateToProps = state => ({
+    jwt: state.token.jwt,
     profile: toUpdateProfileModel(state.manage.profile)
 });
 
 const mapDispatchToProps = dispatch => ({
     getProfile: () => dispatch(getProfile()),
     updateProfile: model => dispatch(updateProfile(model)),
-    refreshToken: () => dispatch(refreshToken())
+    getToken: model => dispatch(getToken(model))
 });
 
 UpdateProfilePage.propTypes = {
+    jwt: PropTypes.object,
     profile: PropTypes.object,
     getProfile: PropTypes.func.isRequired,
     updateProfile: PropTypes.func.isRequired,
-    refreshToken: PropTypes.func.isRequired,
+    getToken: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 };
 

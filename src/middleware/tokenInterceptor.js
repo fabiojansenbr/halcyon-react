@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { refreshToken } from '../actions/tokenActions';
+import { getToken } from '../actions/tokenActions';
 
 const request = async ({ getState, dispatch }, request) => {
     if (!request.authenticate) {
@@ -24,7 +24,13 @@ const request = async ({ getState, dispatch }, request) => {
         return request;
     }
 
-    const result = await dispatch(refreshToken());
+    const result = await dispatch(
+        getToken({
+            grantType: 'RefreshToken',
+            refreshToken: jwt.refreshToken
+        })
+    );
+
     if (result.error) {
         return Promise.reject({
             response: {
