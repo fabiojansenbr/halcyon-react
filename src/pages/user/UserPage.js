@@ -89,10 +89,7 @@ class UserPage extends Component {
     }
 
     render() {
-        const hasUsers =
-            this.state.data &&
-            this.state.data.items &&
-            this.state.data.items.length > 0;
+        const { items } = this.state.data;
 
         return (
             <React.Fragment>
@@ -112,24 +109,25 @@ class UserPage extends Component {
                     onSortChange={this.onSortChange}
                 />
 
-                {this.state.data &&
-                    !hasUsers && (
+                {items &&
+                    items.length === 0 && (
                         <Alert color="info">No users could be found.</Alert>
                     )}
 
-                {hasUsers && (
-                    <React.Fragment>
-                        {this.state.data.items.map(user => (
-                            <Summary key={user.id} user={user} />
-                        ))}
+                {items &&
+                    items.length > 0 && (
+                        <React.Fragment>
+                            {items.map(user => (
+                                <Summary key={user.id} user={user} />
+                            ))}
 
-                        <Pager
-                            {...this.state.data}
-                            onNextPage={this.onNextPage}
-                            onPreviousPage={this.onPreviousPage}
-                        />
-                    </React.Fragment>
-                )}
+                            <Pager
+                                {...this.state.data}
+                                onNextPage={this.onNextPage}
+                                onPreviousPage={this.onPreviousPage}
+                            />
+                        </React.Fragment>
+                    )}
             </React.Fragment>
         );
     }

@@ -26,12 +26,9 @@ class RegisterPage extends Component {
         switch (this.state.stage) {
             case 'RegisterExternal':
                 result = await registerExternal({
-                    emailAddress: values.emailAddress,
-                    firstName: values.firstName,
-                    lastName: values.lastName,
-                    dateOfBirth: values.dateOfBirth,
                     provider: this.state.provider,
-                    accessToken: this.state.accessToken
+                    accessToken: this.state.accessToken,
+                    ...values
                 });
 
                 if (result.error) {
@@ -52,13 +49,7 @@ class RegisterPage extends Component {
                 return this.props.history.push(this.state.from);
 
             default:
-                result = await register({
-                    emailAddress: values.emailAddress,
-                    password: values.password,
-                    firstName: values.firstName,
-                    lastName: values.lastName,
-                    dateOfBirth: values.dateOfBirth
-                });
+                result = await register(...values);
 
                 if (result.error) {
                     return;
@@ -66,8 +57,7 @@ class RegisterPage extends Component {
 
                 result = await getToken({
                     grantType: 'Password',
-                    emailAddress: values.emailAddress,
-                    password: values.password
+                    ...values
                 });
 
                 if (result.error) {

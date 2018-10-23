@@ -39,14 +39,12 @@ class UpdateUserPage extends Component {
     }
 
     async loadData() {
-        const id = this.props.match.params.id;
-        const result = await getUser(id);
+        const result = await getUser(this.props.match.params.id);
         if (result.error) {
             return;
         }
 
-        const data = toUpdateUserViewModel(result);
-        this.setState({ data });
+        this.setState({ data: toUpdateUserViewModel(result) });
     }
 
     onUnlock(user) {
@@ -56,8 +54,7 @@ class UpdateUserPage extends Component {
                 user.firstName
             } ${user.lastName}</strong>?`,
             onOk: async () => {
-                const id = this.props.match.params.id;
-                const result = await unlockUser(id);
+                const result = await unlockUser(this.props.match.params.id);
                 if (result.error) {
                     return;
                 }
@@ -74,8 +71,7 @@ class UpdateUserPage extends Component {
                 user.firstName
             } ${user.lastName}</strong>?`,
             onOk: async () => {
-                const id = this.props.match.params.id;
-                const result = await lockUser(id);
+                const result = await lockUser(this.props.match.params.id);
                 if (result.error) {
                     return;
                 }
@@ -92,8 +88,7 @@ class UpdateUserPage extends Component {
                 user.firstName
             } ${user.lastName}</strong>?`,
             onOk: async () => {
-                const id = this.props.match.params.id;
-                const result = await deleteUser(id);
+                const result = await deleteUser(this.props.match.params.id);
                 if (result.error) {
                     return;
                 }
@@ -104,10 +99,8 @@ class UpdateUserPage extends Component {
     }
 
     async onSubmit(event, values) {
-        const id = this.props.match.params.id;
         const model = toUserDataModel(values);
-
-        const result = await updateUser(id, model);
+        const result = await updateUser(this.props.match.params.id, model);
         if (result.error) {
             return;
         }
@@ -116,7 +109,14 @@ class UpdateUserPage extends Component {
     }
 
     render() {
-        if (!this.state.data) {
+        const {
+            emailAddress,
+            firstName,
+            lastName,
+            gravatarUrl
+        } = this.state.data;
+
+        if (!emailAddress) {
             return null;
         }
 
@@ -127,16 +127,15 @@ class UpdateUserPage extends Component {
                         <CardBody>
                             <div className="d-flex flex-wrap">
                                 <img
-                                    src={this.state.data.gravatarUrl}
-                                    alt={this.state.data.emailAddress}
+                                    src={gravatarUrl}
+                                    alt={emailAddress}
                                     className="img-thumbnail rounded-circle mr-3 mb-2"
                                 />
                                 <h2 className="mb-2 text-truncate">
-                                    {this.state.data.firstName}{' '}
-                                    {this.state.data.lastName}
+                                    {firstName} {lastName}
                                     <br />
                                     <small className="text-muted">
-                                        {this.state.data.emailAddress}
+                                        {emailAddress}
                                     </small>
                                 </h2>
                                 <div className="ml-auto">

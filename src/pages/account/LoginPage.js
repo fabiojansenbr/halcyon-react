@@ -31,7 +31,7 @@ class LoginPage extends Component {
                     grantType: 'TwoFactor',
                     emailAddress: this.state.emailAddress,
                     password: this.state.password,
-                    verificationCode: values.verificationCode
+                    ...values
                 });
 
                 if (result.error) {
@@ -46,7 +46,7 @@ class LoginPage extends Component {
                     grantType: 'RecoveryCode',
                     emailAddress: this.state.emailAddress,
                     password: this.state.password,
-                    recoveryCode: values.recoveryCode
+                    ...values
                 });
 
                 if (result.error) {
@@ -58,12 +58,9 @@ class LoginPage extends Component {
 
             case 'RegisterExternal':
                 result = await registerExternal({
-                    emailAddress: values.emailAddress,
-                    firstName: values.firstName,
-                    lastName: values.lastName,
-                    dateOfBirth: values.dateOfBirth,
                     provider: this.state.provider,
-                    accessToken: this.state.accessToken
+                    accessToken: this.state.accessToken,
+                    ...values
                 });
 
                 if (result.error) {
@@ -86,15 +83,13 @@ class LoginPage extends Component {
             default:
                 result = await getToken({
                     grantType: 'Password',
-                    emailAddress: values.emailAddress,
-                    password: values.password
+                    ...values
                 });
 
                 if (result.requiresTwoFactor) {
                     this.setState({
                         stage: 'TwoFactor',
-                        emailAddress: values.emailAddress,
-                        password: values.password
+                        ...values
                     });
 
                     return;

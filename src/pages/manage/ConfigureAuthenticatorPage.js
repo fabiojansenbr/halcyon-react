@@ -43,7 +43,8 @@ class ConfigureAuthenticatorPage extends Component {
     }
 
     render() {
-        if (!this.state.data) {
+        const { authenticatorUri, secret } = this.state.data;
+        if (!authenticatorUri || !secret) {
             return null;
         }
 
@@ -85,15 +86,13 @@ class ConfigureAuthenticatorPage extends Component {
                                 <li>
                                     <p>
                                         Scan the QR Code or enter this key{' '}
-                                        <kbd>{this.state.data.secret}</kbd> into
-                                        your two factor authenticator app.
-                                        Spaces and casing do not matter.
+                                        <kbd>{secret}</kbd> into your two factor
+                                        authenticator app. Spaces and casing do
+                                        not matter.
                                     </p>
                                     <p>
                                         <QRCode
-                                            value={
-                                                this.state.data.authenticatorUri
-                                            }
+                                            value={authenticatorUri}
                                             size={150}
                                         />
                                     </p>

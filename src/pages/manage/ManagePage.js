@@ -45,8 +45,7 @@ class ManagePage extends Component {
             return;
         }
 
-        const data = toProfileViewModel(result);
-        this.setState({ data });
+        this.setState({ data: toProfileViewModel(result) });
     }
 
     async onVerifyEmail() {

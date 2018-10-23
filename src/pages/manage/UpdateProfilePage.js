@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withContext } from '../../context';
 import { getProfile, updateProfile } from '../../clients/manageClient';
 import { getToken } from '../../clients/tokenClient';
-import { getItem } from '../../utils/storage';
 import { toUpdateProfileViewModel } from '../../mappers/manageMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
@@ -31,8 +30,7 @@ class UpdateProfilePage extends Component {
             return;
         }
 
-        const data = toUpdateProfileViewModel(result);
-        this.setState({ data });
+        this.setState({ data: toUpdateProfileViewModel(result) });
     }
 
     async onSubmit(event, values) {
@@ -41,12 +39,9 @@ class UpdateProfilePage extends Component {
             return;
         }
 
-        const jwt = getItem('session.token');
-        const refreshToken = jwt && jwt.refreshToken;
-
         result = await getToken({
             grantType: 'RefreshToken',
-            refreshToken: refreshToken
+            refreshToken: this.props.context.user.refreshToken
         });
 
         if (result.error) {
