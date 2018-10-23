@@ -22,12 +22,10 @@ class UserOptions extends Component {
     }
 
     render() {
-        const user = this.props.context.user;
-        if (!user) {
+        const { given_name, family_name, picture } = this.props.context.user;
+        if (!given_name) {
             return null;
         }
-
-        const { given_name, family_name, picture } = this.props.context.user;
 
         return (
             <Nav navbar>

@@ -44,7 +44,7 @@ class ConfigureAuthenticatorPage extends Component {
 
     render() {
         const { authenticatorUri, secret } = this.state.data;
-        if (!authenticatorUri || !secret) {
+        if (!authenticatorUri) {
             return null;
         }
 

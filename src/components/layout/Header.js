@@ -43,6 +43,7 @@ class Header extends Component {
     render() {
         const { isOpen } = this.state;
         const { user } = this.props.context;
+
         return (
             <Navbar color="dark" dark expand="lg" fixed="top">
                 <Container>
