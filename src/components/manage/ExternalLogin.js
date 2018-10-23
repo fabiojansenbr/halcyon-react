@@ -12,7 +12,7 @@ const ExternalLogin = ({ profile, onAddLogin, onRemoveLogin }) => (
 
         {providers.map(provider => {
             const userLogin = profile.logins.find(
-                a => a.provider === provider.provider
+                login => login.provider === provider.provider
             );
 
             return (

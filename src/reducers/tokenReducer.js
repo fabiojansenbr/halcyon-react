@@ -9,19 +9,17 @@ const initialState = {
 };
 
 const tokenReducer = (state = initialState, action) => {
-    let jwt;
-
     switch (action.type) {
         case 'TOKEN_LOAD':
-            jwt = getItem(STORAGE_KEY);
+            const storedJwt = getItem(STORAGE_KEY);
             return {
-                jwt,
-                currentUser: jwt && jwtDecode(jwt.accessToken)
+                jwt: storedJwt,
+                currentUser: storedJwt && jwtDecode(storedJwt.accessToken)
             };
 
         case 'GET_TOKEN_SUCCESS':
         case 'REFRESH_TOKEN_SUCCESS':
-            jwt =
+            const jwt =
                 action.payload &&
                 action.payload.data &&
                 action.payload.data.data;

@@ -2,14 +2,12 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { confirmEmail } from '../../actions/manageActions';
-import { parse } from '../../utils/querystring';
 
 class ManagePage extends Component {
     async componentDidMount() {
-        const qs = parse(this.props.location);
-
+        const code = this.props.match.params.code;
         await this.props.confirmEmail({
-            code: qs.code
+            code
         });
 
         this.props.history.push('/manage');
@@ -26,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
 
 ManagePage.propTypes = {
     confirmEmail: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

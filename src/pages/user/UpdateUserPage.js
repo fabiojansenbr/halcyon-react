@@ -32,7 +32,8 @@ class UpdateUserPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getUser(this.props.match.params.id);
+        const id = this.props.match.params.id;
+        this.props.getUser(id);
     }
 
     onUnlock(user) {

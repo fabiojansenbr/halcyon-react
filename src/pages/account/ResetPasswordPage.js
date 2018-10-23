@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { resetPassword } from '../../actions/accountActions';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { parse } from '../../utils/querystring';
 
 class ResetPasswordPage extends Component {
     constructor(props) {
@@ -14,10 +13,10 @@ class ResetPasswordPage extends Component {
     }
 
     async onSubmit(event, values) {
-        const qs = parse(this.props.location);
+        const code = this.props.match.params.code;
         const result = await this.props.resetPassword({
             ...values,
-            code: qs.code
+            code
         });
 
         if (!result.error) {
@@ -77,7 +76,7 @@ const mapDispatchToProps = dispatch => ({
 
 ResetPasswordPage.propTypes = {
     resetPassword: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 
