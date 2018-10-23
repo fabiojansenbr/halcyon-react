@@ -26,6 +26,7 @@ class Header extends Component {
 
         this.onToggle = this.onToggle.bind(this);
         this.onRouteChange = this.onRouteChange.bind(this);
+        this.onLogout = this.onLogout.bind(this);
     }
 
     componentDidMount() {
@@ -40,9 +41,13 @@ class Header extends Component {
         this.setState({ isOpen: false });
     }
 
+    onLogout() {
+        this.props.context.removeUser();
+        this.props.history.push('/');
+    }
+
     render() {
         const { isOpen } = this.state;
-        const { user } = this.props.context;
 
         return (
             <Navbar color="dark" dark expand="lg" fixed="top">
@@ -57,10 +62,14 @@ class Header extends Component {
                     <Collapse isOpen={isOpen} navbar>
                         <Nav navbar className="mr-auto">
                             <BaseOptions />
-                            <AdminOptions user={user} />
+                            <AdminOptions user={this.props.context.user} />
                         </Nav>
-                        <UserOptions user={user} />
-                        <LoginOptions context={this.props.context} />
+                        <UserOptions
+                            history={this.props.history}
+                            user={this.props.context.user}
+                            onLogout={this.onLogout}
+                        />
+                        <LoginOptions user={this.props.context.user} />
                     </Collapse>
                 </Container>
             </Navbar>
@@ -69,7 +78,7 @@ class Header extends Component {
 }
 
 UserOptions.propTypes = {
-    context: PropTypes.object.isRequired,
+    context: PropTypes.object,
     history: PropTypes.object.isRequired
 };
 

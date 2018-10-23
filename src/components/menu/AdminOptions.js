@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const AdminOptions = ({ user: { role } }) => {
+const AdminOptions = ({ user: { role } = {} }) => {
     if (!role) {
         return null;
     }
