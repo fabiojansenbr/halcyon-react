@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const toProfileViewModel = profile => {
+export const toProfileModel = profile => {
     if (!profile) {
         return undefined;
     }
@@ -11,7 +11,7 @@ export const toProfileViewModel = profile => {
     };
 };
 
-export const toUpdateProfileViewModel = profile => {
+export const toUpdateProfileModel = profile => {
     if (!profile) {
         return undefined;
     }

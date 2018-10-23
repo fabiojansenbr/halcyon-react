@@ -9,10 +9,7 @@ import {
     deleteUser
 } from '../../actions/userActions';
 import { openModal } from '../../actions/modalActions';
-import {
-    toUpdateUserViewModel,
-    toUserDataModel
-} from '../../mappers/userMapper';
+import { toUpdateUserModel, toUserDataModel } from '../../mappers/userMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
@@ -163,7 +160,7 @@ class UpdateUserPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    user: toUpdateUserViewModel(state.user.user)
+    user: toUpdateUserModel(state.user.user)
 });
 
 const mapDispatchToProps = dispatch => ({

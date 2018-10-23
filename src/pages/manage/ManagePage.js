@@ -11,7 +11,7 @@ import {
     deleteAccount
 } from '../../actions/manageActions';
 import { openModal } from '../../actions/modalActions';
-import { toProfileViewModel } from '../../mappers/manageMapper';
+import { toProfileModel } from '../../mappers/manageMapper';
 import { Row, Col, Card, CardBody } from 'reactstrap';
 import Profile from '../../components/manage/Profile';
 import Picture from '../../components/manage/Picture';
@@ -145,7 +145,7 @@ class ManagePage extends Component {
 }
 
 const mapStateToProps = state => ({
-    profile: toProfileViewModel(state.manage.profile)
+    profile: toProfileModel(state.manage.profile)
 });
 
 const mapDispatchToProps = dispatch => ({

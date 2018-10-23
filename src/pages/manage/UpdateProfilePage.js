@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile, updateProfile } from '../../actions/manageActions';
 import { refreshToken } from '../../actions/tokenActions';
-import { toUpdateProfileViewModel } from '../../mappers/manageMapper';
+import { toUpdateProfileModel } from '../../mappers/manageMapper';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
@@ -81,7 +81,7 @@ class UpdateProfilePage extends Component {
 }
 
 const mapStateToProps = state => ({
-    profile: toUpdateProfileViewModel(state.manage.profile)
+    profile: toUpdateProfileModel(state.manage.profile)
 });
 
 const mapDispatchToProps = dispatch => ({
