@@ -1,11 +1,10 @@
 import http from '../utils/http';
 
-export const getProfile = () =>
-    http({
-        url: '/manage',
-        method: 'GET',
-        authenticate: true
-    });
+export const getProfile = http({
+    url: '/manage',
+    method: 'GET',
+    authenticate: true
+});
 
 export const updateProfile = model =>
     http({
@@ -31,12 +30,11 @@ export const setPassword = model =>
         data: model
     });
 
-export const verifyEmail = () =>
-    http({
-        url: '/manage/verifyemail',
-        method: 'PUT',
-        authenticate: true
-    });
+export const verifyEmail = http({
+    url: '/manage/verifyemail',
+    method: 'PUT',
+    authenticate: true
+});
 
 export const confirmEmail = model =>
     http({
@@ -62,12 +60,11 @@ export const removeLogin = model =>
         data: model
     });
 
-export const getAuthenticatorSettings = () =>
-    http({
-        url: '/manage/authenticator',
-        method: 'GET',
-        authenticate: true
-    });
+export const getAuthenticatorSettings = http({
+    url: '/manage/authenticator',
+    method: 'GET',
+    authenticate: true
+});
 
 export const configureAuthenticator = model =>
     http({
@@ -77,23 +74,20 @@ export const configureAuthenticator = model =>
         data: model
     });
 
-export const disableAuthenticator = () =>
-    http({
-        url: '/manage/authenticator',
-        method: 'DELETE',
-        authenticate: true
-    });
+export const disableAuthenticator = http({
+    url: '/manage/authenticator',
+    method: 'DELETE',
+    authenticate: true
+});
 
-export const resetRecoveryCodes = () =>
-    http({
-        url: '/manage/resetrecoverycodes',
-        method: 'PUT',
-        authenticate: true
-    });
+export const resetRecoveryCodes = http({
+    url: '/manage/resetrecoverycodes',
+    method: 'PUT',
+    authenticate: true
+});
 
-export const deleteAccount = () =>
-    http({
-        url: '/manage',
-        method: 'DELETE',
-        authenticate: true
-    });
+export const deleteAccount = http({
+    url: '/manage',
+    method: 'DELETE',
+    authenticate: true
+});

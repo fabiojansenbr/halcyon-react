@@ -10,7 +10,7 @@ export const getUsers = model =>
 
 export const getUser = id =>
     http({
-        url: `/user/${encodeURIComponent(id)}`,
+        url: `/user/${id}`,
         method: 'GET',
         authenticate: true
     });
@@ -25,7 +25,7 @@ export const createUser = model =>
 
 export const updateUser = (id, model) =>
     http({
-        url: `/user/${encodeURIComponent(id)}`,
+        url: `/user/${id}`,
         method: 'PUT',
         authenticate: true,
         data: model
@@ -33,21 +33,21 @@ export const updateUser = (id, model) =>
 
 export const lockUser = id =>
     http({
-        url: `/user/${encodeURIComponent(id)}/lock`,
+        url: `/user/${id}/lock`,
         method: 'PUT',
         authenticate: true
     });
 
 export const unlockUser = id =>
     http({
-        url: `/user/${encodeURIComponent(id)}/unlock`,
+        url: `/user/${id}/unlock`,
         method: 'PUT',
         authenticate: true
     });
 
 export const deleteUser = id =>
     http({
-        url: `/user/${encodeURIComponent(id)}`,
+        url: `/user/${id}`,
         method: 'DELETE',
         authenticate: true
     });
