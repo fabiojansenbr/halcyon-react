@@ -14,7 +14,12 @@ const request = async ({ getState, dispatch }, request) => {
     }
 
     const currentUser = token && token.currentUser;
-    if (!isExpired(currentUser.exp)) {
+
+    const remainingSeconds = moment
+        .unix(currentUser.exp)
+        .diff(moment(Date.now()), 'seconds');
+
+    if (remainingSeconds >= 30) {
         request.headers.Authorization = `Bearer ${jwt.accessToken}`;
         return request;
     }
@@ -33,14 +38,6 @@ const request = async ({ getState, dispatch }, request) => {
     }`;
 
     return request;
-};
-
-const isExpired = exp => {
-    const remainingSeconds = moment
-        .unix(exp)
-        .diff(moment(Date.now()), 'seconds');
-
-    return remainingSeconds < 30;
 };
 
 export default request;

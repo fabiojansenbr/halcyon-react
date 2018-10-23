@@ -34,11 +34,11 @@ class LoginPage extends Component {
                     verificationCode: values.verificationCode
                 });
 
-                if (!result.error) {
-                    return this.props.history.push(this.state.from);
+                if (result.error) {
+                    return;
                 }
 
-                return null;
+                return this.props.history.push(this.state.from);
 
             case 'RecoveryCode':
                 result = await this.props.getToken({
@@ -48,11 +48,11 @@ class LoginPage extends Component {
                     recoveryCode: values.recoveryCode
                 });
 
-                if (!result.error) {
-                    return this.props.history.push(this.state.from);
+                if (result.error) {
+                    return;
                 }
 
-                return null;
+                return this.props.history.push(this.state.from);
 
             case 'RegisterExternal':
                 result = await this.props.registerExternal({
@@ -64,19 +64,21 @@ class LoginPage extends Component {
                     accessToken: this.state.accessToken
                 });
 
-                if (!result.error) {
-                    result = await this.props.getToken({
-                        grantType: 'External',
-                        provider: this.state.provider,
-                        accessToken: this.state.accessToken
-                    });
-
-                    if (!result.error) {
-                        return this.props.history.push(this.state.from);
-                    }
+                if (result.error) {
+                    return;
                 }
 
-                return null;
+                result = await this.props.getToken({
+                    grantType: 'External',
+                    provider: this.state.provider,
+                    accessToken: this.state.accessToken
+                });
+
+                if (result.error) {
+                    return;
+                }
+
+                return this.props.history.push(this.state.from);
 
             default:
                 result = await this.props.getToken({
@@ -85,25 +87,25 @@ class LoginPage extends Component {
                     password: values.password
                 });
 
-                if (!result.error) {
-                    return this.props.history.push(this.state.from);
+                if (result.error) {
+                    const requiresTwoFactor =
+                        result.error.response &&
+                        result.error.response.data &&
+                        result.error.response.data.data &&
+                        result.error.response.data.data.requiresTwoFactor;
+
+                    if (requiresTwoFactor) {
+                        this.setState({
+                            stage: 'TwoFactor',
+                            emailAddress: values.emailAddress,
+                            password: values.password
+                        });
+                    }
+
+                    return;
                 }
 
-                const requiresTwoFactor =
-                    result.error.response &&
-                    result.error.response.data &&
-                    result.error.response.data.data &&
-                    result.error.response.data.data.requiresTwoFactor;
-
-                if (requiresTwoFactor) {
-                    this.setState({
-                        stage: 'TwoFactor',
-                        emailAddress: values.emailAddress,
-                        password: values.password
-                    });
-                }
-
-                return null;
+                return this.props.history.push(this.state.from);
         }
     }
 
@@ -112,7 +114,7 @@ class LoginPage extends Component {
             response && response._token && response._token.accessToken;
 
         if (!accessToken) {
-            return null;
+            return;
         }
 
         const result = await this.props.getToken({
@@ -121,25 +123,25 @@ class LoginPage extends Component {
             accessToken
         });
 
-        if (!result.error) {
-            return this.props.history.push(this.state.from);
+        if (result.error) {
+            const requiresExternal =
+                result.error.response &&
+                result.error.response.data &&
+                result.error.response.data.data &&
+                result.error.response.data.data.requiresExternal;
+
+            if (requiresExternal) {
+                this.setState({
+                    stage: 'RegisterExternal',
+                    provider,
+                    accessToken
+                });
+            }
+
+            return;
         }
 
-        const requiresExternal =
-            result.error.response &&
-            result.error.response.data &&
-            result.error.response.data.data &&
-            result.error.response.data.data.requiresExternal;
-
-        if (requiresExternal) {
-            this.setState({
-                stage: 'RegisterExternal',
-                provider,
-                accessToken
-            });
-        }
-
-        return null;
+        return this.props.history.push(this.state.from);
     }
 
     onStageChange(stage) {

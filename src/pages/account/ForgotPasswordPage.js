@@ -14,9 +14,11 @@ class ForgotPasswordPage extends Component {
 
     async onSubmit(event, values) {
         const result = await this.props.forgotPassword(values);
-        if (!result.error) {
-            this.props.history.push('/account/login');
+        if (result.error) {
+            return;
         }
+
+        return this.props.history.push('/account/login');
     }
 
     render() {

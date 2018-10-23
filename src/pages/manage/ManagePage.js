@@ -49,23 +49,29 @@ class ManagePage extends Component {
         }
 
         const result = await this.props.addLogin({ provider, accessToken });
-        if (!result.error) {
-            this.props.getProfile();
+        if (result.error) {
+            return;
         }
+
+        return this.props.getProfile();
     }
 
     async onRemoveLogin(login) {
         const result = await this.props.removeLogin(login);
-        if (!result.error) {
-            this.props.getProfile();
+        if (result.error) {
+            return;
         }
+
+        return this.props.getProfile();
     }
 
     async onDisableAuthenticator() {
         const result = await this.props.disableAuthenticator();
-        if (!result.error) {
-            this.props.getProfile();
+        if (result.error) {
+            return;
         }
+
+        return this.props.getProfile();
     }
 
     async onResetRecoveryCodes() {
@@ -78,9 +84,10 @@ class ManagePage extends Component {
             message: 'Are you sure you want to delete your account?',
             onOk: async () => {
                 const result = await this.props.deleteAccount();
-                if (!result.error) {
-                    this.props.history.push('/');
+                if (result.error) {
+                    return;
                 }
+                return this.props.history.push('/');
             }
         });
     }

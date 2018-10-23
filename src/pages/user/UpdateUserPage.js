@@ -42,9 +42,10 @@ class UpdateUserPage extends Component {
             onOk: async () => {
                 const id = this.props.match.params.id;
                 const result = await this.props.unlockUser(id);
-                if (!result.error) {
-                    this.props.getUser(this.props.match.params.id);
+                if (result.error) {
+                    return;
                 }
+                return this.props.getUser(id);
             }
         });
     }
@@ -58,9 +59,10 @@ class UpdateUserPage extends Component {
             onOk: async () => {
                 const id = this.props.match.params.id;
                 const result = await this.props.lockUser(id);
-                if (!result.error) {
-                    this.props.getUser(this.props.match.params.id);
+                if (result.error) {
+                    return;
                 }
+                this.props.getUser(id);
             }
         });
     }
@@ -74,9 +76,10 @@ class UpdateUserPage extends Component {
             onOk: async () => {
                 const id = this.props.match.params.id;
                 const result = await this.props.deleteUser(id);
-                if (!result.error) {
-                    this.props.history.push('/user');
+                if (result.error) {
+                    return;
                 }
+                return this.props.history.push('/user');
             }
         });
     }
@@ -85,9 +88,10 @@ class UpdateUserPage extends Component {
         const id = this.props.match.params.id;
         const model = toUserDataModel(values);
         const result = await this.props.updateUser(id, model);
-        if (!result.error) {
-            this.props.history.push('/user');
+        if (result.error) {
+            return;
         }
+        return this.props.history.push('/user');
     }
 
     render() {

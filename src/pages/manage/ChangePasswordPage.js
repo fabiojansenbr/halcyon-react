@@ -15,9 +15,11 @@ class ChangePasswordPage extends Component {
 
     async onSubmit(event, values) {
         const result = await this.props.changePassword(values);
-        if (!result.error) {
-            this.props.history.push('/manage');
+        if (result.error) {
+            return;
         }
+
+        return this.props.history.push('/manage');
     }
 
     render() {

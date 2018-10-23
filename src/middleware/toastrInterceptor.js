@@ -35,11 +35,12 @@ const error = (config, error) => {
         default:
             const result = response && response.data;
             const data = result && result.data;
+            const messages = (result && result.messages) || [
+                'An unknown error has occurred.'
+            ];
 
             if (!data) {
-                for (const message of result.messages || [
-                    'An unknown error has occurred.'
-                ]) {
+                for (const message of messages) {
                     iziToast.error({ message });
                 }
             }
