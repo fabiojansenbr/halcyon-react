@@ -26,7 +26,7 @@ class App extends React.Component {
         }
 
         return (
-            <React.Fragment>
+            <>
                 <Header />
                 <Container>
                     {this.props.children}
@@ -34,7 +34,7 @@ class App extends React.Component {
                     <Spinner />
                     <Footer />
                 </Container>
-            </React.Fragment>
+            </>
         );
     }
 }

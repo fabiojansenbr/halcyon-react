@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Picture = ({ profile }) => (
-    <React.Fragment>
+    <>
         <h4>Picture</h4>
         <hr />
 
@@ -24,7 +24,7 @@ const Picture = ({ profile }) => (
                 </a>
             </div>
         </div>
-    </React.Fragment>
+    </>
 );
 
 Picture.propTypes = {

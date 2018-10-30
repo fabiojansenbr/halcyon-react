@@ -5,7 +5,7 @@ import { AvGroup, AvInput } from 'availity-reactstrap-validation';
 const roles = ['System Administrator', 'User Administrator'];
 
 const RoleForm = () => (
-    <React.Fragment>
+    <>
         <h4>Roles</h4>
         <hr />
 
@@ -19,7 +19,7 @@ const RoleForm = () => (
                 </AvGroup>
             </AvGroup>
         ))}
-    </React.Fragment>
+    </>
 );
 
 export default RoleForm;

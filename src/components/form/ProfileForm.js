@@ -3,7 +3,7 @@ import { FormGroup } from 'reactstrap';
 import { AvField } from 'availity-reactstrap-validation';
 
 const ProfileForm = () => (
-    <React.Fragment>
+    <>
         <FormGroup row>
             <AvField
                 name="firstName"
@@ -25,7 +25,7 @@ const ProfileForm = () => (
             label="Date Of Birth"
             required
         />
-    </React.Fragment>
+    </>
 );
 
 export default ProfileForm;

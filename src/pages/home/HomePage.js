@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => (
-    <React.Fragment>
+    <>
         <div className="jumbotron d-flex">
             <img
                 src="/images/logo.png"
@@ -64,7 +64,7 @@ const HomePage = () => (
                 </p>
             </div>
         </div>
-    </React.Fragment>
+    </>
 );
 
 export default HomePage;

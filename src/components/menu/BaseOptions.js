@@ -3,7 +3,7 @@ import { NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 const BaseOptions = () => (
-    <React.Fragment>
+    <>
         <NavItem>
             <NavLink to="/" tag={Link}>
                 Home
@@ -14,7 +14,7 @@ const BaseOptions = () => (
                 About
             </NavLink>
         </NavItem>
-    </React.Fragment>
+    </>
 );
 
 export default BaseOptions;

@@ -8,7 +8,7 @@ const TwoFactor = ({
     onDisableAuthenticator,
     onResetRecoveryCodes
 }) => (
-    <React.Fragment>
+    <>
         <h4>Two Factor Authentication</h4>
         <hr />
 
@@ -20,7 +20,7 @@ const TwoFactor = ({
                 Configure Authenticator App
             </Link>{' '}
             {profile.twoFactorEnabled && (
-                <React.Fragment>
+                <>
                     <Button
                         color="secondary"
                         onClick={onDisableAuthenticator}
@@ -35,10 +35,10 @@ const TwoFactor = ({
                     >
                         Reset Recovery Codes
                     </Button>
-                </React.Fragment>
+                </>
             )}
         </p>
-    </React.Fragment>
+    </>
 );
 
 TwoFactor.propTypes = {

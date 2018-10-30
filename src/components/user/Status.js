@@ -9,7 +9,7 @@ import {
 import StackedIcon from '../layout/StackedIcon';
 
 const Status = ({ user }) => (
-    <React.Fragment>
+    <>
         <StackedIcon
             title="Unlocked"
             icon={faUnlock}
@@ -30,7 +30,7 @@ const Status = ({ user }) => (
             icon={faMobileAlt}
             disabled={!user.twoFactorEnabled}
         />
-    </React.Fragment>
+    </>
 );
 
 Status.propTypes = {

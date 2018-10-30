@@ -6,7 +6,7 @@ import SocialButton from '../layout/SocialButton';
 import providers from '../../providers';
 
 const ExternalLogin = ({ profile, onAddLogin, onRemoveLogin }) => (
-    <React.Fragment>
+    <>
         <h4>External Logins</h4>
         <hr />
 
@@ -44,7 +44,7 @@ const ExternalLogin = ({ profile, onAddLogin, onRemoveLogin }) => (
                 </div>
             );
         })}
-    </React.Fragment>
+    </>
 );
 
 ExternalLogin.propTypes = {

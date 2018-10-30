@@ -5,7 +5,7 @@ import SocialButton from '../layout/SocialButton';
 import providers from '../../providers';
 
 const ExternalLogin = ({ onResponse }) => (
-    <React.Fragment>
+    <>
         {providers.map(provider => (
             <SocialButton
                 key={provider.type}
@@ -19,7 +19,7 @@ const ExternalLogin = ({ onResponse }) => (
                 {provider.provider}
             </SocialButton>
         ))}
-    </React.Fragment>
+    </>
 );
 
 ExternalLogin.propTypes = {

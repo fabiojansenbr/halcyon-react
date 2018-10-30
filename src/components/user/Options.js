@@ -4,30 +4,30 @@ import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 
 const Options = ({ user, currentUser, onUnlock, onLock, onDelete }) => (
-    <React.Fragment>
+    <>
         {user.isLockedOut && (
-            <React.Fragment>
+            <>
                 <Button color="warning" onClick={() => onUnlock(user)}>
                     Unlock
                 </Button>{' '}
-            </React.Fragment>
+            </>
         )}
 
         {user.id !== currentUser.sub && (
-            <React.Fragment>
+            <>
                 {!user.isLockedOut && (
-                    <React.Fragment>
+                    <>
                         <Button color="warning" onClick={() => onLock(user)}>
                             Lock
                         </Button>{' '}
-                    </React.Fragment>
+                    </>
                 )}
                 <Button color="danger" onClick={() => onDelete(user)}>
                     Delete
                 </Button>{' '}
-            </React.Fragment>
+            </>
         )}
-    </React.Fragment>
+    </>
 );
 
 const mapStateToProps = state => ({

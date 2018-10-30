@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 
 const Settings = ({ onDeleteAccount, onDownloadData }) => (
-    <React.Fragment>
+    <>
         <h4>Settings</h4>
         <hr />
 
@@ -19,7 +19,7 @@ const Settings = ({ onDeleteAccount, onDownloadData }) => (
                 Delete Account
             </Button>
         </p>
-    </React.Fragment>
+    </>
 );
 
 Settings.propTypes = {

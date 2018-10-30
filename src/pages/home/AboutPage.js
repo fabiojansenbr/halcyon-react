@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AboutPage = () => (
-    <React.Fragment>
+    <>
         <h1>About</h1>
         <hr />
 
@@ -53,7 +53,7 @@ const AboutPage = () => (
             adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce
             condimentum eleifend enim a feugiat.
         </p>
-    </React.Fragment>
+    </>
 );
 
 export default AboutPage;

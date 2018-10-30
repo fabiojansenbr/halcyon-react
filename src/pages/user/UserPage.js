@@ -87,7 +87,7 @@ class UserPage extends Component {
             this.props.users.items.length > 0;
 
         return (
-            <React.Fragment>
+            <>
                 <div className="d-flex">
                     <h1>Users</h1>
                     <Link
@@ -110,7 +110,7 @@ class UserPage extends Component {
                     )}
 
                 {hasUsers && (
-                    <React.Fragment>
+                    <>
                         {this.props.users.items.map(user => (
                             <Summary key={user.id} user={user} />
                         ))}
@@ -120,9 +120,9 @@ class UserPage extends Component {
                             onNextPage={this.onNextPage}
                             onPreviousPage={this.onPreviousPage}
                         />
-                    </React.Fragment>
+                    </>
                 )}
-            </React.Fragment>
+            </>
         );
     }
 }
