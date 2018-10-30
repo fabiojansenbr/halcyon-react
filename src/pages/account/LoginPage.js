@@ -6,7 +6,6 @@ import { registerExternal } from '../../actions/accountActions';
 import PasswordForm from '../../components/account/PasswordForm';
 import RegisterExternalForm from '../../components/account/RegisterExternalForm';
 import TwoFactorForm from '../../components/account/TwoFactorForm';
-import RecoveryCodeForm from '../../components/account/RecoveryCodeForm';
 
 class LoginPage extends Component {
     constructor(props) {
@@ -32,20 +31,6 @@ class LoginPage extends Component {
                     emailAddress: this.state.emailAddress,
                     password: this.state.password,
                     verificationCode: values.verificationCode
-                });
-
-                if (result.error) {
-                    return;
-                }
-
-                return this.props.history.push(this.state.from);
-
-            case 'RecoveryCode':
-                result = await this.props.getToken({
-                    grantType: 'RecoveryCode',
-                    emailAddress: this.state.emailAddress,
-                    password: this.state.password,
-                    recoveryCode: values.recoveryCode
                 });
 
                 if (result.error) {
@@ -162,14 +147,6 @@ class LoginPage extends Component {
             case 'TwoFactor':
                 return (
                     <TwoFactorForm
-                        onSubmit={this.onSubmit}
-                        onStageChange={this.onStageChange}
-                    />
-                );
-
-            case 'RecoveryCode':
-                return (
-                    <RecoveryCodeForm
                         onSubmit={this.onSubmit}
                         onStageChange={this.onStageChange}
                     />

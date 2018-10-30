@@ -7,7 +7,6 @@ import {
     addLogin,
     removeLogin,
     disableAuthenticator,
-    resetRecoveryCodes,
     deleteAccount
 } from '../../actions/manageActions';
 import { openModal } from '../../actions/modalActions';
@@ -27,7 +26,6 @@ class ManagePage extends Component {
         this.onAddLogin = this.onAddLogin.bind(this);
         this.onRemoveLogin = this.onRemoveLogin.bind(this);
         this.onDisableAuthenticator = this.onDisableAuthenticator.bind(this);
-        this.onResetRecoveryCodes = this.onResetRecoveryCodes.bind(this);
         this.onDeleteAccount = this.onDeleteAccount.bind(this);
         this.onDownloadData = this.onDownloadData.bind(this);
     }
@@ -72,10 +70,6 @@ class ManagePage extends Component {
         }
 
         return this.props.getProfile();
-    }
-
-    async onResetRecoveryCodes() {
-        await this.props.resetRecoveryCodes();
     }
 
     onDeleteAccount() {
@@ -136,7 +130,6 @@ class ManagePage extends Component {
                                 onDisableAuthenticator={
                                     this.onDisableAuthenticator
                                 }
-                                onResetRecoveryCodes={this.onResetRecoveryCodes}
                             />
 
                             <Settings
@@ -161,7 +154,6 @@ const mapDispatchToProps = dispatch => ({
     addLogin: model => dispatch(addLogin(model)),
     removeLogin: model => dispatch(removeLogin(model)),
     disableAuthenticator: () => dispatch(disableAuthenticator()),
-    resetRecoveryCodes: () => dispatch(resetRecoveryCodes()),
     deleteAccount: () => dispatch(deleteAccount()),
     openModal: modal => dispatch(openModal(modal))
 });
@@ -173,7 +165,6 @@ ManagePage.propTypes = {
     addLogin: PropTypes.func.isRequired,
     removeLogin: PropTypes.func.isRequired,
     disableAuthenticator: PropTypes.func.isRequired,
-    resetRecoveryCodes: PropTypes.func.isRequired,
     deleteAccount: PropTypes.func.isRequired,
     openModal: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired

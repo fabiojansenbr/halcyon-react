@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { Link } from 'react-router-dom';
 
 const TwoFactorForm = ({ onSubmit, onStageChange }) => (
     <Row className="justify-content-md-center">
@@ -40,12 +41,7 @@ const TwoFactorForm = ({ onSubmit, onStageChange }) => (
 
                     <p>
                         Don&#39;t have access to your authenticator device?{' '}
-                        <Button
-                            color="link"
-                            onClick={() => onStageChange('RecoveryCode')}
-                        >
-                            Log in with recovery code
-                        </Button>
+                        <Link to="/account/forgotpassword">Request reset</Link>
                     </p>
                 </CardBody>
             </Card>

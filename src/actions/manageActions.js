@@ -126,17 +126,6 @@ export const disableAuthenticator = () => ({
     }
 });
 
-export const resetRecoveryCodes = () => ({
-    type: 'RESET_RECOVERY_CODES',
-    payload: {
-        request: {
-            url: '/manage/resetrecoverycodes',
-            method: 'PUT',
-            authenticate: true
-        }
-    }
-});
-
 export const deleteAccount = () => ({
     type: 'DELETE_ACCOUNT',
     payload: {

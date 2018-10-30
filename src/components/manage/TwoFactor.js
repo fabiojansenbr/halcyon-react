@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const TwoFactor = ({
-    profile,
-    onDisableAuthenticator,
-    onResetRecoveryCodes
-}) => (
+const TwoFactor = ({ profile, onDisableAuthenticator }) => (
     <>
         <h4>Two Factor Authentication</h4>
         <hr />
@@ -28,13 +24,6 @@ const TwoFactor = ({
                     >
                         Disable Authenticator App
                     </Button>{' '}
-                    <Button
-                        color="secondary"
-                        onClick={onResetRecoveryCodes}
-                        className="mb-2"
-                    >
-                        Reset Recovery Codes
-                    </Button>
                 </>
             )}
         </p>
@@ -43,8 +32,7 @@ const TwoFactor = ({
 
 TwoFactor.propTypes = {
     profile: PropTypes.object.isRequired,
-    onDisableAuthenticator: PropTypes.func.isRequired,
-    onResetRecoveryCodes: PropTypes.func.isRequired
+    onDisableAuthenticator: PropTypes.func.isRequired
 };
 
 export default TwoFactor;
