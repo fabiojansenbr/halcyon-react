@@ -41,7 +41,9 @@ const TwoFactorForm = ({ onSubmit, onStageChange }) => (
 
                     <p>
                         Don&#39;t have access to your authenticator device?{' '}
-                        <Link to="/account/forgotpassword">Request reset</Link>
+                        <Link to="/account/forgotpassword">
+                            Request password reset
+                        </Link>
                     </p>
                 </CardBody>
             </Card>
