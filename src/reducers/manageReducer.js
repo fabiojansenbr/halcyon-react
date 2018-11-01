@@ -1,6 +1,6 @@
 const initialState = {
     profile: undefined,
-    authenticatorSettings: undefined
+    twoFactorConfig: undefined
 };
 
 const manageReducer = (state = initialState, action) => {
@@ -20,14 +20,14 @@ const manageReducer = (state = initialState, action) => {
                 profile
             };
 
-        case 'GET_AUTHENTICATOR_SETTINGS_SUCCESS':
-            const authenticatorSettings =
+        case 'GET_TWO_FACTOR_CONFIG_SUCCESS':
+            const twoFactorConfig =
                 action.payload &&
                 action.payload.data &&
                 action.payload.data.data;
 
             return {
-                authenticatorSettings
+                twoFactorConfig
             };
 
         default:

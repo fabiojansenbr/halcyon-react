@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    getAuthenticatorSettings,
-    configureAuthenticator
+    getTwoFactorConfig,
+    enableTwoFactor
 } from '../../actions/manageActions';
 import { Row, Col, Card, CardBody, FormGroup, Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
 import QRCode from 'qrcode.react';
 
-class ConfigureAuthenticatorPage extends Component {
+class EnableTwoFactorPage extends Component {
     constructor(props) {
         super(props);
 
@@ -18,11 +18,11 @@ class ConfigureAuthenticatorPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getAuthenticatorSettings();
+        this.props.getTwoFactorConfig();
     }
 
     async onSubmit(event, values) {
-        const result = await this.props.configureAuthenticator(values);
+        const result = await this.props.enableTwoFactor(values);
         if (result.error) {
             return;
         }
@@ -31,7 +31,7 @@ class ConfigureAuthenticatorPage extends Component {
     }
 
     render() {
-        if (!this.props.authenticatorSettings) {
+        if (!this.props.twoFactorConfig) {
             return null;
         }
 
@@ -74,10 +74,7 @@ class ConfigureAuthenticatorPage extends Component {
                                     <p>
                                         Scan the QR Code or enter this key{' '}
                                         <kbd>
-                                            {
-                                                this.props.authenticatorSettings
-                                                    .secret
-                                            }
+                                            {this.props.twoFactorConfig.secret}
                                         </kbd>{' '}
                                         into your two factor authenticator app.
                                         Spaces and casing do not matter.
@@ -85,7 +82,7 @@ class ConfigureAuthenticatorPage extends Component {
                                     <p>
                                         <QRCode
                                             value={
-                                                this.props.authenticatorSettings
+                                                this.props.twoFactorConfig
                                                     .authenticatorUri
                                             }
                                             size={150}
@@ -131,22 +128,22 @@ class ConfigureAuthenticatorPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    authenticatorSettings: state.manage.authenticatorSettings
+    twoFactorConfig: state.manage.twoFactorConfig
 });
 
 const mapDispatchToProps = dispatch => ({
-    getAuthenticatorSettings: () => dispatch(getAuthenticatorSettings()),
-    configureAuthenticator: model => dispatch(configureAuthenticator(model))
+    getTwoFactorConfig: () => dispatch(getTwoFactorConfig()),
+    enableTwoFactor: model => dispatch(enableTwoFactor(model))
 });
 
-ConfigureAuthenticatorPage.propTypes = {
-    authenticatorSettings: PropTypes.object,
-    getAuthenticatorSettings: PropTypes.func.isRequired,
-    configureAuthenticator: PropTypes.func.isRequired,
+EnableTwoFactorPage.propTypes = {
+    twoFactorConfig: PropTypes.object,
+    getTwoFactorConfig: PropTypes.func.isRequired,
+    enableTwoFactor: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ConfigureAuthenticatorPage);
+)(EnableTwoFactorPage);

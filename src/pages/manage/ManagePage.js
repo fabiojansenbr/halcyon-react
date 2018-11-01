@@ -6,7 +6,7 @@ import {
     verifyEmail,
     addLogin,
     removeLogin,
-    disableAuthenticator,
+    disableTwoFactor,
     deleteAccount
 } from '../../actions/manageActions';
 import { openModal } from '../../actions/modalActions';
@@ -25,7 +25,7 @@ class ManagePage extends Component {
         this.onVerifyEmail = this.onVerifyEmail.bind(this);
         this.onAddLogin = this.onAddLogin.bind(this);
         this.onRemoveLogin = this.onRemoveLogin.bind(this);
-        this.onDisableAuthenticator = this.onDisableAuthenticator.bind(this);
+        this.onDisableTwoFactor = this.onDisableTwoFactor.bind(this);
         this.onDeleteAccount = this.onDeleteAccount.bind(this);
         this.onDownloadData = this.onDownloadData.bind(this);
     }
@@ -63,8 +63,8 @@ class ManagePage extends Component {
         return this.props.getProfile();
     }
 
-    async onDisableAuthenticator() {
-        const result = await this.props.disableAuthenticator();
+    async onDisableTwoFactor() {
+        const result = await this.props.disableTwoFactor();
         if (result.error) {
             return;
         }
@@ -127,9 +127,7 @@ class ManagePage extends Component {
 
                             <TwoFactor
                                 profile={this.props.profile}
-                                onDisableAuthenticator={
-                                    this.onDisableAuthenticator
-                                }
+                                onDisableTwoFactor={this.onDisableTwoFactor}
                             />
 
                             <Settings
@@ -153,7 +151,7 @@ const mapDispatchToProps = dispatch => ({
     verifyEmail: () => dispatch(verifyEmail()),
     addLogin: model => dispatch(addLogin(model)),
     removeLogin: model => dispatch(removeLogin(model)),
-    disableAuthenticator: () => dispatch(disableAuthenticator()),
+    disableTwoFactor: () => dispatch(disableTwoFactor()),
     deleteAccount: () => dispatch(deleteAccount()),
     openModal: modal => dispatch(openModal(modal))
 });
@@ -164,7 +162,7 @@ ManagePage.propTypes = {
     verifyEmail: PropTypes.func.isRequired,
     addLogin: PropTypes.func.isRequired,
     removeLogin: PropTypes.func.isRequired,
-    disableAuthenticator: PropTypes.func.isRequired,
+    disableTwoFactor: PropTypes.func.isRequired,
     deleteAccount: PropTypes.func.isRequired,
     openModal: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired

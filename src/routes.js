@@ -20,7 +20,7 @@ import UpdateProfilePage from './pages/manage/UpdateProfilePage';
 import ConfirmEmailPage from './pages/manage/ConfirmEmailPage';
 import ChangePasswordPage from './pages/manage/ChangePasswordPage';
 import SetPasswordPage from './pages/manage/SetPasswordPage';
-import ConfigureAuthenticatorPage from './pages/manage/ConfigureAuthenticatorPage';
+import EnableTwoFactorPage from './pages/manage/EnableTwoFactorPage';
 
 import UserPage from './pages/user/UserPage';
 import CreateUserPage from './pages/user/CreateUserPage';
@@ -86,9 +86,9 @@ const routes = (
                 component={SetPasswordPage}
             />
             <PrivateRoute
-                path="/manage/configureauthenticator"
+                path="/manage/twofactor"
                 title="Configure Authenticator App"
-                component={ConfigureAuthenticatorPage}
+                component={EnableTwoFactorPage}
             />
 
             <PrivateRoute

@@ -92,22 +92,22 @@ export const removeLogin = model => ({
     }
 });
 
-export const getAuthenticatorSettings = () => ({
-    type: 'GET_AUTHENTICATOR_SETTINGS',
+export const getTwoFactorConfig = () => ({
+    type: 'GET_TWO_FACTOR_CONFIG',
     payload: {
         request: {
-            url: '/manage/authenticator',
+            url: '/manage/twofactor',
             method: 'GET',
             authenticate: true
         }
     }
 });
 
-export const configureAuthenticator = model => ({
-    type: 'CONFIGURE_AUTHENTICATOR',
+export const enableTwoFactor = model => ({
+    type: 'ENABLE_TWO_FACTOR',
     payload: {
         request: {
-            url: '/manage/authenticator',
+            url: '/manage/twofactor',
             method: 'POST',
             authenticate: true,
             data: model
@@ -115,11 +115,11 @@ export const configureAuthenticator = model => ({
     }
 });
 
-export const disableAuthenticator = () => ({
-    type: 'DISABLE_AUTHENTICATOR',
+export const disableTwoFactor = () => ({
+    type: 'DISABLE_TWO_FACTOR',
     payload: {
         request: {
-            url: '/manage/authenticator',
+            url: '/manage/twofactor',
             method: 'DELETE',
             authenticate: true
         }
