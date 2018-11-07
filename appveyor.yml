@@ -1,6 +1,6 @@
 version: 1.0.{build}
 image: ubuntu
-stack: node 10
+stack: node 8
 
 build_script:
 - npm install
