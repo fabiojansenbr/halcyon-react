@@ -1,11 +1,10 @@
 version: 1.0.{build}
 image: ubuntu
-stack: node 8
+stack: node 10
 
 build_script:
 - npm install
 - npm run lint
-- npm test
 - npm run build
 
 artifacts:
