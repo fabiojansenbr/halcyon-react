@@ -8,7 +8,7 @@ A React web site project template.
 
 **Technologies used:**
 
-- React
-[https://github.com/facebook/react](https://github.com/facebook/react)
-- Redux
-[https://github.com/reactjs/redux](https://github.com/reactjs/redux)
+-   React
+    [https://github.com/facebook/react](https://github.com/facebook/react)
+-   Redux
+    [https://github.com/reactjs/redux](https://github.com/reactjs/redux)

@@ -1,8 +1,7 @@
 {
     "files.exclude": {
         "**/node_modules": true,
-        "**/build": true,
-        "**/coverage": true
+        "**/build": true
     },
     "editor.tabSize": 4,
     "editor.autoIndent": true,
